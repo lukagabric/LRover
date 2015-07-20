@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>289583EA-46CF-4B2B-A7D7-A726B4693540</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Rover</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>055D7366BBFF75567A7B20EEC3B89A6A30038100</key>
+		<string>https://github.com/lukagabric/LRover.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Rover.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>055D7366BBFF75567A7B20EEC3B89A6A30038100</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/lukagabric/LRover.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>055D7366BBFF75567A7B20EEC3B89A6A30038100</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>055D7366BBFF75567A7B20EEC3B89A6A30038100</string>
+			<key>IDESourceControlWCCName</key>
+			<string>LRover</string>
+		</dict>
+	</array>
+</dict>
+</plist>
