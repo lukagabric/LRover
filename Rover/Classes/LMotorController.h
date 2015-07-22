@@ -5,7 +5,7 @@
 
 class LMotorController {
 protected:
-    int _ena, _in1, _in2, _enb, _in3, _in4;
+    unsigned int _ena, _in1, _in2, _enb, _in3, _in4;
     double _motorAConst, _motorBConst;
 public:
     LMotorController(int ena, int in1, int in2, int enb, int in3, int in4, double motorAConst, double motorBConst);

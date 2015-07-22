@@ -8,7 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		4124D4F31B5D6DEF0065FBF5 /* Rover.ino in Sources */ = {isa = PBXBuildFile; fileRef = 4174D4F31B5D6DEF0065FBF5 /* Rover.ino */; };
+		41372BDE1B602BE2001967CC /* LUltrasonic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41372BDC1B602BE2001967CC /* LUltrasonic.cpp */; };
 		4174D4771B5D6DEF0065FBF5 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4174D4761B5D6DEF0065FBF5 /* main.cpp */; };
+		41D2E7D71B6008330076FF1B /* PID_v1.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41D2E7D51B6008330076FF1B /* PID_v1.cpp */; };
 		AA2A150720200537AA000006 /* abi.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAAA150720200537AA000006 /* abi.cpp */; };
 		AA2A150720200537AA000007 /* Arduino.h in Sources */ = {isa = PBXBuildFile; fileRef = AAAA150720200537AA000007 /* Arduino.h */; };
 		AA2A150720200537AA000008 /* binary.h in Sources */ = {isa = PBXBuildFile; fileRef = AAAA150720200537AA000008 /* binary.h */; };
@@ -401,6 +403,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		41372BDC1B602BE2001967CC /* LUltrasonic.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LUltrasonic.cpp; sourceTree = "<group>"; };
+		41372BDD1B602BE2001967CC /* LUltrasonic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LUltrasonic.h; sourceTree = "<group>"; };
 		4174D4731B5D6DEF0065FBF5 /* Index */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Index; sourceTree = BUILT_PRODUCTS_DIR; };
 		4174D4761B5D6DEF0065FBF5 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		4174D4781B5D6DEF0065FBF5 /* Makefile */ = {isa = PBXFileReference; explicitFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
@@ -517,6 +521,8 @@
 		4174D4F11B5D6DEF0065FBF5 /* TemplateIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = TemplateIcon.icns; path = Utilities/TemplateIcon.icns; sourceTree = "<group>"; };
 		4174D4F21B5D6DEF0065FBF5 /* uploader_izmir.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; name = uploader_izmir.sh; path = Utilities/uploader_izmir.sh; sourceTree = "<group>"; };
 		4174D4F31B5D6DEF0065FBF5 /* Rover.ino */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; path = Rover.ino; sourceTree = "<group>"; };
+		41D2E7D51B6008330076FF1B /* PID_v1.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PID_v1.cpp; sourceTree = "<group>"; };
+		41D2E7D61B6008330076FF1B /* PID_v1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PID_v1.h; sourceTree = "<group>"; };
 		41D624531B5D7DE200611BC2 /* LMotorController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LMotorController.cpp; sourceTree = "<group>"; };
 		41D624541B5D7DE200611BC2 /* LMotorController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMotorController.h; sourceTree = "<group>"; };
 		41D624551B5D7DE200611BC2 /* RoverMain.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RoverMain.cpp; sourceTree = "<group>"; };
@@ -1096,6 +1102,10 @@
 		41D624521B5D7DE200611BC2 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				41D2E7D51B6008330076FF1B /* PID_v1.cpp */,
+				41D2E7D61B6008330076FF1B /* PID_v1.h */,
+				41372BDC1B602BE2001967CC /* LUltrasonic.cpp */,
+				41372BDD1B602BE2001967CC /* LUltrasonic.h */,
 				41D624531B5D7DE200611BC2 /* LMotorController.cpp */,
 				41D624541B5D7DE200611BC2 /* LMotorController.h */,
 				41D624551B5D7DE200611BC2 /* RoverMain.cpp */,
@@ -2495,6 +2505,7 @@
 				AA2A150720200537AA00004D /* pins_arduino.h in Sources */,
 				AA2A150720200537AA00004F /* pins_arduino.h in Sources */,
 				AA2A150720200537AA000051 /* pins_arduino.h in Sources */,
+				41D2E7D71B6008330076FF1B /* PID_v1.cpp in Sources */,
 				AA2A150720200537AA000053 /* pins_arduino.h in Sources */,
 				AA2A150720200537AA000058 /* Bridge.cpp in Sources */,
 				AA2A150720200537AA000059 /* Bridge.h in Sources */,
@@ -2811,6 +2822,7 @@
 				AA2A150720200537AA0001E8 /* main.c in Sources */,
 				AA2A150720200537AA0001E9 /* nvram.c in Sources */,
 				AA2A150720200537AA0001EA /* nvram.h in Sources */,
+				41372BDE1B602BE2001967CC /* LUltrasonic.cpp in Sources */,
 				AA2A150720200537AA0001EB /* owl_os.c in Sources */,
 				AA2A150720200537AA0001EC /* ping.c in Sources */,
 				AA2A150720200537AA0001ED /* ping.h in Sources */,

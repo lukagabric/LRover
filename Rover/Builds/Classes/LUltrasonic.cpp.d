@@ -1,4 +1,4 @@
-Builds/main.cpp.o: main.cpp \
+Builds/Classes/LUltrasonic.cpp.o: Classes/LUltrasonic.cpp \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/cores/arduino/Arduino.h \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/cores/arduino/binary.h \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/cores/arduino/WCharacter.h \
@@ -11,5 +11,4 @@ Builds/main.cpp.o: main.cpp \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/cores/arduino/Arduino.h \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/variants/eightanaloginputs/pins_arduino.h \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/variants/eightanaloginputs/../standard/pins_arduino.h \
- Rover.ino Classes/RoverMain.h Classes/LMotorController.h \
- Classes/PID_v1.h
+ Classes/LUltrasonic.h
