@@ -7,9 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		410965231B60478300832B47 /* RoverNavigator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 410965211B60478300832B47 /* RoverNavigator.cpp */; };
 		4124D4F31B5D6DEF0065FBF5 /* Rover.ino in Sources */ = {isa = PBXBuildFile; fileRef = 4174D4F31B5D6DEF0065FBF5 /* Rover.ino */; };
 		41372BDE1B602BE2001967CC /* LUltrasonic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41372BDC1B602BE2001967CC /* LUltrasonic.cpp */; };
 		4174D4771B5D6DEF0065FBF5 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4174D4761B5D6DEF0065FBF5 /* main.cpp */; };
+		417CCBAB1B604BC20065DF36 /* RoverWallFollower.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 417CCBA91B604BC20065DF36 /* RoverWallFollower.cpp */; };
 		41D2E7D71B6008330076FF1B /* PID_v1.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41D2E7D51B6008330076FF1B /* PID_v1.cpp */; };
 		AA2A150720200537AA000006 /* abi.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAAA150720200537AA000006 /* abi.cpp */; };
 		AA2A150720200537AA000007 /* Arduino.h in Sources */ = {isa = PBXBuildFile; fileRef = AAAA150720200537AA000007 /* Arduino.h */; };
@@ -403,6 +405,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		410965211B60478300832B47 /* RoverNavigator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RoverNavigator.cpp; sourceTree = "<group>"; };
+		410965221B60478300832B47 /* RoverNavigator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoverNavigator.h; sourceTree = "<group>"; };
 		41372BDC1B602BE2001967CC /* LUltrasonic.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LUltrasonic.cpp; sourceTree = "<group>"; };
 		41372BDD1B602BE2001967CC /* LUltrasonic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LUltrasonic.h; sourceTree = "<group>"; };
 		4174D4731B5D6DEF0065FBF5 /* Index */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Index; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -521,12 +525,12 @@
 		4174D4F11B5D6DEF0065FBF5 /* TemplateIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = TemplateIcon.icns; path = Utilities/TemplateIcon.icns; sourceTree = "<group>"; };
 		4174D4F21B5D6DEF0065FBF5 /* uploader_izmir.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; name = uploader_izmir.sh; path = Utilities/uploader_izmir.sh; sourceTree = "<group>"; };
 		4174D4F31B5D6DEF0065FBF5 /* Rover.ino */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; path = Rover.ino; sourceTree = "<group>"; };
+		417CCBA91B604BC20065DF36 /* RoverWallFollower.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RoverWallFollower.cpp; sourceTree = "<group>"; };
+		417CCBAA1B604BC20065DF36 /* RoverWallFollower.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoverWallFollower.h; sourceTree = "<group>"; };
 		41D2E7D51B6008330076FF1B /* PID_v1.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PID_v1.cpp; sourceTree = "<group>"; };
 		41D2E7D61B6008330076FF1B /* PID_v1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PID_v1.h; sourceTree = "<group>"; };
 		41D624531B5D7DE200611BC2 /* LMotorController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LMotorController.cpp; sourceTree = "<group>"; };
 		41D624541B5D7DE200611BC2 /* LMotorController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMotorController.h; sourceTree = "<group>"; };
-		41D624551B5D7DE200611BC2 /* RoverMain.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RoverMain.cpp; sourceTree = "<group>"; };
-		41D624561B5D7DE200611BC2 /* RoverMain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoverMain.h; sourceTree = "<group>"; };
 		AAAA150720200537AA000006 /* abi.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = abi.cpp; sourceTree = "<group>"; };
 		AAAA150720200537AA000007 /* Arduino.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Arduino.h; sourceTree = "<group>"; };
 		AAAA150720200537AA000008 /* binary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = binary.h; sourceTree = "<group>"; };
@@ -1108,8 +1112,10 @@
 				41372BDD1B602BE2001967CC /* LUltrasonic.h */,
 				41D624531B5D7DE200611BC2 /* LMotorController.cpp */,
 				41D624541B5D7DE200611BC2 /* LMotorController.h */,
-				41D624551B5D7DE200611BC2 /* RoverMain.cpp */,
-				41D624561B5D7DE200611BC2 /* RoverMain.h */,
+				410965211B60478300832B47 /* RoverNavigator.cpp */,
+				410965221B60478300832B47 /* RoverNavigator.h */,
+				417CCBA91B604BC20065DF36 /* RoverWallFollower.cpp */,
+				417CCBAA1B604BC20065DF36 /* RoverWallFollower.h */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -2468,6 +2474,7 @@
 				AA2A150720200537AA00001A /* Print.h in Sources */,
 				AA2A150720200537AA00001B /* Printable.h in Sources */,
 				AA2A150720200537AA00001C /* Server.h in Sources */,
+				417CCBAB1B604BC20065DF36 /* RoverWallFollower.cpp in Sources */,
 				AA2A150720200537AA00001D /* Stream.cpp in Sources */,
 				AA2A150720200537AA00001E /* Stream.h in Sources */,
 				AA2A150720200537AA00001F /* Tone.cpp in Sources */,
@@ -2523,6 +2530,7 @@
 				AA2A150720200537AA000065 /* YunClient.h in Sources */,
 				AA2A150720200537AA000066 /* YunServer.cpp in Sources */,
 				AA2A150720200537AA000067 /* YunServer.h in Sources */,
+				410965231B60478300832B47 /* RoverNavigator.cpp in Sources */,
 				AA2A150720200537AA00006A /* Esplora.cpp in Sources */,
 				AA2A150720200537AA00006B /* Esplora.h in Sources */,
 				AA2A150720200537AA00006E /* Dhcp.cpp in Sources */,

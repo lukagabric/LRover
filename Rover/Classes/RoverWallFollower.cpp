@@ -1,6 +1,7 @@
-#include "RoverMain.h"
+#include "RoverWallFollower.h"
 #include "Arduino.h"
 #include "PID_v1.h"
+#include "LUltrasonic.h"
 
 //Motor Controller
 #define ENA 3
@@ -17,23 +18,30 @@
 #define Ki 250
 #define Kd 1.9
 
+//Ultrasonic
+#define SONIC_ECHO_PIN 10
+#define SONIC_TRIG_PIN 11
+#define SONIC_WALL_DISTANCE 50
+
 #pragma mark - Setup
 
-void RoverMain::setup() {
+void RoverWallFollower::setup() {
     Serial.begin(9600);
     
     _motorController = new LMotorController(ENA, IN1, IN2, ENB, IN3, IN4, 1, 1);
-
+    
     _pidSetpoint = 0;
     _pid = new PID(&_pidInput, &_pidOutput, &_pidSetpoint, Kp, Ki, Kd, DIRECT);
     _pid->SetMode(AUTOMATIC);
     _pid->SetSampleTime(10);
     _pid->SetOutputLimits(-255, 255);
+    
+    _sonic = new LUltrasonic(SONIC_ECHO_PIN, SONIC_TRIG_PIN);
 }
 
 #pragma mark - Loop
 
-void RoverMain::loop() {
+void RoverWallFollower::loop() {
     unsigned long currentTime = millis();
     
     if (currentTime - _time1Hz >= 1000) {
@@ -54,42 +62,31 @@ void RoverMain::loop() {
     }
 }
 
-void RoverMain::loopAt1Hz() {
+void RoverWallFollower::loopAt1Hz() {
     
 }
 
-void RoverMain::loopAt5Hz() {
+void RoverWallFollower::loopAt5Hz() {
     
 }
 
-void RoverMain::loopAt10Hz() {
+void RoverWallFollower::loopAt10Hz() {
     
 }
 
-void RoverMain::loopAt100Hz() {
+void RoverWallFollower::loopAt100Hz() {
     updatePID();
     updateMovement();
 }
 
 #pragma mark - Operations
 
-void RoverMain::updatePID() {
-    double compass = 20;
-    double bearing = 350;
-    
-    double diffAngle = bearing - compass;
-    if (diffAngle > 180) {
-        diffAngle -= 360;
-    }
-    else if (diffAngle < -180) {
-        diffAngle += 360;
-    }
-    
-    _pidInput = diffAngle;
+void RoverWallFollower::updatePID() {
+    _pidInput = _sonic->measureDistance();
     _pid->Compute();
 }
 
-void RoverMain::updateMovement() {
+void RoverWallFollower::updateMovement() {
     double rightWheelSpeed = 255;
     double leftWheelSpeed = 255;
     
