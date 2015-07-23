@@ -16,9 +16,9 @@
 #define MIN_WHEEL_SPEED 100
 
 //PID Constants
-#define Kp 70
-#define Ki 250
-#define Kd 1.9
+#define Kp 10
+#define Ki 20
+#define Kd 0.1
 
 //Ultrasonic
 #define SONIC_ECHO_PIN 9
@@ -28,7 +28,9 @@
 #pragma mark - Setup
 
 void RoverWallFollower::setup() {
+#if ENABLE_LOGGING
     Serial.begin(9600);
+#endif
     
     _motorController = new LMotorController(ENA, IN1, IN2, ENB, IN3, IN4, 1, 1);
     
