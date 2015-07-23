@@ -10,8 +10,6 @@
 #define IN4 7
 #define ENB 6
 
-#define MIN_WHEEL_SPEED 60
-
 //PID Constants
 #define Kp 70
 #define Ki 250
@@ -100,7 +98,7 @@ void RoverNavigator::updateMovement() {
         leftWheelSpeed -= _pidOutput;
     }
     
-    _motorController->move(leftWheelSpeed, rightWheelSpeed, MIN_WHEEL_SPEED);
+    _motorController->move(leftWheelSpeed, rightWheelSpeed);
 }
 
 #pragma mark -

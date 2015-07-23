@@ -3,6 +3,8 @@
 #include "PID_v1.h"
 #include "LUltrasonic.h"
 
+#define ENABLE_LOGGING 0
+
 //Motor Controller
 #define ENA 3
 #define IN1 2
@@ -11,7 +13,7 @@
 #define IN4 7
 #define ENB 6
 
-#define MIN_WHEEL_SPEED 60
+#define MIN_WHEEL_SPEED 100
 
 //PID Constants
 #define Kp 70
@@ -19,8 +21,8 @@
 #define Kd 1.9
 
 //Ultrasonic
-#define SONIC_ECHO_PIN 10
-#define SONIC_TRIG_PIN 11
+#define SONIC_ECHO_PIN 9
+#define SONIC_TRIG_PIN 8
 #define SONIC_WALL_DISTANCE 50
 
 #pragma mark - Setup
@@ -30,7 +32,7 @@ void RoverWallFollower::setup() {
     
     _motorController = new LMotorController(ENA, IN1, IN2, ENB, IN3, IN4, 1, 1);
     
-    _pidSetpoint = 0;
+    _pidSetpoint = 30;
     _pid = new PID(&_pidInput, &_pidOutput, &_pidSetpoint, Kp, Ki, Kd, DIRECT);
     _pid->SetMode(AUTOMATIC);
     _pid->SetSampleTime(10);
@@ -63,15 +65,15 @@ void RoverWallFollower::loop() {
 }
 
 void RoverWallFollower::loopAt1Hz() {
-    
+
 }
 
 void RoverWallFollower::loopAt5Hz() {
-    
+
 }
 
 void RoverWallFollower::loopAt10Hz() {
-    
+
 }
 
 void RoverWallFollower::loopAt100Hz() {
@@ -87,17 +89,29 @@ void RoverWallFollower::updatePID() {
 }
 
 void RoverWallFollower::updateMovement() {
-    double rightWheelSpeed = 255;
-    double leftWheelSpeed = 255;
+    int rightWheelSpeed = 255;
+    int leftWheelSpeed = 255;
     
     if (_pidOutput < 0) {
-        rightWheelSpeed -= abs(_pidOutput);
+        rightWheelSpeed += _pidOutput;
     }
     else {
         leftWheelSpeed -= _pidOutput;
     }
     
-    _motorController->move(leftWheelSpeed, rightWheelSpeed, MIN_WHEEL_SPEED);
+    rightWheelSpeed = max(MIN_WHEEL_SPEED, rightWheelSpeed);
+    leftWheelSpeed = max(MIN_WHEEL_SPEED, leftWheelSpeed);
+
+#if ENABLE_LOGGING
+    Serial.print("\tDST=");
+    Serial.print(_pidInput);
+    Serial.print("\tRW=");
+    Serial.print(rightWheelSpeed);
+    Serial.print("\tLW");
+    Serial.println(leftWheelSpeed);
+#endif
+
+    _motorController->move(leftWheelSpeed, rightWheelSpeed);
 }
 
 #pragma mark -

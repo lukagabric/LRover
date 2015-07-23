@@ -7,6 +7,9 @@
 LUltrasonic::LUltrasonic(unsigned int echoPin, unsigned int triggerPin) {
     _echoPin = echoPin;
     _triggerPin = triggerPin;
+    
+    pinMode(_echoPin, INPUT);
+    pinMode(_triggerPin, OUTPUT);
 }
 
 unsigned long LUltrasonic::measureDistance() {
@@ -19,8 +22,8 @@ unsigned long LUltrasonic::measureDistance() {
 	digitalWrite(_triggerPin, LOW);
 	duration = pulseIn(_echoPin, HIGH);
 	distance = duration / 29 / 2;
-
-	return distance <= MAX_MEASUREABLE_DISTANCE ? distance : INFINITE_DISTANCE;
+    
+    return distance <= MAX_MEASUREABLE_DISTANCE ? distance : INFINITE_DISTANCE;
 }
 
 
