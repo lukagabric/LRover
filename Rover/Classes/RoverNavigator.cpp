@@ -2,6 +2,9 @@
 #include "Arduino.h"
 #include "PID_v1.h"
 
+#define ENABLE_LOGGING 1
+#define MANUAL_TUNING 1
+
 //Motor Controller
 #define ENA 3
 #define IN1 2
@@ -9,6 +12,8 @@
 #define IN3 5
 #define IN4 7
 #define ENB 6
+
+#define MIN_WHEEL_SPEED 30
 
 //PID Constants
 #define Kp 70
@@ -18,12 +23,17 @@
 #pragma mark - Setup
 
 void RoverNavigator::setup() {
+#if ENABLE_LOGGING
     Serial.begin(9600);
+#endif
     
     _motorController = new LMotorController(ENA, IN1, IN2, ENB, IN3, IN4, 1, 1);
 
     _pidSetpoint = 0;
-    _pid = new PID(&_pidInput, &_pidOutput, &_pidSetpoint, Kp, Ki, Kd, DIRECT);
+    _pid = new PID(&_pidInput, &_pidOutput, &_pidSetpoint, 0, 0, 0, DIRECT);
+#if MANUAL_TUNING
+    _pid->SetTunings(_kp, _ki, _kd);
+#endif
     _pid->SetMode(AUTOMATIC);
     _pid->SetSampleTime(10);
     _pid->SetOutputLimits(-255, 255);
@@ -53,7 +63,9 @@ void RoverNavigator::loop() {
 }
 
 void RoverNavigator::loopAt1Hz() {
-    
+#if MANUAL_TUNING
+    updatePIDConstants();
+#endif
 }
 
 void RoverNavigator::loopAt5Hz() {
@@ -70,6 +82,26 @@ void RoverNavigator::loopAt100Hz() {
 }
 
 #pragma mark - Operations
+
+#if MANUAL_TUNING
+void RoverNavigator::updatePIDConstants() {
+    int potKp = analogRead(A0);
+    int potKi = analogRead(A1);
+    int potKd = analogRead(A2);
+    
+    _kp = map(potKp, 0, 1023, 0, 25000) / 100.0; //0 - 250
+    _ki = map(potKi, 0, 1023, 0, 100000) / 100.0; //0 - 1000
+    _kd = map(potKd, 0, 1023, 0, 500) / 100.0; //0 - 5
+    
+    if (_kp != _prevKp || _ki != _prevKi || _kd != _prevKd) {
+#if ENABLE_LOGGING
+        Serial.print(_kp);Serial.print(", ");Serial.print(_ki);Serial.print(", ");Serial.println(_kd);
+#endif
+        _pid->SetTunings(_kp, _ki, _kd);
+        _prevKp = _kp; _prevKi = _ki; _prevKd = _kd;
+    }
+}
+#endif
 
 void RoverNavigator::updatePID() {
     double compass = 20;
@@ -88,15 +120,27 @@ void RoverNavigator::updatePID() {
 }
 
 void RoverNavigator::updateMovement() {
-    double rightWheelSpeed = 255;
-    double leftWheelSpeed = 255;
+    int rightWheelSpeed = 255;
+    int leftWheelSpeed = 255;
     
     if (_pidOutput < 0) {
-        rightWheelSpeed -= abs(_pidOutput);
+        rightWheelSpeed += _pidOutput;
     }
     else {
         leftWheelSpeed -= _pidOutput;
     }
+    
+    rightWheelSpeed = max(MIN_WHEEL_SPEED, rightWheelSpeed);
+    leftWheelSpeed = max(MIN_WHEEL_SPEED, leftWheelSpeed);
+    
+#if ENABLE_LOGGING
+    Serial.print("\tDST=");
+    Serial.print(_pidInput);
+    Serial.print("\tRW=");
+    Serial.print(rightWheelSpeed);
+    Serial.print("\tLW");
+    Serial.println(leftWheelSpeed);
+#endif
     
     _motorController->move(leftWheelSpeed, rightWheelSpeed);
 }

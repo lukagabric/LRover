@@ -9,6 +9,7 @@ class RoverNavigator {
 private:
     LMotorController *_motorController;
     
+    double _kp, _prevKp, _ki, _prevKi, _kd, _prevKd;
     double _pidInput, _pidOutput, _pidSetpoint;
     PID *_pid;
 
@@ -19,6 +20,7 @@ private:
     void loopAt100Hz();
     
     void updatePID();
+    void updatePIDConstants();
     void updateMovement();
 public:
     void setup();
