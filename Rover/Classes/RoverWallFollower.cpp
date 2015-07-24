@@ -3,7 +3,8 @@
 #include "PID_v1.h"
 #include "LUltrasonic.h"
 
-#define ENABLE_LOGGING 0
+#define ENABLE_LOGGING 1
+#define MANUAL_TUNING 1
 
 //Motor Controller
 #define ENA 3
@@ -13,7 +14,7 @@
 #define IN4 7
 #define ENB 6
 
-#define MIN_WHEEL_SPEED 100
+#define MIN_WHEEL_SPEED 30
 
 //PID Constants
 #define Kp 5
@@ -31,16 +32,18 @@ void RoverWallFollower::setup() {
 #if ENABLE_LOGGING
     Serial.begin(9600);
 #endif
-    
+    _sonic = new LUltrasonic(SONIC_ECHO_PIN, SONIC_TRIG_PIN);
+
     _motorController = new LMotorController(ENA, IN1, IN2, ENB, IN3, IN4, 1, 1);
     
     _pidSetpoint = 30;
     _pid = new PID(&_pidInput, &_pidOutput, &_pidSetpoint, Kp, Ki, Kd, DIRECT);
+#if MANUAL_TUNING
+    _pid->SetTunings(_kp, _ki, _kd);
+#endif
     _pid->SetMode(AUTOMATIC);
     _pid->SetSampleTime(10);
     _pid->SetOutputLimits(-255, 255);
-    
-    _sonic = new LUltrasonic(SONIC_ECHO_PIN, SONIC_TRIG_PIN);
 }
 
 #pragma mark - Loop
@@ -67,7 +70,9 @@ void RoverWallFollower::loop() {
 }
 
 void RoverWallFollower::loopAt1Hz() {
-
+#if MANUAL_TUNING
+    updatePIDConstants();
+#endif
 }
 
 void RoverWallFollower::loopAt5Hz() {
@@ -84,6 +89,26 @@ void RoverWallFollower::loopAt100Hz() {
 }
 
 #pragma mark - Operations
+
+#if MANUAL_TUNING
+void RoverWallFollower::updatePIDConstants() {
+    int potKp = analogRead(A0);
+    int potKi = analogRead(A1);
+    int potKd = analogRead(A2);
+    
+    _kp = map(potKp, 0, 1023, 0, 25000) / 100.0; //0 - 250
+    _ki = map(potKi, 0, 1023, 0, 100000) / 100.0; //0 - 1000
+    _kd = map(potKd, 0, 1023, 0, 500) / 100.0; //0 - 5
+    
+    if (_kp != _prevKp || _ki != _prevKi || _kd != _prevKd) {
+#if ENABLE_LOGGING
+        Serial.print(_kp);Serial.print(", ");Serial.print(_ki);Serial.print(", ");Serial.println(_kd);
+#endif
+        _pid->SetTunings(_kp, _ki, _kd);
+        _prevKp = _kp; _prevKi = _ki; _prevKd = _kd;
+    }
+}
+#endif
 
 void RoverWallFollower::updatePID() {
     _pidInput = _sonic->measureDistance();
