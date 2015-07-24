@@ -16,9 +16,9 @@
 #define MIN_WHEEL_SPEED 100
 
 //PID Constants
-#define Kp 10
-#define Ki 20
-#define Kd 0.1
+#define Kp 5
+#define Ki 10
+#define Kd 2
 
 //Ultrasonic
 #define SONIC_ECHO_PIN 9
