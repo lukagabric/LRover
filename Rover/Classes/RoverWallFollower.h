@@ -5,6 +5,7 @@
 #include "Arduino.h"
 #include "PID_v1.h"
 #include "LUltrasonic.h"
+#include "LLowPassFilter.h"
 
 class RoverWallFollower {
 private:
@@ -15,6 +16,8 @@ private:
     PID *_pid;
     
     LUltrasonic *_sonic;
+    
+    LLowPassFilter *_lowPassFilter;
     
     unsigned long _time1Hz, _time5Hz, _time10Hz, _time100Hz;
     void loopAt1Hz();

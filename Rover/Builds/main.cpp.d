@@ -12,4 +12,5 @@ Builds/main.cpp.o: main.cpp \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/variants/eightanaloginputs/pins_arduino.h \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/variants/eightanaloginputs/../standard/pins_arduino.h \
  Rover.ino Classes/RoverWallFollower.h Classes/LMotorController.h \
- Classes/PID_v1.h Classes/LUltrasonic.h Classes/RoverNavigator.h
+ Classes/PID_v1.h Classes/LUltrasonic.h Classes/LLowPassFilter.h \
+ Classes/RoverNavigator.h

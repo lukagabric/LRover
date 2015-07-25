@@ -28,6 +28,10 @@
 #define SONIC_TRIG_PIN 8
 #define SONIC_WALL_DISTANCE 50
 
+//Low-Pass Filter
+#define LPF_RC 0.05
+#define LPF_DT 1/100.0
+
 #pragma mark - Setup
 
 void RoverWallFollower::setup() {
@@ -37,6 +41,8 @@ void RoverWallFollower::setup() {
     _sonic = new LUltrasonic(SONIC_ECHO_PIN, SONIC_TRIG_PIN);
 
     _motorController = new LMotorController(ENA, IN1, IN2, ENB, IN3, IN4, 1, 1);
+    
+    _lowPassFilter = new LLowPassFilter(LPF_RC, LPF_DT);
     
     _pidSetpoint = 30;
     _pid = new PID(&_pidInput, &_pidOutput, &_pidSetpoint, Kp, Ki, Kd, DIRECT);
@@ -114,7 +120,8 @@ void RoverWallFollower::updatePIDConstants() {
 #endif
 
 void RoverWallFollower::updatePID() {
-    _pidInput = _sonic->measureDistance();
+    double rawDistance = _sonic->measureDistance();
+    _pidInput = _lowPassFilter->filteredValue(rawDistance);
     _pid->Compute();
 }
 

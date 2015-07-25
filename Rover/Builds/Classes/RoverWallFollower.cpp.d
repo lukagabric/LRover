@@ -12,4 +12,4 @@ Builds/Classes/RoverWallFollower.cpp.o: Classes/RoverWallFollower.cpp \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/cores/arduino/Arduino.h \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/variants/eightanaloginputs/pins_arduino.h \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/variants/eightanaloginputs/../standard/pins_arduino.h \
- Classes/PID_v1.h Classes/LUltrasonic.h
+ Classes/PID_v1.h Classes/LUltrasonic.h Classes/LLowPassFilter.h
