@@ -3,10 +3,10 @@
 #include "PID_v1.h"
 #include "LUltrasonic.h"
 
-#define LOG_PID_CONSTANTS 1
-#define LOG_MOVEMENT 1
+#define LOG_PID_CONSTANTS 0
+#define LOG_MOVEMENT 0
 #define MANUAL_TUNING 1
-#define DRIVE 0
+#define DRIVE 1
 
 //Motor Controller
 #define ENA 3
