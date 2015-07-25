@@ -3,8 +3,10 @@
 #include "PID_v1.h"
 #include "LUltrasonic.h"
 
-#define ENABLE_LOGGING 1
+#define LOG_PID_CONSTANTS 1
+#define LOG_MOVEMENT 1
 #define MANUAL_TUNING 1
+#define DRIVE 0
 
 //Motor Controller
 #define ENA 3
@@ -29,7 +31,7 @@
 #pragma mark - Setup
 
 void RoverWallFollower::setup() {
-#if ENABLE_LOGGING
+#if LOG_PID_CONSTANTS || LOG_MOVEMENT
     Serial.begin(9600);
 #endif
     _sonic = new LUltrasonic(SONIC_ECHO_PIN, SONIC_TRIG_PIN);
@@ -100,13 +102,14 @@ void RoverWallFollower::updatePIDConstants() {
     _ki = map(potKi, 0, 1023, 0, 100000) / 100.0; //0 - 1000
     _kd = map(potKd, 0, 1023, 0, 500) / 100.0; //0 - 5
     
-    if (_kp != _prevKp || _ki != _prevKi || _kd != _prevKd) {
-#if ENABLE_LOGGING
+    if (_kp == _prevKp && _ki == _prevKi && _kd == _prevKd) return;
+
+#if LOG_PID_CONSTANTS
         Serial.print(_kp);Serial.print(", ");Serial.print(_ki);Serial.print(", ");Serial.println(_kd);
 #endif
-        _pid->SetTunings(_kp, _ki, _kd);
-        _prevKp = _kp; _prevKi = _ki; _prevKd = _kd;
-    }
+
+    _pid->SetTunings(_kp, _ki, _kd);
+    _prevKp = _kp; _prevKi = _ki; _prevKd = _kd;
 }
 #endif
 
@@ -129,16 +132,13 @@ void RoverWallFollower::updateMovement() {
     rightWheelSpeed = max(MIN_WHEEL_SPEED, rightWheelSpeed);
     leftWheelSpeed = max(MIN_WHEEL_SPEED, leftWheelSpeed);
 
-#if ENABLE_LOGGING
-    Serial.print("\tDST=");
-    Serial.print(_pidInput);
-    Serial.print("\tRW=");
-    Serial.print(rightWheelSpeed);
-    Serial.print("\tLW");
-    Serial.println(leftWheelSpeed);
+#if LOG_MOVEMENT
+    Serial.print("\tDST=");Serial.print(_pidInput);Serial.print("\tRW=");Serial.print(rightWheelSpeed);Serial.print("\tLW");Serial.println(leftWheelSpeed);
 #endif
 
+#if DRIVE
     _motorController->move(leftWheelSpeed, rightWheelSpeed);
+#endif
 }
 
 #pragma mark -
