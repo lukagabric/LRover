@@ -16,7 +16,7 @@
 #define IN4 7
 #define ENB 6
 
-#define MIN_WHEEL_SPEED 30
+#define MIN_WHEEL_SPEED 70
 
 //PID Constants
 #define Kp 5
