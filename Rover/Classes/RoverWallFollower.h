@@ -12,18 +12,17 @@ private:
     LMotorController *_motorController;
     
     double _kp, _prevKp, _ki, _prevKi, _kd, _prevKd;
-    double _pidInput, _pidOutput, _pidSetpoint;
+    double _pidInput, _pidOutput, _prevPidOutput, _pidSetpoint;
     PID *_pid;
     
     LUltrasonic *_sonic;
+    double _prevDistance;
     
     LLowPassFilter *_lowPassFilter;
     
-    unsigned long _time1Hz, _time5Hz, _time10Hz, _time100Hz;
+    unsigned long _time1Hz, _time20Hz;
     void loopAt1Hz();
-    void loopAt5Hz();
-    void loopAt10Hz();
-    void loopAt100Hz();
+    void loopAt20Hz();
     
     void updatePID();
     void updatePIDConstants();

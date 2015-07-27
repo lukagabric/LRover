@@ -3,9 +3,12 @@
 #include "PID_v1.h"
 #include "LUltrasonic.h"
 
-#define LOG_PID_CONSTANTS 0
-#define LOG_MOVEMENT 0
+#define LOG_PID_CONSTANTS 1
+#define LOG_PID_OUTPUT 0
+#define LOG_WHEEL_SPEED 0
+#define LOG_DISTANCE 1
 #define MANUAL_TUNING 1
+#define USE_DISTANCE_LOW_PASS_FILTER 0
 #define DRIVE 1
 
 //Motor Controller
@@ -16,11 +19,11 @@
 #define IN4 7
 #define ENB 6
 
-#define MIN_WHEEL_SPEED 70
+#define MINIMUM_WHEEL_SPEED 30
 
 //PID Constants
 #define Kp 5
-#define Ki 10
+#define Ki 7
 #define Kd 2
 
 //Ultrasonic
@@ -29,15 +32,15 @@
 
 //Low-Pass Filter
 #define LPF_RC 0.005
-#define LPF_DT 1/100.0
+#define LPF_DT 1/20.0
 
 //Target Wall Distance
-#define TARGET_WALL_DISTANCE 22
+#define TARGET_WALL_DISTANCE 30
 
 #pragma mark - Setup
 
 void RoverWallFollower::setup() {
-#if LOG_PID_CONSTANTS || LOG_MOVEMENT
+#if LOG_PID_CONSTANTS || LOG_PID_OUTPUT || LOG_WHEEL_SPEED || LOG_DISTANCE
     Serial.begin(9600);
 #endif
     _sonic = new LUltrasonic(SONIC_ECHO_PIN, SONIC_TRIG_PIN);
@@ -52,7 +55,7 @@ void RoverWallFollower::setup() {
     _pid->SetTunings(_kp, _ki, _kd);
 #endif
     _pid->SetMode(AUTOMATIC);
-    _pid->SetSampleTime(10);
+    _pid->SetSampleTime(50);
     _pid->SetOutputLimits(-255, 255);
 }
 
@@ -65,17 +68,9 @@ void RoverWallFollower::loop() {
         _time1Hz = currentTime;
         loopAt1Hz();
     }
-    if (currentTime - _time5Hz >= 200) {
-        _time5Hz = currentTime;
-        loopAt5Hz();
-    }
-    if (currentTime - _time10Hz >= 100) {
-        _time10Hz = currentTime;
-        loopAt10Hz();
-    }
-    if (currentTime - _time100Hz >= 10) {
-        _time100Hz = currentTime;
-        loopAt100Hz();
+    if (currentTime - _time20Hz >= 50) {
+        _time20Hz = currentTime;
+        loopAt20Hz();
     }
 }
 
@@ -85,30 +80,21 @@ void RoverWallFollower::loopAt1Hz() {
 #endif
 }
 
-void RoverWallFollower::loopAt5Hz() {
-
-}
-
-void RoverWallFollower::loopAt10Hz() {
-
-}
-
-void RoverWallFollower::loopAt100Hz() {
+void RoverWallFollower::loopAt20Hz() {
     updatePID();
     updateMovement();
 }
 
 #pragma mark - Operations
 
-#if MANUAL_TUNING
 void RoverWallFollower::updatePIDConstants() {
     int potKp = analogRead(A0);
     int potKi = analogRead(A1);
     int potKd = analogRead(A2);
     
-    _kp = map(potKp, 0, 1023, 0, 10000) / 100.0;
-    _ki = map(potKi, 0, 1023, 0, 10000) / 100.0;
-    _kd = map(potKd, 0, 1023, 0, 500) / 100.0;
+    _kp = map(potKp, 0, 1023, 0, 1000) / 100.0;
+    _ki = map(potKi, 0, 1023, 0, 100) / 100.0;
+    _kd = map(potKd, 0, 1023, 0, 100) / 100.0;
     
     if (_kp == _prevKp && _ki == _prevKi && _kd == _prevKd) return;
 
@@ -119,30 +105,52 @@ void RoverWallFollower::updatePIDConstants() {
     _pid->SetTunings(_kp, _ki, _kd);
     _prevKp = _kp; _prevKi = _ki; _prevKd = _kd;
 }
-#endif
 
 void RoverWallFollower::updatePID() {
     double rawDistance = _sonic->measureDistance();
+
+#if USE_DISTANCE_LOW_PASS_FILTER
     _pidInput = _lowPassFilter->filteredValue(rawDistance);
+#else
+    _pidInput = rawDistance;
+#endif
+
     _pid->Compute();
+
+#if LOG_PID_OUTPUT
+    if (_pidOutput != _prevPidOutput) {
+        Serial.print("PID OUTPUT: ");Serial.println(_pidOutput);
+        _prevPidOutput = _pidOutput;
+    }
+#endif
 }
 
 void RoverWallFollower::updateMovement() {
     int rightWheelSpeed = 255;
     int leftWheelSpeed = 255;
     
+    int output = _pidOutput;
+    
     if (_pidOutput < 0) {
+        //too far, turn right
         rightWheelSpeed += _pidOutput;
+        rightWheelSpeed = max(MINIMUM_WHEEL_SPEED, rightWheelSpeed);
     }
     else {
+        //too close, turn left
         leftWheelSpeed -= _pidOutput;
+        leftWheelSpeed = max(MINIMUM_WHEEL_SPEED, leftWheelSpeed);
     }
     
-    rightWheelSpeed = max(MIN_WHEEL_SPEED, rightWheelSpeed);
-    leftWheelSpeed = max(MIN_WHEEL_SPEED, leftWheelSpeed);
-
-#if LOG_MOVEMENT
-    Serial.print("\tDST=");Serial.print(_pidInput);Serial.print("\tRW=");Serial.print(rightWheelSpeed);Serial.print("\tLW");Serial.println(leftWheelSpeed);
+#if LOG_WHEEL_SPEED
+    Serial.print("\tRW=");Serial.print(rightWheelSpeed);Serial.print("\tLW");Serial.println(leftWheelSpeed);
+#endif
+    
+#if LOG_DISTANCE
+    if (_pidInput != _prevDistance) {
+        Serial.print("\tDST=");Serial.println(_pidInput);
+        _prevDistance = _pidInput;
+    }
 #endif
 
 #if DRIVE
