@@ -19,12 +19,12 @@
 #define IN4 7
 #define ENB 6
 
-#define MINIMUM_WHEEL_SPEED 30
+#define MINIMUM_WHEEL_SPEED 10
 
 //PID Constants
 #define Kp 5
-#define Ki 7
-#define Kd 2
+#define Ki 0.01
+#define Kd 0.25
 
 //Ultrasonic
 #define SONIC_ECHO_PIN 9
@@ -93,7 +93,7 @@ void RoverWallFollower::updatePIDConstants() {
     int potKd = analogRead(A2);
     
     _kp = map(potKp, 0, 1023, 0, 1000) / 100.0;
-    _ki = map(potKi, 0, 1023, 0, 100) / 100.0;
+    _ki = map(potKi, 0, 1023, 0, 1000) / 100.0;
     _kd = map(potKd, 0, 1023, 0, 100) / 100.0;
     
     if (_kp == _prevKp && _ki == _prevKi && _kd == _prevKd) return;
