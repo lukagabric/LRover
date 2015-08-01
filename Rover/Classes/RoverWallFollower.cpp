@@ -92,9 +92,9 @@ void RoverWallFollower::updatePIDConstants() {
     int potKi = analogRead(A1);
     int potKd = analogRead(A2);
     
-    _kp = map(potKp, 0, 1023, 0, 1000) / 100.0;
-    _ki = map(potKi, 0, 1023, 0, 1000) / 100.0;
-    _kd = map(potKd, 0, 1023, 0, 100) / 100.0;
+    _kp = map(potKp, 0, 1023, 0, 25000) / 100.0; //0 - 250
+    _ki = map(potKi, 0, 1023, 0, 100000) / 100.0; //0 - 1000
+    _kd = map(potKd, 0, 1023, 0, 500) / 100.0; //0 - 5
     
     if (_kp == _prevKp && _ki == _prevKi && _kd == _prevKd) return;
 
