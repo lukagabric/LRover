@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		410965231B60478300832B47 /* RoverNavigator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 410965211B60478300832B47 /* RoverNavigator.cpp */; };
 		4124D4F31B5D6DEF0065FBF5 /* Rover.ino in Sources */ = {isa = PBXBuildFile; fileRef = 4174D4F31B5D6DEF0065FBF5 /* Rover.ino */; };
+		41304E0E1B6D5ABC00282544 /* HMC5883L.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41304E0D1B6D5ABC00282544 /* HMC5883L.cpp */; };
+		41304E111B6D5AE400282544 /* I2Cdev.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41304E0F1B6D5AE400282544 /* I2Cdev.cpp */; };
 		41372BDE1B602BE2001967CC /* LUltrasonic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41372BDC1B602BE2001967CC /* LUltrasonic.cpp */; };
 		4174D4771B5D6DEF0065FBF5 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4174D4761B5D6DEF0065FBF5 /* main.cpp */; };
 		417CCBAB1B604BC20065DF36 /* RoverWallFollower.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 417CCBA91B604BC20065DF36 /* RoverWallFollower.cpp */; };
@@ -408,6 +410,10 @@
 /* Begin PBXFileReference section */
 		410965211B60478300832B47 /* RoverNavigator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RoverNavigator.cpp; sourceTree = "<group>"; };
 		410965221B60478300832B47 /* RoverNavigator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoverNavigator.h; sourceTree = "<group>"; };
+		41304E0C1B6D5ABC00282544 /* HMC5883L.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMC5883L.h; sourceTree = "<group>"; };
+		41304E0D1B6D5ABC00282544 /* HMC5883L.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HMC5883L.cpp; sourceTree = "<group>"; };
+		41304E0F1B6D5AE400282544 /* I2Cdev.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = I2Cdev.cpp; sourceTree = "<group>"; };
+		41304E101B6D5AE400282544 /* I2Cdev.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = I2Cdev.h; sourceTree = "<group>"; };
 		41372BDC1B602BE2001967CC /* LUltrasonic.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LUltrasonic.cpp; sourceTree = "<group>"; };
 		41372BDD1B602BE2001967CC /* LUltrasonic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LUltrasonic.h; sourceTree = "<group>"; };
 		4174D4731B5D6DEF0065FBF5 /* Index */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Index; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1109,6 +1115,10 @@
 		41D624521B5D7DE200611BC2 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				41304E0F1B6D5AE400282544 /* I2Cdev.cpp */,
+				41304E101B6D5AE400282544 /* I2Cdev.h */,
+				41304E0C1B6D5ABC00282544 /* HMC5883L.h */,
+				41304E0D1B6D5ABC00282544 /* HMC5883L.cpp */,
 				41D2E7D51B6008330076FF1B /* PID_v1.cpp */,
 				41D2E7D61B6008330076FF1B /* PID_v1.h */,
 				41857AA61B63A67E008C183B /* LLowPassFilter.cpp */,
@@ -2678,6 +2688,7 @@
 				AA2A150720200537AA000107 /* EasyTransfer2.cpp in Sources */,
 				AA2A150720200537AA000108 /* EasyTransfer2.h in Sources */,
 				AA2A150720200537AA000109 /* lineFollow.cpp in Sources */,
+				41304E0E1B6D5ABC00282544 /* HMC5883L.cpp in Sources */,
 				AA2A150720200537AA00010A /* LineFollow.h in Sources */,
 				AA2A150720200537AA00010B /* Multiplexer.cpp in Sources */,
 				41857AA81B63A67E008C183B /* LLowPassFilter.cpp in Sources */,
@@ -2837,6 +2848,7 @@
 				AA2A150720200537AA0001E9 /* nvram.c in Sources */,
 				AA2A150720200537AA0001EA /* nvram.h in Sources */,
 				41372BDE1B602BE2001967CC /* LUltrasonic.cpp in Sources */,
+				41304E111B6D5AE400282544 /* I2Cdev.cpp in Sources */,
 				AA2A150720200537AA0001EB /* owl_os.c in Sources */,
 				AA2A150720200537AA0001EC /* ping.c in Sources */,
 				AA2A150720200537AA0001ED /* ping.h in Sources */,

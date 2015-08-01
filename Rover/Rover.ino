@@ -1,7 +1,7 @@
 #include "RoverWallFollower.h"
 #include "RoverNavigator.h"
 
-RoverWallFollower rover;
+RoverNavigator rover;
 
 void setup() {
     rover.setup();
