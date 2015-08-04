@@ -15,6 +15,7 @@
 		4174D4771B5D6DEF0065FBF5 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4174D4761B5D6DEF0065FBF5 /* main.cpp */; };
 		417CCBAB1B604BC20065DF36 /* RoverWallFollower.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 417CCBA91B604BC20065DF36 /* RoverWallFollower.cpp */; };
 		41857AA81B63A67E008C183B /* LLowPassFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41857AA61B63A67E008C183B /* LLowPassFilter.cpp */; };
+		41D294D51B71371500D37F64 /* LCompass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41D294D31B71371500D37F64 /* LCompass.cpp */; };
 		41D2E7D71B6008330076FF1B /* PID_v1.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41D2E7D51B6008330076FF1B /* PID_v1.cpp */; };
 		AA2A150720200537AA000006 /* abi.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAAA150720200537AA000006 /* abi.cpp */; };
 		AA2A150720200537AA000007 /* Arduino.h in Sources */ = {isa = PBXBuildFile; fileRef = AAAA150720200537AA000007 /* Arduino.h */; };
@@ -536,6 +537,8 @@
 		417CCBAA1B604BC20065DF36 /* RoverWallFollower.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoverWallFollower.h; sourceTree = "<group>"; };
 		41857AA61B63A67E008C183B /* LLowPassFilter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LLowPassFilter.cpp; sourceTree = "<group>"; };
 		41857AA71B63A67E008C183B /* LLowPassFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLowPassFilter.h; sourceTree = "<group>"; };
+		41D294D31B71371500D37F64 /* LCompass.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LCompass.cpp; sourceTree = "<group>"; };
+		41D294D41B71371500D37F64 /* LCompass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCompass.h; sourceTree = "<group>"; };
 		41D2E7D51B6008330076FF1B /* PID_v1.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PID_v1.cpp; sourceTree = "<group>"; };
 		41D2E7D61B6008330076FF1B /* PID_v1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PID_v1.h; sourceTree = "<group>"; };
 		41D624531B5D7DE200611BC2 /* LMotorController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LMotorController.cpp; sourceTree = "<group>"; };
@@ -1121,6 +1124,8 @@
 				41304E0D1B6D5ABC00282544 /* HMC5883L.cpp */,
 				41D2E7D51B6008330076FF1B /* PID_v1.cpp */,
 				41D2E7D61B6008330076FF1B /* PID_v1.h */,
+				41D294D31B71371500D37F64 /* LCompass.cpp */,
+				41D294D41B71371500D37F64 /* LCompass.h */,
 				41857AA61B63A67E008C183B /* LLowPassFilter.cpp */,
 				41857AA71B63A67E008C183B /* LLowPassFilter.h */,
 				41372BDC1B602BE2001967CC /* LUltrasonic.cpp */,
@@ -2765,6 +2770,7 @@
 				AA2A150720200537AA00016F /* clocks.h in Sources */,
 				AA2A150720200537AA000171 /* conf_access.h in Sources */,
 				AA2A150720200537AA000172 /* conf_at45dbx.h in Sources */,
+				41D294D51B71371500D37F64 /* LCompass.cpp in Sources */,
 				AA2A150720200537AA000174 /* flash_fw.c in Sources */,
 				AA2A150720200537AA000175 /* nor_flash.c in Sources */,
 				AA2A150720200537AA000176 /* nor_flash.h in Sources */,

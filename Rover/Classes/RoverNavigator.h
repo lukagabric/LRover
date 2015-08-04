@@ -6,28 +6,37 @@
 #include "PID_v1.h"
 #include "LUltrasonic.h"
 #include "LLowPassFilter.h"
-#include "HMC5883L.h"
+#include "LCompass.h"
+
+#define DEBUG_LOG 0
+#define MANUAL_PID_TUNING 1
+#define USE_COMPASS_LOW_PASS_FILTER 1
+#define DRIVE 1
 
 class RoverNavigator {
 private:
     LMotorController *_motorController;
+    int _leftWheelSpeed, _rightWheelSpeed;
     
-    HMC5883L *_compass;
-    int16_t _mx, _my, _mz;
-    
-    double _kp, _prevKp, _ki, _prevKi, _kd, _prevKd;
-    double _pidInput, _pidOutput, _prevPidOutput, _pidSetpoint;
     PID *_pid;
+    double _kp, _ki, _kd;
+    double _headdingOffset, _pidOutput, _pidSetpoint, _currentHeading, _goalHeading;
     
-    LLowPassFilter *_lowPassFilter;
+    LCompass *_compass;
+    LLowPassFilter *_compassLPF;    
     
     unsigned long _time1Hz, _time20Hz;
     void loopAt1Hz();
     void loopAt20Hz();
     
-    void updatePID();
-    void updatePIDConstants();
-    void updateMovement();
+#if MANUAL_PID_TUNING
+    void configurePIDConstants();
+#endif
+    void configurePIDOutput();
+    void configureMovement();
+#if DEBUG_LOG
+    void debugLog();
+#endif
 public:
     void setup();
     void loop();

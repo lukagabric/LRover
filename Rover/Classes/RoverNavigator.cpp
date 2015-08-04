@@ -4,13 +4,7 @@
 #include "LUltrasonic.h"
 #include <Wire.h>
 
-#define LOG_PID_CONSTANTS 1
-#define LOG_PID_OUTPUT 0
-#define LOG_WHEEL_SPEED 0
-#define LOG_DIRECTION 1
-#define MANUAL_TUNING 1
-#define USE_DISTANCE_LOW_PASS_FILTER 0
-#define DRIVE 0
+// S = 262; E = 166; N = 28; W = 321
 
 //Motor Controller
 #define ENA 3
@@ -28,39 +22,27 @@
 #define Kd 0.25
 
 //Low-Pass Filter
-#define LPF_RC 0.005
+#define LPF_RC 0.05
 #define LPF_DT 1/20.0
-
-//Compass
-#define Addr 0x1E
 
 #pragma mark - Setup
 
 void RoverNavigator::setup() {
-#if LOG_PID_CONSTANTS || LOG_PID_OUTPUT || LOG_WHEEL_SPEED || LOG_DIRECTION
+#if DEBUG_LOG
     Serial.begin(9600);
 #endif
-
+    
     delay(100);
     
-    // initialize device
-    Serial.println("Initializing I2C devices...");
-    _compass = new HMC5883L();
-    _compass->initialize();
-    
-    // verify connection
-    Serial.println("Testing device connections...");
-    Serial.println(_compass->testConnection() ? "HMC5883L connection successful" : "HMC5883L connection failed");
+    _compass = new LCompass();
+    _compassLPF = new LLowPassFilter(LPF_RC, LPF_DT);
 
-    delay(2000);
-    
     _motorController = new LMotorController(ENA, IN1, IN2, ENB, IN3, IN4, 1, 1);
     
-    _lowPassFilter = new LLowPassFilter(LPF_RC, LPF_DT);
-    
+    _goalHeading = 166; //East
     _pidSetpoint = 0;
-    _pid = new PID(&_pidInput, &_pidOutput, &_pidSetpoint, Kp, Ki, Kd, DIRECT);
-#if MANUAL_TUNING
+    _pid = new PID(&_headdingOffset, &_pidOutput, &_pidSetpoint, Kp, Ki, Kd, DIRECT);
+#if MANUAL_PID_TUNING
     _pid->SetTunings(_kp, _ki, _kd);
 #endif
     _pid->SetMode(AUTOMATIC);
@@ -71,23 +53,6 @@ void RoverNavigator::setup() {
 #pragma mark - Loop
 
 void RoverNavigator::loop() {
-    _compass->getHeading(&_mx, &_my, &_mz);
-    
-    // display tab-separated gyro x/y/z values
-    Serial.print("Compass:\t");
-    Serial.print(_mx); Serial.print("\t");
-    Serial.print(_my); Serial.print("\t");
-    Serial.print(_mz); Serial.print("\t");
-
-    // To calculate heading in degrees. 0 degree indicates North
-    float heading = atan2(_my, _mx);
-    if (heading < 0) {
-        heading += 2 * M_PI;
-    }
-    Serial.print("heading:\t");
-    Serial.println(heading * 180/M_PI);
-    
-    
     unsigned long currentTime = millis();
     
     if (currentTime - _time1Hz >= 1000) {
@@ -101,19 +66,23 @@ void RoverNavigator::loop() {
 }
 
 void RoverNavigator::loopAt1Hz() {
-#if MANUAL_TUNING
-    updatePIDConstants();
+#if MANUAL_PID_TUNING
+    configurePIDConstants();
+#endif
+#if DEBUG_LOG
+    debugLog();
 #endif
 }
 
 void RoverNavigator::loopAt20Hz() {
-    updatePID();
-    updateMovement();
+    configurePIDOutput();
+    configureMovement();
 }
 
 #pragma mark - Operations
 
-void RoverNavigator::updatePIDConstants() {
+#if MANUAL_PID_TUNING
+void RoverNavigator::configurePIDConstants() {
     int potKp = analogRead(A0);
     int potKi = analogRead(A1);
     int potKd = analogRead(A2);
@@ -122,65 +91,52 @@ void RoverNavigator::updatePIDConstants() {
     _ki = map(potKi, 0, 1023, 0, 100000) / 100.0; //0 - 1000
     _kd = map(potKd, 0, 1023, 0, 500) / 100.0; //0 - 5
     
-    if (_kp == _prevKp && _ki == _prevKi && _kd == _prevKd) return;
-    
-#if LOG_PID_CONSTANTS
-    Serial.print(_kp);Serial.print(", ");Serial.print(_ki);Serial.print(", ");Serial.println(_kd);
-#endif
-    
     _pid->SetTunings(_kp, _ki, _kd);
-    _prevKp = _kp; _prevKi = _ki; _prevKd = _kd;
 }
-
-void RoverNavigator::updatePID() {
-    double rawDirection;
-#if USE_DISTANCE_LOW_PASS_FILTER
-    _pidInput = _lowPassFilter->filteredValue(rawDirection);
-#else
-    _pidInput = rawDirection;
 #endif
+
+void RoverNavigator::configurePIDOutput() {
+    double rawHeading = _compass->headingDeg();
+    
+#if USE_COMPASS_LOW_PASS_FILTER
+    _currentHeading = _compassLPF->filteredValue(rawHeading);
+#else
+    _currentHeading = rawHeading;
+#endif
+    
+    _headdingOffset = _compass->headingOffset(_goalHeading, _currentHeading);
     
     _pid->Compute();
+}
+
+void RoverNavigator::configureMovement() {
+    _rightWheelSpeed = 255;
+    _leftWheelSpeed = 255;
     
-#if LOG_PID_OUTPUT
-    if (_pidOutput != _prevPidOutput) {
-        Serial.print("PID OUTPUT: ");Serial.println(_pidOutput);
-        _prevPidOutput = _pidOutput;
+    if (_pidOutput < 0) {
+        //turn right
+        _rightWheelSpeed += _pidOutput;
+        _rightWheelSpeed = max(MINIMUM_WHEEL_SPEED, _rightWheelSpeed);
     }
+    else {
+        //turn left
+        _leftWheelSpeed -= _pidOutput;
+        _leftWheelSpeed = max(MINIMUM_WHEEL_SPEED, _leftWheelSpeed);
+    }
+    
+#if DRIVE
+    _motorController->move(_leftWheelSpeed, _rightWheelSpeed);
 #endif
 }
 
-void RoverNavigator::updateMovement() {
-    int rightWheelSpeed = 255;
-    int leftWheelSpeed = 255;
-    
-    int output = _pidOutput;
-    
-    if (_pidOutput < 0) {
-        //too far, turn right
-        rightWheelSpeed += _pidOutput;
-        rightWheelSpeed = max(MINIMUM_WHEEL_SPEED, rightWheelSpeed);
-    }
-    else {
-        //too close, turn left
-        leftWheelSpeed -= _pidOutput;
-        leftWheelSpeed = max(MINIMUM_WHEEL_SPEED, leftWheelSpeed);
-    }
-    
-#if LOG_WHEEL_SPEED
-    Serial.print("\tRW=");Serial.print(rightWheelSpeed);Serial.print("\tLW");Serial.println(leftWheelSpeed);
-#endif
-    
-#if LOG_DISTANCE
-    if (_pidInput != _prevDistance) {
-        Serial.print("\tDST=");Serial.println(_pidInput);
-        _prevDistance = _pidInput;
-    }
-#endif
-    
-#if DRIVE
-    _motorController->move(leftWheelSpeed, rightWheelSpeed);
-#endif
+#if DEBUG_LOG
+void RoverNavigator::debugLog() {
+    Serial.println("\n==================================================================================================");
+    Serial.print("\nCURRENT HEADING: ");Serial.print(_currentHeading);Serial.print("    GOAL HEADING: ");Serial.print(_goalHeading);Serial.print("    HEADING OFFSET: ");Serial.println(_headdingOffset);
+    Serial.print("\nKp: ");Serial.print(_kp);Serial.print("    Ki:");Serial.print(_ki);Serial.print("    Kd:");Serial.println(_kd);
+    Serial.print("\nPID OUTPUT: ");Serial.println(_pidOutput);
+    Serial.print("\nRW: ");Serial.print(_rightWheelSpeed);Serial.print("    LW: ");Serial.println(_leftWheelSpeed);
 }
+#endif
 
 #pragma mark -
