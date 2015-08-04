@@ -4,8 +4,6 @@
 #include "LUltrasonic.h"
 #include <Wire.h>
 
-// S = 262; E = 166; N = 28; W = 321
-
 //Motor Controller
 #define ENA 3
 #define IN1 2
@@ -39,7 +37,7 @@ void RoverNavigator::setup() {
 
     _motorController = new LMotorController(ENA, IN1, IN2, ENB, IN3, IN4, 1, 1);
     
-    _goalHeading = 166; //East
+    _goalHeading = 262; //S
     _pidSetpoint = 0;
     _pid = new PID(&_headdingOffset, &_pidOutput, &_pidSetpoint, Kp, Ki, Kd, DIRECT);
 #if MANUAL_PID_TUNING
@@ -55,6 +53,10 @@ void RoverNavigator::setup() {
 void RoverNavigator::loop() {
     unsigned long currentTime = millis();
     
+    if (currentTime - _time15s >= 15000) {
+        _time15s = currentTime;
+        loop15s();
+    }
     if (currentTime - _time1Hz >= 1000) {
         _time1Hz = currentTime;
         loopAt1Hz();
@@ -63,6 +65,27 @@ void RoverNavigator::loop() {
         _time20Hz = currentTime;
         loopAt20Hz();
     }
+}
+
+void RoverNavigator::loop15s() {
+    //E = 166; N = 28; W = 321; S = 262
+    
+    switch (state) {
+        case 0:
+            _goalHeading = 166; //E
+            break;
+        case 1:
+            _goalHeading = 28; //N
+            break;
+        case 2:
+            _goalHeading = 321; //W
+            break;
+        default:
+            _goalHeading = 262; //S
+            break;
+    }
+    
+    state = ++state % 4;
 }
 
 void RoverNavigator::loopAt1Hz() {

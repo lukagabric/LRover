@@ -15,6 +15,8 @@
 
 class RoverNavigator {
 private:
+    int state;
+    
     LMotorController *_motorController;
     int _leftWheelSpeed, _rightWheelSpeed;
     
@@ -25,7 +27,8 @@ private:
     LCompass *_compass;
     LLowPassFilter *_compassLPF;    
     
-    unsigned long _time1Hz, _time20Hz;
+    unsigned long _time1Hz, _time20Hz, _time15s;
+    void loop15s();
     void loopAt1Hz();
     void loopAt20Hz();
     
