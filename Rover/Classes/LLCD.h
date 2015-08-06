@@ -17,8 +17,8 @@ private:
     LiquidCrystal_I2C *_lcd;
 public:
     LLCD();
-    void print(unsigned int line, const char str[]);
-    void print(unsigned int line, double n, int digits);
+    void print(unsigned int column, unsigned int line, const char str[]);
+    void print(unsigned int column, unsigned int line, double n, int digits);
 };
 
 #endif /* defined(__Rover__LLCD__) */

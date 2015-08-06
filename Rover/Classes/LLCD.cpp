@@ -31,14 +31,14 @@ LLCD::LLCD() {
     _lcd->home();    
 }
 
-void LLCD::print(unsigned int line, const char str[]) {
+void LLCD::print(unsigned int column, unsigned int line, const char str[]) {
     if (line > 1) return;
     
-    _lcd->setCursor(0, line);
+    _lcd->setCursor(column, line);
     _lcd->print(str);
 }
 
-void LLCD::print(unsigned int line, double n, int digits) {
-    _lcd->setCursor(0, line);
+void LLCD::print(unsigned int column, unsigned int line, double n, int digits) {
+    _lcd->setCursor(column, line);
     _lcd->print(n, digits);
 }
