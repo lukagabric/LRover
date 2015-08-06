@@ -39,6 +39,8 @@ void LLCD::print(unsigned int column, unsigned int line, const char str[]) {
 }
 
 void LLCD::print(unsigned int column, unsigned int line, double n, int digits) {
+    if (line > 1) return;
+    
     _lcd->setCursor(column, line);
     _lcd->print(n, digits);
 }

@@ -98,15 +98,15 @@ void RoverNavigator::loopAt1Hz() {
     if (_gps->location(&_lat, &_lon, &_age)) {
 #if ENABLE_LCD
         _lcd->print(0, 0, "LAT=");
-        _lcd->print(0, 5, _lat, 8);
+        _lcd->print(5, 0, _lat, 8);
         _lcd->print(1, 0, "LON=");
-        _lcd->print(1, 5, _lon, 8);
+        _lcd->print(5, 1, _lon, 8);
 #endif
     }
     else {
 #if ENABLE_LCD
         _lcd->print(0, 0, "LOCATION");
-        _lcd->print(1, 0, "UNAVAILABLE");
+        _lcd->print(0, 1, "UNAVAILABLE");
 #endif
     }
     Serial.print("LAT = ");Serial.print(_lat);Serial.print(", LON = ");Serial.println(_lon);
