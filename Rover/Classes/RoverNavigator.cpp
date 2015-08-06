@@ -99,7 +99,7 @@ void RoverNavigator::loopAt1Hz() {
 #if ENABLE_LCD
         _lcd->print(0, 0, "LAT=");
         _lcd->print(5, 0, _lat, 8);
-        _lcd->print(1, 0, "LON=");
+        _lcd->print(0, 1, "LON=");
         _lcd->print(5, 1, _lon, 8);
 #endif
     }
