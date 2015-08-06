@@ -22,7 +22,7 @@ bool LGPS::location(float *lat, float *lon, unsigned long *age) {
 }
 
 bool LGPS::locationValid(float lat, float lon) {
-    return (lat != TinyGPS::GPS_INVALID_F_ANGLE || lon != TinyGPS::GPS_INVALID_F_ANGLE);
+    return (lat != TinyGPS::GPS_INVALID_F_ANGLE && lon != TinyGPS::GPS_INVALID_F_ANGLE);
 }
 
 float LGPS::altitude() {
