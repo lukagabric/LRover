@@ -32,9 +32,15 @@ void RoverNavigator::setup() {
     
     delay(100);
     
+#if ENABLE_LCD
+    _lcd = new LLCD();
+#endif
+
     _compass = new LCompass();
     _compassLPF = new LLowPassFilter(LPF_RC, LPF_DT);
 
+    _gps = new LGPS();
+    
     _motorController = new LMotorController(ENA, IN1, IN2, ENB, IN3, IN4, 1, 1);
     
     _goalHeading = 262; //S
@@ -89,9 +95,23 @@ void RoverNavigator::loop15s() {
 }
 
 void RoverNavigator::loopAt1Hz() {
+    if (_gps->location(&_lat, &_lon, &_age)) {
+#if ENABLE_LCD
+        _lcd->print(0, _lat, 15);
+        _lcd->print(1, _lon, 15);
+#endif
+    }
+    else {
+#if ENABLE_LCD
+        _lcd->print(0, "LOCATION");
+        _lcd->print(1, "UNAVAILABLE");
+#endif
+    }
+    
 #if MANUAL_PID_TUNING
     configurePIDConstants();
 #endif
+    
 #if DEBUG_LOG
     debugLog();
 #endif
@@ -153,8 +173,14 @@ void RoverNavigator::configureMovement() {
 }
 
 #if DEBUG_LOG
-void RoverNavigator::debugLog() {
+void RoverNavigator::debugLog() {    
     Serial.println("\n==================================================================================================");
+    if (_gps->locationValid(_lat, _lon)) {
+        Serial.print("\nLAT: ");Serial.print(_lat);Serial.print("    LON: ");Serial.print(_lon);Serial.print("    AGE: ");Serial.println(_age);
+    }
+    else {
+        Serial.println("\nLOCATION UNAVAILABLE");
+    }
     Serial.print("\nCURRENT HEADING: ");Serial.print(_currentHeading);Serial.print("    GOAL HEADING: ");Serial.print(_goalHeading);Serial.print("    HEADING OFFSET: ");Serial.println(_headdingOffset);
     Serial.print("\nKp: ");Serial.print(_kp);Serial.print("    Ki:");Serial.print(_ki);Serial.print("    Kd:");Serial.println(_kd);
     Serial.print("\nPID OUTPUT: ");Serial.println(_pidOutput);

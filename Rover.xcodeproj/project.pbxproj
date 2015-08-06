@@ -8,10 +8,21 @@
 
 /* Begin PBXBuildFile section */
 		410965231B60478300832B47 /* RoverNavigator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 410965211B60478300832B47 /* RoverNavigator.cpp */; };
+		411CB1141B73E0950006CBC3 /* LLCD.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 411CB1121B73E0950006CBC3 /* LLCD.cpp */; };
+		411CB1271B73E1A70006CBC3 /* FastIO.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 411CB1161B73E1A70006CBC3 /* FastIO.cpp */; };
+		411CB1281B73E1A70006CBC3 /* I2CIO.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 411CB1181B73E1A70006CBC3 /* I2CIO.cpp */; };
+		411CB1291B73E1A70006CBC3 /* LCD.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 411CB11B1B73E1A70006CBC3 /* LCD.cpp */; };
+		411CB12A1B73E1A70006CBC3 /* LiquidCrystal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 411CB11D1B73E1A70006CBC3 /* LiquidCrystal.cpp */; };
+		411CB12B1B73E1A70006CBC3 /* LiquidCrystal_I2C.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 411CB11F1B73E1A70006CBC3 /* LiquidCrystal_I2C.cpp */; };
+		411CB12C1B73E1A70006CBC3 /* LiquidCrystal_SR.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 411CB1211B73E1A70006CBC3 /* LiquidCrystal_SR.cpp */; };
+		411CB12D1B73E1A70006CBC3 /* LiquidCrystal_SR2W.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 411CB1231B73E1A70006CBC3 /* LiquidCrystal_SR2W.cpp */; };
+		411CB12E1B73E1A70006CBC3 /* LiquidCrystal_SR3W.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 411CB1251B73E1A70006CBC3 /* LiquidCrystal_SR3W.cpp */; };
 		4124D4F31B5D6DEF0065FBF5 /* Rover.ino in Sources */ = {isa = PBXBuildFile; fileRef = 4174D4F31B5D6DEF0065FBF5 /* Rover.ino */; };
 		41304E0E1B6D5ABC00282544 /* HMC5883L.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41304E0D1B6D5ABC00282544 /* HMC5883L.cpp */; };
 		41304E111B6D5AE400282544 /* I2Cdev.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41304E0F1B6D5AE400282544 /* I2Cdev.cpp */; };
 		41372BDE1B602BE2001967CC /* LUltrasonic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41372BDC1B602BE2001967CC /* LUltrasonic.cpp */; };
+		417127F61B7269C9001885C9 /* TinyGPS.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 417127F41B7269C9001885C9 /* TinyGPS.cpp */; };
+		417127F91B7269E1001885C9 /* LGPS.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 417127F71B7269E1001885C9 /* LGPS.cpp */; };
 		4174D4771B5D6DEF0065FBF5 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4174D4761B5D6DEF0065FBF5 /* main.cpp */; };
 		417CCBAB1B604BC20065DF36 /* RoverWallFollower.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 417CCBA91B604BC20065DF36 /* RoverWallFollower.cpp */; };
 		41857AA81B63A67E008C183B /* LLowPassFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41857AA61B63A67E008C183B /* LLowPassFilter.cpp */; };
@@ -411,12 +422,35 @@
 /* Begin PBXFileReference section */
 		410965211B60478300832B47 /* RoverNavigator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RoverNavigator.cpp; sourceTree = "<group>"; };
 		410965221B60478300832B47 /* RoverNavigator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoverNavigator.h; sourceTree = "<group>"; };
+		411CB1121B73E0950006CBC3 /* LLCD.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LLCD.cpp; sourceTree = "<group>"; };
+		411CB1131B73E0950006CBC3 /* LLCD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLCD.h; sourceTree = "<group>"; };
+		411CB1161B73E1A70006CBC3 /* FastIO.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FastIO.cpp; sourceTree = "<group>"; };
+		411CB1171B73E1A70006CBC3 /* FastIO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FastIO.h; sourceTree = "<group>"; };
+		411CB1181B73E1A70006CBC3 /* I2CIO.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = I2CIO.cpp; sourceTree = "<group>"; };
+		411CB1191B73E1A70006CBC3 /* I2CIO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = I2CIO.h; sourceTree = "<group>"; };
+		411CB11A1B73E1A70006CBC3 /* keywords.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = keywords.txt; sourceTree = "<group>"; };
+		411CB11B1B73E1A70006CBC3 /* LCD.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LCD.cpp; sourceTree = "<group>"; };
+		411CB11C1B73E1A70006CBC3 /* LCD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCD.h; sourceTree = "<group>"; };
+		411CB11D1B73E1A70006CBC3 /* LiquidCrystal.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LiquidCrystal.cpp; sourceTree = "<group>"; };
+		411CB11E1B73E1A70006CBC3 /* LiquidCrystal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LiquidCrystal.h; sourceTree = "<group>"; };
+		411CB11F1B73E1A70006CBC3 /* LiquidCrystal_I2C.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LiquidCrystal_I2C.cpp; sourceTree = "<group>"; };
+		411CB1201B73E1A70006CBC3 /* LiquidCrystal_I2C.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LiquidCrystal_I2C.h; sourceTree = "<group>"; };
+		411CB1211B73E1A70006CBC3 /* LiquidCrystal_SR.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LiquidCrystal_SR.cpp; sourceTree = "<group>"; };
+		411CB1221B73E1A70006CBC3 /* LiquidCrystal_SR.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LiquidCrystal_SR.h; sourceTree = "<group>"; };
+		411CB1231B73E1A70006CBC3 /* LiquidCrystal_SR2W.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LiquidCrystal_SR2W.cpp; sourceTree = "<group>"; };
+		411CB1241B73E1A70006CBC3 /* LiquidCrystal_SR2W.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LiquidCrystal_SR2W.h; sourceTree = "<group>"; };
+		411CB1251B73E1A70006CBC3 /* LiquidCrystal_SR3W.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LiquidCrystal_SR3W.cpp; sourceTree = "<group>"; };
+		411CB1261B73E1A70006CBC3 /* LiquidCrystal_SR3W.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LiquidCrystal_SR3W.h; sourceTree = "<group>"; };
 		41304E0C1B6D5ABC00282544 /* HMC5883L.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMC5883L.h; sourceTree = "<group>"; };
 		41304E0D1B6D5ABC00282544 /* HMC5883L.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HMC5883L.cpp; sourceTree = "<group>"; };
 		41304E0F1B6D5AE400282544 /* I2Cdev.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = I2Cdev.cpp; sourceTree = "<group>"; };
 		41304E101B6D5AE400282544 /* I2Cdev.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = I2Cdev.h; sourceTree = "<group>"; };
 		41372BDC1B602BE2001967CC /* LUltrasonic.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LUltrasonic.cpp; sourceTree = "<group>"; };
 		41372BDD1B602BE2001967CC /* LUltrasonic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LUltrasonic.h; sourceTree = "<group>"; };
+		417127F41B7269C9001885C9 /* TinyGPS.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TinyGPS.cpp; sourceTree = "<group>"; };
+		417127F51B7269C9001885C9 /* TinyGPS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TinyGPS.h; sourceTree = "<group>"; };
+		417127F71B7269E1001885C9 /* LGPS.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LGPS.cpp; sourceTree = "<group>"; };
+		417127F81B7269E1001885C9 /* LGPS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGPS.h; sourceTree = "<group>"; };
 		4174D4731B5D6DEF0065FBF5 /* Index */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Index; sourceTree = BUILT_PRODUCTS_DIR; };
 		4174D4761B5D6DEF0065FBF5 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		4174D4781B5D6DEF0065FBF5 /* Makefile */ = {isa = PBXFileReference; explicitFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
@@ -935,6 +969,30 @@
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
+		411CB1151B73E1A70006CBC3 /* LCD */ = {
+			isa = PBXGroup;
+			children = (
+				411CB1161B73E1A70006CBC3 /* FastIO.cpp */,
+				411CB1171B73E1A70006CBC3 /* FastIO.h */,
+				411CB1181B73E1A70006CBC3 /* I2CIO.cpp */,
+				411CB1191B73E1A70006CBC3 /* I2CIO.h */,
+				411CB11A1B73E1A70006CBC3 /* keywords.txt */,
+				411CB11B1B73E1A70006CBC3 /* LCD.cpp */,
+				411CB11C1B73E1A70006CBC3 /* LCD.h */,
+				411CB11D1B73E1A70006CBC3 /* LiquidCrystal.cpp */,
+				411CB11E1B73E1A70006CBC3 /* LiquidCrystal.h */,
+				411CB11F1B73E1A70006CBC3 /* LiquidCrystal_I2C.cpp */,
+				411CB1201B73E1A70006CBC3 /* LiquidCrystal_I2C.h */,
+				411CB1211B73E1A70006CBC3 /* LiquidCrystal_SR.cpp */,
+				411CB1221B73E1A70006CBC3 /* LiquidCrystal_SR.h */,
+				411CB1231B73E1A70006CBC3 /* LiquidCrystal_SR2W.cpp */,
+				411CB1241B73E1A70006CBC3 /* LiquidCrystal_SR2W.h */,
+				411CB1251B73E1A70006CBC3 /* LiquidCrystal_SR3W.cpp */,
+				411CB1261B73E1A70006CBC3 /* LiquidCrystal_SR3W.h */,
+			);
+			path = LCD;
+			sourceTree = "<group>";
+		};
 		4174D4671B5D6DEF0065FBF5 = {
 			isa = PBXGroup;
 			children = (
@@ -1118,12 +1176,19 @@
 		41D624521B5D7DE200611BC2 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				411CB1151B73E1A70006CBC3 /* LCD */,
+				417127F41B7269C9001885C9 /* TinyGPS.cpp */,
+				417127F51B7269C9001885C9 /* TinyGPS.h */,
 				41304E0F1B6D5AE400282544 /* I2Cdev.cpp */,
 				41304E101B6D5AE400282544 /* I2Cdev.h */,
 				41304E0C1B6D5ABC00282544 /* HMC5883L.h */,
 				41304E0D1B6D5ABC00282544 /* HMC5883L.cpp */,
 				41D2E7D51B6008330076FF1B /* PID_v1.cpp */,
 				41D2E7D61B6008330076FF1B /* PID_v1.h */,
+				417127F71B7269E1001885C9 /* LGPS.cpp */,
+				417127F81B7269E1001885C9 /* LGPS.h */,
+				411CB1121B73E0950006CBC3 /* LLCD.cpp */,
+				411CB1131B73E0950006CBC3 /* LLCD.h */,
 				41D294D31B71371500D37F64 /* LCompass.cpp */,
 				41D294D41B71371500D37F64 /* LCompass.h */,
 				41857AA61B63A67E008C183B /* LLowPassFilter.cpp */,
@@ -2481,6 +2546,7 @@
 				AA2A150720200537AA00000D /* HardwareSerial0.cpp in Sources */,
 				AA2A150720200537AA00000E /* HardwareSerial1.cpp in Sources */,
 				AA2A150720200537AA00000F /* HardwareSerial2.cpp in Sources */,
+				411CB12D1B73E1A70006CBC3 /* LiquidCrystal_SR2W.cpp in Sources */,
 				AA2A150720200537AA000010 /* HardwareSerial3.cpp in Sources */,
 				AA2A150720200537AA000011 /* HardwareSerial_private.h in Sources */,
 				AA2A150720200537AA000012 /* HID.cpp in Sources */,
@@ -2511,6 +2577,7 @@
 				AA2A150720200537AA00002A /* wiring_private.h in Sources */,
 				AA2A150720200537AA00002B /* wiring_pulse.c in Sources */,
 				AA2A150720200537AA00002C /* wiring_shift.c in Sources */,
+				417127F61B7269C9001885C9 /* TinyGPS.cpp in Sources */,
 				AA2A150720200537AA00002D /* WMath.cpp in Sources */,
 				AA2A150720200537AA00002E /* WString.cpp in Sources */,
 				AA2A150720200537AA00002F /* WString.h in Sources */,
@@ -2519,6 +2586,7 @@
 				AA2A150720200537AA000035 /* SoftwareSerial.h in Sources */,
 				AA2A150720200537AA000037 /* SPI.cpp in Sources */,
 				AA2A150720200537AA000038 /* SPI.h in Sources */,
+				411CB12C1B73E1A70006CBC3 /* LiquidCrystal_SR.cpp in Sources */,
 				AA2A150720200537AA00003B /* twi.c in Sources */,
 				AA2A150720200537AA00003C /* twi.h in Sources */,
 				AA2A150720200537AA00003D /* Wire.cpp in Sources */,
@@ -2580,6 +2648,7 @@
 				AA2A150720200537AA00008F /* GSM3CircularBuffer.cpp in Sources */,
 				AA2A150720200537AA000090 /* GSM3CircularBuffer.h in Sources */,
 				AA2A150720200537AA000091 /* GSM3IO.h in Sources */,
+				411CB12B1B73E1A70006CBC3 /* LiquidCrystal_I2C.cpp in Sources */,
 				AA2A150720200537AA000092 /* GSM3MobileAccessProvider.cpp in Sources */,
 				AA2A150720200537AA000093 /* GSM3MobileAccessProvider.h in Sources */,
 				AA2A150720200537AA000094 /* GSM3MobileCellManagement.cpp in Sources */,
@@ -2597,6 +2666,7 @@
 				AA2A150720200537AA0000A0 /* GSM3MobileNetworkRegistry.cpp in Sources */,
 				AA2A150720200537AA0000A1 /* GSM3MobileNetworkRegistry.h in Sources */,
 				AA2A150720200537AA0000A2 /* GSM3MobileServerProvider.cpp in Sources */,
+				411CB1291B73E1A70006CBC3 /* LCD.cpp in Sources */,
 				AA2A150720200537AA0000A3 /* GSM3MobileServerProvider.h in Sources */,
 				AA2A150720200537AA0000A4 /* GSM3MobileServerService.cpp in Sources */,
 				AA2A150720200537AA0000A5 /* GSM3MobileServerService.h in Sources */,
@@ -2699,6 +2769,7 @@
 				41857AA81B63A67E008C183B /* LLowPassFilter.cpp in Sources */,
 				AA2A150720200537AA00010C /* Multiplexer.h in Sources */,
 				AA2A150720200537AA000110 /* IRremote.cpp in Sources */,
+				411CB12E1B73E1A70006CBC3 /* LiquidCrystal_SR3W.cpp in Sources */,
 				AA2A150720200537AA000111 /* IRremote.h in Sources */,
 				AA2A150720200537AA000112 /* IRremoteInt.h in Sources */,
 				AA2A150720200537AA000113 /* IRremoteTools.cpp in Sources */,
@@ -2739,6 +2810,7 @@
 				AA2A150720200537AA000145 /* ChoreoOutput.h in Sources */,
 				AA2A150720200537AA000146 /* ChoreoOutputFormatter.cpp in Sources */,
 				AA2A150720200537AA000147 /* ChoreoOutputFormatter.h in Sources */,
+				411CB12A1B73E1A70006CBC3 /* LiquidCrystal.cpp in Sources */,
 				AA2A150720200537AA000148 /* ChoreoOutputSet.cpp in Sources */,
 				AA2A150720200537AA000149 /* ChoreoOutputSet.h in Sources */,
 				AA2A150720200537AA00014A /* ChoreoPreset.cpp in Sources */,
@@ -2757,6 +2829,7 @@
 				AA2A150720200537AA000157 /* tmbmd5.h in Sources */,
 				AA2A150720200537AA00015B /* TFT.cpp in Sources */,
 				AA2A150720200537AA00015C /* TFT.h in Sources */,
+				417127F91B7269E1001885C9 /* LGPS.cpp in Sources */,
 				AA2A150720200537AA00015E /* Adafruit_GFX.cpp in Sources */,
 				AA2A150720200537AA00015F /* Adafruit_GFX.h in Sources */,
 				AA2A150720200537AA000160 /* Adafruit_ST7735.cpp in Sources */,
@@ -2815,12 +2888,14 @@
 				AA2A150720200537AA0001B5 /* nlao_exceptions.h in Sources */,
 				AA2A150720200537AA0001B6 /* nlao_interrupts.h in Sources */,
 				AA2A150720200537AA0001B7 /* nlao_io.h in Sources */,
+				411CB1141B73E0950006CBC3 /* LLCD.cpp in Sources */,
 				AA2A150720200537AA0001B8 /* nlao_usart.h in Sources */,
 				AA2A150720200537AA0001BF /* parts.h in Sources */,
 				AA2A150720200537AA0001C1 /* mrepeat.h in Sources */,
 				AA2A150720200537AA0001C2 /* preprocessor.h in Sources */,
 				AA2A150720200537AA0001C3 /* stringz.h in Sources */,
 				AA2A150720200537AA0001C4 /* tpaste.h in Sources */,
+				411CB1271B73E1A70006CBC3 /* FastIO.cpp in Sources */,
 				AA2A150720200537AA0001C7 /* startup.c in Sources */,
 				AA2A150720200537AA0001C8 /* startup.h in Sources */,
 				AA2A150720200537AA0001C9 /* wl_fw.h in Sources */,
@@ -2845,6 +2920,7 @@
 				AA2A150720200537AA0001E0 /* console.c in Sources */,
 				AA2A150720200537AA0001E1 /* console.h in Sources */,
 				AA2A150720200537AA0001E2 /* debug.h in Sources */,
+				411CB1281B73E1A70006CBC3 /* I2CIO.cpp in Sources */,
 				AA2A150720200537AA0001E3 /* fw_download.h in Sources */,
 				AA2A150720200537AA0001E4 /* fw_download_extflash.c in Sources */,
 				AA2A150720200537AA0001E5 /* lwip_setup.c in Sources */,
