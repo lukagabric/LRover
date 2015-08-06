@@ -44,8 +44,15 @@ private:
 #if MANUAL_PID_TUNING
     void configurePIDConstants();
 #endif
+    
     void configurePIDOutput();
     void configureMovement();
+    
+#if ENABLE_LCD
+    void printToLCD();
+#endif
+    
+    
 #if DEBUG_LOG
     void debugLog();
 #endif

@@ -95,20 +95,11 @@ void RoverNavigator::loop15s() {
 }
 
 void RoverNavigator::loopAt1Hz() {
-    if (_gps->location(&_lat, &_lon, &_age)) {
+    _gps->location(&_lat, &_lon, &_age);
+
 #if ENABLE_LCD
-        _lcd->print(0, 0, "LAT=");
-        _lcd->print(4, 0, _lat, 8);
-        _lcd->print(0, 1, "LON=");
-        _lcd->print(4, 1, _lon, 8);
+    printToLCD();
 #endif
-    }
-    else {
-#if ENABLE_LCD
-        _lcd->print(0, 0, "LOCATION");
-        _lcd->print(0, 1, "UNAVAILABLE");
-#endif
-    }
     
 #if MANUAL_PID_TUNING
     configurePIDConstants();
@@ -174,8 +165,27 @@ void RoverNavigator::configureMovement() {
 #endif
 }
 
+#pragma mark - Debug
+
+#if ENABLE_LCD
+void RoverNavigator::printToLCD() {
+    if (_gps->locationValid(_lat, _lon)) {
+        _lcd->print(0, 0, "LAT=");
+        _lcd->print(4, 0, _lat, 8);
+        _lcd->print(0, 1, "LON=");
+        _lcd->print(4, 1, _lon, 8);
+    }
+    else {
+#if ENABLE_LCD
+        _lcd->print(0, 0, "LOCATION");
+        _lcd->print(0, 1, "UNAVAILABLE");
+#endif
+    }
+}
+#endif
+
 #if DEBUG_LOG
-void RoverNavigator::debugLog() {    
+void RoverNavigator::debugLog() {
     Serial.println("\n==================================================================================================");
     if (_gps->locationValid(_lat, _lon)) {
         Serial.print("\nLAT: ");Serial.print(_lat);Serial.print("    LON: ");Serial.print(_lon);Serial.print("    AGE: ");Serial.println(_age);
