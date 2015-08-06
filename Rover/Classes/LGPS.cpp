@@ -15,7 +15,18 @@ LGPS::LGPS() {
     _ss->begin(9600);
 }
 
+void LGPS::readGPSData() {
+    unsigned long start = millis();
+    do {
+        while (_ss->available()) {
+            _gps->encode(_ss->read());
+        }
+    } while (millis() - start < 1000);
+}
+
 bool LGPS::location(float *lat, float *lon, unsigned long *age) {
+    readGPSData();
+    
     _gps->f_get_position(lat, lon, age);
     
     return locationValid(*lat, *lon);
@@ -28,3 +39,4 @@ bool LGPS::locationValid(float lat, float lon) {
 float LGPS::altitude() {
     return _gps->f_altitude();
 }
+

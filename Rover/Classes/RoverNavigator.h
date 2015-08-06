@@ -10,7 +10,7 @@
 #include "LLCD.h"
 #include "LGPS.h"
 
-#define DEBUG_LOG 0
+#define DEBUG_LOG 1
 #define ENABLE_LCD 1
 #define MANUAL_PID_TUNING 1
 #define USE_COMPASS_LOW_PASS_FILTER 1

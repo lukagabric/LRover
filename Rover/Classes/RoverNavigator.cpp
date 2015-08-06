@@ -67,10 +67,10 @@ void RoverNavigator::loop() {
         _time1Hz = currentTime;
         loopAt1Hz();
     }
-    if (currentTime - _time20Hz >= 50) {
-        _time20Hz = currentTime;
-        loopAt20Hz();
-    }
+//    if (currentTime - _time20Hz >= 50) {
+//        _time20Hz = currentTime;
+//        loopAt20Hz();
+//    }
 }
 
 void RoverNavigator::loop15s() {
@@ -97,8 +97,8 @@ void RoverNavigator::loop15s() {
 void RoverNavigator::loopAt1Hz() {
     if (_gps->location(&_lat, &_lon, &_age)) {
 #if ENABLE_LCD
-        _lcd->print(0, _lat, 15);
-        _lcd->print(1, _lon, 15);
+        _lcd->print(0, _lat, 8);
+        _lcd->print(1, _lon, 8);
 #endif
     }
     else {
@@ -107,6 +107,7 @@ void RoverNavigator::loopAt1Hz() {
         _lcd->print(1, "UNAVAILABLE");
 #endif
     }
+    Serial.print("LAT = ");Serial.print(_lat);Serial.print(", LON = ");Serial.println(_lon);
     
 #if MANUAL_PID_TUNING
     configurePIDConstants();

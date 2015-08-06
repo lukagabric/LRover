@@ -19,6 +19,7 @@ private:
     SoftwareSerial *_ss;
 public:
     LGPS();
+    void readGPSData();
     bool location(float *lat, float *lon, unsigned long *age);
     bool locationValid(float lat, float lon);
     float altitude();
