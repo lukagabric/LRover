@@ -14,14 +14,15 @@ LCompass::LCompass() {
     _compass->setSampleAveraging(5);
 }
 
-double LCompass::headingDeg() {
+double LCompass::updateHeading() {
     _compass->getHeading(&_mx, &_my, &_mz);
     
     float heading = atan2(_my, _mx);
     if (heading < 0) {
         heading += 2 * M_PI;
     }
-    return heading * 180/M_PI;
+    
+    headingDeg = heading * 180/M_PI;
 }
 
 double LCompass::headingOffset(double goalHeading, double currentHeading) {

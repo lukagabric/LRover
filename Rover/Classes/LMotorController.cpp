@@ -22,33 +22,27 @@ LMotorController::LMotorController(int ena, int in1, int in2, int enb, int in3, 
 }
 
 void LMotorController::move(int leftSpeed, int rightSpeed) {
-    leftSpeed = max(leftSpeed, -255);
-    leftSpeed = min(leftSpeed, 255);
+    leftWheelSpeed = max(leftSpeed, -255);
+    leftWheelSpeed = min(leftSpeed, 255);
     
-    rightSpeed = max(rightSpeed, -255);
-    rightSpeed = min(rightSpeed, 255);
+    rightWheelSpeed = max(rightSpeed, -255);
+    rightWheelSpeed = min(rightSpeed, 255);
     
-    digitalWrite(_in3, rightSpeed > 0 ? HIGH : LOW);
-    digitalWrite(_in4, rightSpeed > 0 ? LOW : HIGH);
-    digitalWrite(_in1, leftSpeed > 0 ? HIGH : LOW);
-    digitalWrite(_in2, leftSpeed > 0 ? LOW : HIGH);
-    analogWrite(_ena, leftSpeed * _motorAConst);
-    analogWrite(_enb, rightSpeed * _motorBConst);
+    digitalWrite(_in3, rightWheelSpeed > 0 ? HIGH : LOW);
+    digitalWrite(_in4, rightWheelSpeed > 0 ? LOW : HIGH);
+    digitalWrite(_in1, leftWheelSpeed > 0 ? HIGH : LOW);
+    digitalWrite(_in2, leftWheelSpeed > 0 ? LOW : HIGH);
+    analogWrite(_ena, leftWheelSpeed * _motorAConst);
+    analogWrite(_enb, rightWheelSpeed * _motorBConst);
 }
 
 void LMotorController::move(int speed) {
-    speed = max(speed, -255);
-    speed = min(speed, 255);
-    
-    digitalWrite(_in1, speed > 0 ? HIGH : LOW);
-    digitalWrite(_in2, speed > 0 ? LOW : HIGH);
-    digitalWrite(_in3, speed > 0 ? HIGH : LOW);
-    digitalWrite(_in4, speed > 0 ? LOW : HIGH);
-    analogWrite(_ena, speed * _motorAConst);
-    analogWrite(_enb, speed * _motorBConst);
+    move(speed, speed);
 }
 
 void LMotorController::turnRight(int speed, bool kick) {
+    speed = max(speed, 0);
+    
     digitalWrite(_in1, HIGH);
     digitalWrite(_in2, LOW);
     digitalWrite(_in3, LOW);
@@ -63,9 +57,14 @@ void LMotorController::turnRight(int speed, bool kick) {
     
     analogWrite(_ena, speed * _motorAConst);
     analogWrite(_enb, speed * _motorBConst);
+    
+    leftWheelSpeed = speed;
+    rightWheelSpeed = -1 * speed;
 }
 
 void LMotorController::turnLeft(int speed, bool kick) {
+    speed = max(speed, 0);
+
     digitalWrite(_in1, LOW);
     digitalWrite(_in2, HIGH);
     digitalWrite(_in3, HIGH);
@@ -80,6 +79,9 @@ void LMotorController::turnLeft(int speed, bool kick) {
     
     analogWrite(_ena, speed * _motorAConst);
     analogWrite(_enb, speed * _motorBConst);
+    
+    leftWheelSpeed = -1 * speed;
+    rightWheelSpeed = speed;
 }
 
 void LMotorController::stopMoving() {
@@ -89,4 +91,7 @@ void LMotorController::stopMoving() {
     digitalWrite(_in4, LOW);
     digitalWrite(_ena, HIGH);
     digitalWrite(_enb, HIGH);
+    
+    leftWheelSpeed = 0;
+    rightWheelSpeed = 0;
 }

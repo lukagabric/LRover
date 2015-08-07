@@ -24,8 +24,8 @@
 		417127F61B7269C9001885C9 /* TinyGPS.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 417127F41B7269C9001885C9 /* TinyGPS.cpp */; };
 		417127F91B7269E1001885C9 /* LGPS.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 417127F71B7269E1001885C9 /* LGPS.cpp */; };
 		4174D4771B5D6DEF0065FBF5 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4174D4761B5D6DEF0065FBF5 /* main.cpp */; };
-		417CCBAB1B604BC20065DF36 /* RoverWallFollower.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 417CCBA91B604BC20065DF36 /* RoverWallFollower.cpp */; };
 		41857AA81B63A67E008C183B /* LLowPassFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41857AA61B63A67E008C183B /* LLowPassFilter.cpp */; };
+		419955AE1B75084B005AD71E /* LPID.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 419955AC1B75084B005AD71E /* LPID.cpp */; };
 		41D294D51B71371500D37F64 /* LCompass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41D294D31B71371500D37F64 /* LCompass.cpp */; };
 		41D2E7D71B6008330076FF1B /* PID_v1.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41D2E7D51B6008330076FF1B /* PID_v1.cpp */; };
 		AA2A150720200537AA000006 /* abi.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAAA150720200537AA000006 /* abi.cpp */; };
@@ -567,10 +567,10 @@
 		4174D4F11B5D6DEF0065FBF5 /* TemplateIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = TemplateIcon.icns; path = Utilities/TemplateIcon.icns; sourceTree = "<group>"; };
 		4174D4F21B5D6DEF0065FBF5 /* uploader_izmir.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; name = uploader_izmir.sh; path = Utilities/uploader_izmir.sh; sourceTree = "<group>"; };
 		4174D4F31B5D6DEF0065FBF5 /* Rover.ino */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; path = Rover.ino; sourceTree = "<group>"; };
-		417CCBA91B604BC20065DF36 /* RoverWallFollower.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RoverWallFollower.cpp; sourceTree = "<group>"; };
-		417CCBAA1B604BC20065DF36 /* RoverWallFollower.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoverWallFollower.h; sourceTree = "<group>"; };
 		41857AA61B63A67E008C183B /* LLowPassFilter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LLowPassFilter.cpp; sourceTree = "<group>"; };
 		41857AA71B63A67E008C183B /* LLowPassFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLowPassFilter.h; sourceTree = "<group>"; };
+		419955AC1B75084B005AD71E /* LPID.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LPID.cpp; sourceTree = "<group>"; };
+		419955AD1B75084B005AD71E /* LPID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPID.h; sourceTree = "<group>"; };
 		41D294D31B71371500D37F64 /* LCompass.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LCompass.cpp; sourceTree = "<group>"; };
 		41D294D41B71371500D37F64 /* LCompass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCompass.h; sourceTree = "<group>"; };
 		41D2E7D51B6008330076FF1B /* PID_v1.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PID_v1.cpp; sourceTree = "<group>"; };
@@ -1185,10 +1185,12 @@
 				41304E0D1B6D5ABC00282544 /* HMC5883L.cpp */,
 				41D2E7D51B6008330076FF1B /* PID_v1.cpp */,
 				41D2E7D61B6008330076FF1B /* PID_v1.h */,
-				417127F71B7269E1001885C9 /* LGPS.cpp */,
-				417127F81B7269E1001885C9 /* LGPS.h */,
 				411CB1121B73E0950006CBC3 /* LLCD.cpp */,
 				411CB1131B73E0950006CBC3 /* LLCD.h */,
+				419955AC1B75084B005AD71E /* LPID.cpp */,
+				419955AD1B75084B005AD71E /* LPID.h */,
+				417127F71B7269E1001885C9 /* LGPS.cpp */,
+				417127F81B7269E1001885C9 /* LGPS.h */,
 				41D294D31B71371500D37F64 /* LCompass.cpp */,
 				41D294D41B71371500D37F64 /* LCompass.h */,
 				41857AA61B63A67E008C183B /* LLowPassFilter.cpp */,
@@ -1199,8 +1201,6 @@
 				41D624541B5D7DE200611BC2 /* LMotorController.h */,
 				410965211B60478300832B47 /* RoverNavigator.cpp */,
 				410965221B60478300832B47 /* RoverNavigator.h */,
-				417CCBA91B604BC20065DF36 /* RoverWallFollower.cpp */,
-				417CCBAA1B604BC20065DF36 /* RoverWallFollower.h */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -2560,7 +2560,6 @@
 				AA2A150720200537AA00001A /* Print.h in Sources */,
 				AA2A150720200537AA00001B /* Printable.h in Sources */,
 				AA2A150720200537AA00001C /* Server.h in Sources */,
-				417CCBAB1B604BC20065DF36 /* RoverWallFollower.cpp in Sources */,
 				AA2A150720200537AA00001D /* Stream.cpp in Sources */,
 				AA2A150720200537AA00001E /* Stream.h in Sources */,
 				AA2A150720200537AA00001F /* Tone.cpp in Sources */,
@@ -2906,6 +2905,7 @@
 				AA2A150720200537AA0001D1 /* ard_spi.h in Sources */,
 				AA2A150720200537AA0001D2 /* ard_tcp.c in Sources */,
 				AA2A150720200537AA0001D3 /* ard_tcp.h in Sources */,
+				419955AE1B75084B005AD71E /* LPID.cpp in Sources */,
 				AA2A150720200537AA0001D4 /* ard_utils.c in Sources */,
 				AA2A150720200537AA0001D5 /* ard_utils.h in Sources */,
 				AA2A150720200537AA0001D6 /* avr32_spi.c in Sources */,

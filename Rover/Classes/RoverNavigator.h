@@ -14,25 +14,14 @@
 #define ENABLE_LCD 1
 #define MANUAL_PID_TUNING 1
 #define USE_COMPASS_LOW_PASS_FILTER 1
-#define DRIVE 0
+#define DRIVE 1
 
 class RoverNavigator {
 private:
-    int state;
-    
     LLCD *_lcd;
-    
     LGPS *_gps;
-    float _lat, _lon;
-    unsigned long _age;
-    
     LMotorController *_motorController;
-    int _leftWheelSpeed, _rightWheelSpeed;
-    
-    PID *_pid;
-    double _kp, _ki, _kd;
-    double _headdingOffset, _pidOutput, _pidSetpoint, _currentHeading, _goalHeading;
-    
+    LPID *_pid;
     LCompass *_compass;
     LLowPassFilter *_compassLPF;    
     

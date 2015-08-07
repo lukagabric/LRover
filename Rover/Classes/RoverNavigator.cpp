@@ -43,7 +43,7 @@ void RoverNavigator::setup() {
     
     _motorController = new LMotorController(ENA, IN1, IN2, ENB, IN3, IN4, 1, 1);
     
-    _goalHeading = 262; //S
+    _goalHeading = 0; //S
     _pidSetpoint = 0;
     _pid = new PID(&_headdingOffset, &_pidOutput, &_pidSetpoint, Kp, Ki, Kd, DIRECT);
 #if MANUAL_PID_TUNING
@@ -57,6 +57,8 @@ void RoverNavigator::setup() {
 #pragma mark - Loop
 
 void RoverNavigator::loop() {
+    _gps->loop();
+    
     unsigned long currentTime = millis();
     
     if (currentTime - _time15s >= 15000) {
@@ -74,29 +76,10 @@ void RoverNavigator::loop() {
 }
 
 void RoverNavigator::loop15s() {
-    //E = 166; N = 28; W = 321; S = 262
     
-    switch (state) {
-        case 0:
-            _goalHeading = 166; //E
-            break;
-        case 1:
-            _goalHeading = 28; //N
-            break;
-        case 2:
-            _goalHeading = 321; //W
-            break;
-        default:
-            _goalHeading = 262; //S
-            break;
-    }
-    
-    state = ++state % 4;
 }
 
 void RoverNavigator::loopAt1Hz() {
-    _gps->location(&_lat, &_lon, &_age);
-
 #if ENABLE_LCD
     printToLCD();
 #endif
@@ -146,22 +129,22 @@ void RoverNavigator::configurePIDOutput() {
 }
 
 void RoverNavigator::configureMovement() {
-    _rightWheelSpeed = 255;
-    _leftWheelSpeed = 255;
+    int rightWheelSpeed = 255;
+    int leftWheelSpeed = 255;
     
     if (_pidOutput < 0) {
         //turn right
-        _rightWheelSpeed += _pidOutput;
-        _rightWheelSpeed = max(MINIMUM_WHEEL_SPEED, _rightWheelSpeed);
+        rightWheelSpeed += _pidOutput;
+        rightWheelSpeed = max(MINIMUM_WHEEL_SPEED, rightWheelSpeed);
     }
     else {
         //turn left
-        _leftWheelSpeed -= _pidOutput;
-        _leftWheelSpeed = max(MINIMUM_WHEEL_SPEED, _leftWheelSpeed);
+        leftWheelSpeed -= _pidOutput;
+        leftWheelSpeed = max(MINIMUM_WHEEL_SPEED, leftWheelSpeed);
     }
     
 #if DRIVE
-    _motorController->move(_leftWheelSpeed, _rightWheelSpeed);
+    _motorController->move(leftWheelSpeed, rightWheelSpeed);
 #endif
 }
 
@@ -169,18 +152,22 @@ void RoverNavigator::configureMovement() {
 
 #if ENABLE_LCD
 void RoverNavigator::printToLCD() {
-    if (_gps->locationValid(_lat, _lon)) {
-        _lcd->print(0, 0, "LAT=");
-        _lcd->print(4, 0, _lat, 8);
-        _lcd->print(0, 1, "LON=");
-        _lcd->print(4, 1, _lon, 8);
+    switch (state) {
+        case 0:
+            _goalHeading = 166; //E
+            break;
+        case 1:
+            _goalHeading = 28; //N
+            break;
+        case 2:
+            _goalHeading = 321; //W
+            break;
+        default:
+            _goalHeading = 262; //S
+            break;
     }
-    else {
-#if ENABLE_LCD
-        _lcd->print(0, 0, "LOCATION");
-        _lcd->print(0, 1, "UNAVAILABLE");
-#endif
-    }
+    
+    state = ++state % 4;
 }
 #endif
 
@@ -196,7 +183,7 @@ void RoverNavigator::debugLog() {
     Serial.print("\nCURRENT HEADING: ");Serial.print(_currentHeading);Serial.print("    GOAL HEADING: ");Serial.print(_goalHeading);Serial.print("    HEADING OFFSET: ");Serial.println(_headdingOffset);
     Serial.print("\nKp: ");Serial.print(_kp);Serial.print("    Ki:");Serial.print(_ki);Serial.print("    Kd:");Serial.println(_kd);
     Serial.print("\nPID OUTPUT: ");Serial.println(_pidOutput);
-    Serial.print("\nRW: ");Serial.print(_rightWheelSpeed);Serial.print("    LW: ");Serial.println(_leftWheelSpeed);
+    Serial.print("\nRW: ");Serial.print(_motorController->rightWheelSpeed);Serial.print("    LW: ");Serial.println(_motorController->leftWheelSpeed);
 }
 #endif
 

@@ -2,7 +2,6 @@
 #include "LUltrasonic.h"
 
 #define MAX_MEASUREABLE_DISTANCE 300
-#define INFINITE_DISTANCE 999999
 
 LUltrasonic::LUltrasonic(unsigned int echoPin, unsigned int triggerPin) {
     _echoPin = echoPin;
@@ -12,8 +11,8 @@ LUltrasonic::LUltrasonic(unsigned int echoPin, unsigned int triggerPin) {
     pinMode(_triggerPin, OUTPUT);
 }
 
-unsigned long LUltrasonic::measureDistance() {
-	unsigned long duration, distance; 
+unsigned long LUltrasonic::measuredDistance() {
+	unsigned long duration, measuredDistance;
 
 	digitalWrite(_triggerPin, LOW); 
 	delayMicroseconds(10); 
@@ -21,21 +20,24 @@ unsigned long LUltrasonic::measureDistance() {
 	delayMicroseconds(20);
 	digitalWrite(_triggerPin, LOW);
 	duration = pulseIn(_echoPin, HIGH);
-	distance = duration / 29 / 2;
+	measuredDistance = duration / 29 / 2;
     
-    return distance <= MAX_MEASUREABLE_DISTANCE ? distance : INFINITE_DISTANCE;
+    return measuredDistance <= MAX_MEASUREABLE_DISTANCE ? measuredDistance : LULTRASONIC_INFINITE_DISTANCE;
 }
 
+void LUltrasonic::updateDistance() {
+    distance = measuredDistance();
+}
 
-unsigned long LUltrasonic::measureDistance3() {
+void LUltrasonic::updateDistance3() {
     unsigned long measures[3];
     
     int i = 0;
 
     do {
-        unsigned long distance = measureDistance();
-        if (distance <= MAX_MEASUREABLE_DISTANCE) {
-            measures[i++] = distance;
+        unsigned long measuredDistance = measureDistance();
+        if (measuredDistance <= MAX_MEASUREABLE_DISTANCE) {
+            measures[i++] = measuredDistance;
         }
         delay(2);
     } while (i < 3);

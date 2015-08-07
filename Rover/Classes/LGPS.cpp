@@ -7,6 +7,7 @@
 //
 
 #include "LGPS.h"
+#include "LLCD.h"
 
 LGPS::LGPS() {
     _gps = new TinyGPS();
@@ -15,25 +16,38 @@ LGPS::LGPS() {
     _ss->begin(9600);
 }
 
-void LGPS::readGPSData() {
-    unsigned long start = millis();
-    do {
-        while (_ss->available()) {
+void LGPS::updateGPSData() {
+    if (millis() - _time < 800) return;
+    
+    bool newData = false;
+    if (_ss->available()) {
+        newData = true;
+        do {
             _gps->encode(_ss->read());
-        }
-    } while (millis() - start < 1000);
+        } while (_ss->available());
+    }
+    
+    if (newData) {
+        _time = millis();
+        
+        _gps->f_get_position(&lat, &lon, &age);
+        altitude = _gps->f_altitude();
+    }
 }
 
-void LGPS::location(float *lat, float *lon, unsigned long *age) {
-    readGPSData();
-    _gps->f_get_position(lat, lon, age);
-}
-
-bool LGPS::locationValid(float lat, float lon) {
+bool LGPS::locationValid() {
     return (lat != TinyGPS::GPS_INVALID_F_ANGLE && lon != TinyGPS::GPS_INVALID_F_ANGLE);
 }
 
-float LGPS::altitude() {
-    return _gps->f_altitude();
+void LGPS::printLocationToLCD(LLCD *lcd) {
+    if (locationValid()) {
+        lcd->print(0, 0, "LAT=");
+        lcd->print(4, 0, lat, 8);
+        lcd->print(0, 1, "LON=");
+        lcd->print(4, 1, lon, 8);
+    }
+    else {
+        lcd->print(0, 0, "LOCATION");
+        lcd->print(0, 1, "UNAVAILABLE");
+    }
 }
-

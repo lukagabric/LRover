@@ -19,7 +19,8 @@ private:
     int16_t _mx, _my, _mz;
 public:
     LCompass();
-    double headingDeg();
+    void updateHeading();
+    double headingDeg;
     double headingOffset(double goalHeading, double currentHeading); //Direction: CCW
 };
 

@@ -3,13 +3,19 @@
 
 #include <Arduino.h>
 
+#define LULTRASONIC_INFINITE_DISTANCE 999999
+
 class LUltrasonic {
   protected:
     unsigned int _echoPin, _triggerPin;
+    unsigned long measuredDistance();
   public:
     LUltrasonic(unsigned int echoPin, unsigned int triggerPin);
-    unsigned long measureDistance();
-    unsigned long measureDistance3();
+    
+    void updateDistance();
+    void updateDistance3();
+    
+    unsigned long distance;
 };
 
 #endif

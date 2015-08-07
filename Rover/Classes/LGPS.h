@@ -17,12 +17,18 @@ class LGPS {
 private:
     TinyGPS *_gps;
     SoftwareSerial *_ss;
+    unsigned long _time;
 public:
     LGPS();
-    void readGPSData();
-    void location(float *lat, float *lon, unsigned long *age);
-    bool locationValid(float lat, float lon);
-    float altitude();
+
+    void updateGPSData();
+
+    float lat, lon, age;
+    bool locationValid();
+
+    float altitude;
+
+    void printLocationToLCD(LLCD *lcd);
 };
 
 #endif /* defined(__Rover__LGPS__) */
