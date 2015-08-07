@@ -3,48 +3,31 @@
 
 #include "LMotorController.h"
 #include "Arduino.h"
-#include "PID_v1.h"
+#include "LPID.h"
 #include "LUltrasonic.h"
-#include "LLowPassFilter.h"
 #include "LCompass.h"
 #include "LLCD.h"
 #include "LGPS.h"
-
-#define DEBUG_LOG 1
-#define ENABLE_LCD 1
-#define MANUAL_PID_TUNING 1
-#define USE_COMPASS_LOW_PASS_FILTER 1
-#define DRIVE 1
+#include "LPIDTuner.h"
 
 class RoverNavigator {
 private:
     LLCD *_lcd;
     LGPS *_gps;
     LMotorController *_motorController;
+    LPIDTuner *_pidTuner;
     LPID *_pid;
     LCompass *_compass;
-    LLowPassFilter *_compassLPF;    
     
     unsigned long _time1Hz, _time20Hz, _time15s;
     void loop15s();
     void loopAt1Hz();
     void loopAt20Hz();
     
-#if MANUAL_PID_TUNING
-    void configurePIDConstants();
-#endif
-    
-    void configurePIDOutput();
     void configureMovement();
     
-#if ENABLE_LCD
-    void printToLCD();
-#endif
-    
-    
-#if DEBUG_LOG
+    void debugLogToLCD();
     void debugLog();
-#endif
 public:
     void setup();
     void loop();

@@ -1,8 +1,13 @@
 #include "RoverNavigator.h"
 #include "Arduino.h"
-#include "PID_v1.h"
 #include "LUltrasonic.h"
 #include <Wire.h>
+#include "LLowPassFilter.h"
+
+#define DEBUG_LOG 1
+#define LCD_DEBUG_LOG 1
+#define MANUAL_PID_TUNING 1
+#define DRIVE 1
 
 //Motor Controller
 #define ENA 3
@@ -32,32 +37,33 @@ void RoverNavigator::setup() {
     
     delay(100);
     
-#if ENABLE_LCD
+#if LCD_DEBUG_LOG
     _lcd = new LLCD();
 #endif
 
-    _compass = new LCompass();
-    _compassLPF = new LLowPassFilter(LPF_RC, LPF_DT);
+    LLowPassFilter *compassLPF = new LLowPassFilter(LPF_RC, LPF_DT);
+    _compass = new LCompass(compassLPF);
 
     _gps = new LGPS();
     
+#if DRIVE
     _motorController = new LMotorController(ENA, IN1, IN2, ENB, IN3, IN4, 1, 1);
-    
-    _goalHeading = 0; //S
-    _pidSetpoint = 0;
-    _pid = new PID(&_headdingOffset, &_pidOutput, &_pidSetpoint, Kp, Ki, Kd, DIRECT);
-#if MANUAL_PID_TUNING
-    _pid->SetTunings(_kp, _ki, _kd);
 #endif
+    
+    _pid = new LPID(Kp, Ki, Kd, DIRECT);
     _pid->SetMode(AUTOMATIC);
-    _pid->SetSampleTime(50);
     _pid->SetOutputLimits(-255, 255);
+    _pid->SetSampleTime(50);
+    
+#if MANUAL_PID_TUNING
+    _pidTuner = new LPIDTuner(_pid);
+#endif
 }
 
 #pragma mark - Loop
 
 void RoverNavigator::loop() {
-    _gps->loop();
+    _gps->readGPSData();
     
     unsigned long currentTime = millis();
     
@@ -80,12 +86,12 @@ void RoverNavigator::loop15s() {
 }
 
 void RoverNavigator::loopAt1Hz() {
-#if ENABLE_LCD
-    printToLCD();
+#if LCD_DEBUG_LOG
+    debugLogToLCD();
 #endif
     
 #if MANUAL_PID_TUNING
-    configurePIDConstants();
+    _pidTuner->configurePIDConstants();
 #endif
     
 #if DEBUG_LOG
@@ -94,97 +100,48 @@ void RoverNavigator::loopAt1Hz() {
 }
 
 void RoverNavigator::loopAt20Hz() {
-    configurePIDOutput();
     configureMovement();
 }
 
 #pragma mark - Operations
 
-#if MANUAL_PID_TUNING
-void RoverNavigator::configurePIDConstants() {
-    int potKp = analogRead(A0);
-    int potKi = analogRead(A1);
-    int potKd = analogRead(A2);
-    
-    _kp = map(potKp, 0, 1023, 0, 25000) / 100.0; //0 - 250
-    _ki = map(potKi, 0, 1023, 0, 100000) / 100.0; //0 - 1000
-    _kd = map(potKd, 0, 1023, 0, 500) / 100.0; //0 - 5
-    
-    _pid->SetTunings(_kp, _ki, _kd);
-}
-#endif
-
-void RoverNavigator::configurePIDOutput() {
-    double rawHeading = _compass->headingDeg();
-    
-#if USE_COMPASS_LOW_PASS_FILTER
-    _currentHeading = _compassLPF->filteredValue(rawHeading);
-#else
-    _currentHeading = rawHeading;
-#endif
-    
-    _headdingOffset = _compass->headingOffset(_goalHeading, _currentHeading);
-    
-    _pid->Compute();
-}
-
 void RoverNavigator::configureMovement() {
-    int rightWheelSpeed = 255;
-    int leftWheelSpeed = 255;
-    
-    if (_pidOutput < 0) {
-        //turn right
-        rightWheelSpeed += _pidOutput;
-        rightWheelSpeed = max(MINIMUM_WHEEL_SPEED, rightWheelSpeed);
-    }
-    else {
-        //turn left
-        leftWheelSpeed -= _pidOutput;
-        leftWheelSpeed = max(MINIMUM_WHEEL_SPEED, leftWheelSpeed);
-    }
+    _compass->updateHeading();
+    _pid->setInput(_compass->offsetFromGoalHeading());
+    _pid->Compute();
     
 #if DRIVE
-    _motorController->move(leftWheelSpeed, rightWheelSpeed);
+    _motorController->move(_pid->output(), MINIMUM_WHEEL_SPEED);
 #endif
 }
 
 #pragma mark - Debug
 
-#if ENABLE_LCD
-void RoverNavigator::printToLCD() {
-    switch (state) {
-        case 0:
-            _goalHeading = 166; //E
-            break;
-        case 1:
-            _goalHeading = 28; //N
-            break;
-        case 2:
-            _goalHeading = 321; //W
-            break;
-        default:
-            _goalHeading = 262; //S
-            break;
-    }
-    
-    state = ++state % 4;
+void RoverNavigator::debugLogToLCD() {
+//    switch (state) {
+//        case 0:
+//            _goalHeading = 166; //E
+//            break;
+//        case 1:
+//            _goalHeading = 28; //N
+//            break;
+//        case 2:
+//            _goalHeading = 321; //W
+//            break;
+//        default:
+//            _goalHeading = 262; //S
+//            break;
+//    }
+//    
+//    state = ++state % 4;
 }
-#endif
 
-#if DEBUG_LOG
 void RoverNavigator::debugLog() {
     Serial.println("\n==================================================================================================");
-    if (_gps->locationValid(_lat, _lon)) {
-        Serial.print("\nLAT: ");Serial.print(_lat);Serial.print("    LON: ");Serial.print(_lon);Serial.print("    AGE: ");Serial.println(_age);
-    }
-    else {
-        Serial.println("\nLOCATION UNAVAILABLE");
-    }
-    Serial.print("\nCURRENT HEADING: ");Serial.print(_currentHeading);Serial.print("    GOAL HEADING: ");Serial.print(_goalHeading);Serial.print("    HEADING OFFSET: ");Serial.println(_headdingOffset);
-    Serial.print("\nKp: ");Serial.print(_kp);Serial.print("    Ki:");Serial.print(_ki);Serial.print("    Kd:");Serial.println(_kd);
-    Serial.print("\nPID OUTPUT: ");Serial.println(_pidOutput);
-    Serial.print("\nRW: ");Serial.print(_motorController->rightWheelSpeed);Serial.print("    LW: ");Serial.println(_motorController->leftWheelSpeed);
+    _gps->printLocationToSerial();
+    _compass->printHeadingToSerial();
+    _pid->printPIDToSerial();
+    _motorController->printSpeedToSerial();
 }
-#endif
 
 #pragma mark -

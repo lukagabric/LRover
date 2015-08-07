@@ -1,4 +1,4 @@
-Builds/Classes/I2Cdev.cpp.o: Classes/I2Cdev.cpp Classes/I2Cdev.h \
+Builds/Classes/ThirdParty/LCD/LCD.cpp.o: Classes/ThirdParty/LCD/LCD.cpp \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/cores/arduino/Arduino.h \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/cores/arduino/binary.h \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/cores/arduino/WCharacter.h \
@@ -11,5 +11,5 @@ Builds/Classes/I2Cdev.cpp.o: Classes/I2Cdev.cpp Classes/I2Cdev.h \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/cores/arduino/Arduino.h \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/variants/eightanaloginputs/pins_arduino.h \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/variants/eightanaloginputs/../standard/pins_arduino.h \
- /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/libraries/Wire/Wire.h \
- /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/cores/arduino/Stream.h
+ Classes/ThirdParty/LCD/LCD.h \
+ /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/cores/arduino/Print.h

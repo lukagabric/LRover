@@ -1,5 +1,5 @@
-Builds/Classes/HMC5883L.cpp.o: Classes/HMC5883L.cpp Classes/HMC5883L.h \
- Classes/I2Cdev.h \
+Builds/Classes/ThirdParty/LCD/LiquidCrystal_I2C.cpp.o: \
+ Classes/ThirdParty/LCD/LiquidCrystal_I2C.cpp \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/cores/arduino/Arduino.h \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/cores/arduino/binary.h \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/cores/arduino/WCharacter.h \
@@ -12,5 +12,7 @@ Builds/Classes/HMC5883L.cpp.o: Classes/HMC5883L.cpp Classes/HMC5883L.h \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/cores/arduino/Arduino.h \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/variants/eightanaloginputs/pins_arduino.h \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/variants/eightanaloginputs/../standard/pins_arduino.h \
- /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/libraries/Wire/Wire.h \
- /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/cores/arduino/Stream.h
+ Classes/ThirdParty/LCD/I2CIO.h \
+ Classes/ThirdParty/LCD/LiquidCrystal_I2C.h \
+ /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/cores/arduino/Print.h \
+ Classes/ThirdParty/LCD/LCD.h

@@ -8,13 +8,18 @@
 
 #include "LCompass.h"
 
-LCompass::LCompass() {
+#pragma mark - Constructor
+
+LCompass::LCompass(LLowPassFilter *filter) {
+    _filter = filter;
     _compass = new HMC5883L();
     _compass->initialize();
     _compass->setSampleAveraging(5);
 }
 
-double LCompass::updateHeading() {
+#pragma mark - Update Heading
+
+void LCompass::updateHeading() {
     _compass->getHeading(&_mx, &_my, &_mz);
     
     float heading = atan2(_my, _mx);
@@ -22,11 +27,27 @@ double LCompass::updateHeading() {
         heading += 2 * M_PI;
     }
     
-    headingDeg = heading * 180/M_PI;
+    float rawHeadingDeg = heading * 180/M_PI;
+
+    _headingDeg = _filter ? _filter->filterValue(rawHeadingDeg) : rawHeadingDeg;
 }
 
-double LCompass::headingOffset(double goalHeading, double currentHeading) {
-    double headingOffset = goalHeading - currentHeading;
+#pragma mark - Getters/Setters
+
+double LCompass::headingDeg() {
+    return _headingDeg;
+}
+
+void LCompass::setGoalHeading(double goalHeading) {
+    _goalHeading = goalHeading;
+}
+
+double LCompass::goalHeading() {
+    return _goalHeading;
+}
+
+double LCompass::offsetFromGoalHeading() {
+    double headingOffset = goalHeading() - headingDeg();
     
     if (headingOffset < -180) {
         headingOffset += 360;
@@ -37,3 +58,18 @@ double LCompass::headingOffset(double goalHeading, double currentHeading) {
 
     return headingOffset;
 }
+
+#pragma mark - Debug
+
+void LCompass::printHeadingToLCD(LLCD *lcd) {
+    lcd->print(0, 0, "HEADING =");
+    lcd->print(9, 0, headingDeg(), 2);
+    lcd->print(0, 1, "OFFSET  = ");
+    lcd->print(0, 1, offsetFromGoalHeading(), 2);
+}
+
+void LCompass::printHeadingToSerial() {
+    Serial.print("\nHEADING: ");Serial.print(headingDeg());Serial.print("    GOAL HEADING: ");Serial.print(goalHeading());Serial.print("    HEADING OFFSET: ");Serial.println(offsetFromGoalHeading());
+}
+
+#pragma mark -

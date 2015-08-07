@@ -1,6 +1,8 @@
 #include "LMotorController.h"
 #include "Arduino.h"
 
+#pragma mark - Constructor
+
 LMotorController::LMotorController(int ena, int in1, int in2, int enb, int in3, int in4, double motorAConst, double motorBConst) {
     _motorAConst = motorAConst;
     _motorBConst = motorBConst;
@@ -21,23 +23,43 @@ LMotorController::LMotorController(int ena, int in1, int in2, int enb, int in3, 
 	pinMode(_in4, OUTPUT);
 }
 
+#pragma mark - Operations
+
 void LMotorController::move(int leftSpeed, int rightSpeed) {
-    leftWheelSpeed = max(leftSpeed, -255);
-    leftWheelSpeed = min(leftSpeed, 255);
+    _leftWheelSpeed = max(leftSpeed, -255);
+    _leftWheelSpeed = min(leftSpeed, 255);
     
-    rightWheelSpeed = max(rightSpeed, -255);
-    rightWheelSpeed = min(rightSpeed, 255);
+    _rightWheelSpeed = max(rightSpeed, -255);
+    _rightWheelSpeed = min(rightSpeed, 255);
     
-    digitalWrite(_in3, rightWheelSpeed > 0 ? HIGH : LOW);
-    digitalWrite(_in4, rightWheelSpeed > 0 ? LOW : HIGH);
-    digitalWrite(_in1, leftWheelSpeed > 0 ? HIGH : LOW);
-    digitalWrite(_in2, leftWheelSpeed > 0 ? LOW : HIGH);
-    analogWrite(_ena, leftWheelSpeed * _motorAConst);
-    analogWrite(_enb, rightWheelSpeed * _motorBConst);
+    digitalWrite(_in3, _rightWheelSpeed > 0 ? HIGH : LOW);
+    digitalWrite(_in4, _rightWheelSpeed > 0 ? LOW : HIGH);
+    digitalWrite(_in1, _leftWheelSpeed > 0 ? HIGH : LOW);
+    digitalWrite(_in2, _leftWheelSpeed > 0 ? LOW : HIGH);
+    analogWrite(_ena, _leftWheelSpeed * _motorAConst);
+    analogWrite(_enb, _rightWheelSpeed * _motorBConst);
 }
 
 void LMotorController::move(int speed) {
     move(speed, speed);
+}
+
+void LMotorController::move(double pidOutput, int minWheelSpeed) {
+    int leftWheelSpeed = 255;
+    int rightWheelSpeed = 255;
+    
+    if (pidOutput > 0) {
+        //turn left
+        leftWheelSpeed -= pidOutput;
+        leftWheelSpeed = max(minWheelSpeed, leftWheelSpeed);
+    }
+    else {
+        //turn right
+        rightWheelSpeed += pidOutput;
+        rightWheelSpeed = max(minWheelSpeed, rightWheelSpeed);
+    }
+    
+    move(leftWheelSpeed, rightWheelSpeed);
 }
 
 void LMotorController::turnRight(int speed, bool kick) {
@@ -58,8 +80,8 @@ void LMotorController::turnRight(int speed, bool kick) {
     analogWrite(_ena, speed * _motorAConst);
     analogWrite(_enb, speed * _motorBConst);
     
-    leftWheelSpeed = speed;
-    rightWheelSpeed = -1 * speed;
+    _leftWheelSpeed = speed;
+    _rightWheelSpeed = -1 * speed;
 }
 
 void LMotorController::turnLeft(int speed, bool kick) {
@@ -80,8 +102,8 @@ void LMotorController::turnLeft(int speed, bool kick) {
     analogWrite(_ena, speed * _motorAConst);
     analogWrite(_enb, speed * _motorBConst);
     
-    leftWheelSpeed = -1 * speed;
-    rightWheelSpeed = speed;
+    _leftWheelSpeed = -1 * speed;
+    _rightWheelSpeed = speed;
 }
 
 void LMotorController::stopMoving() {
@@ -92,6 +114,31 @@ void LMotorController::stopMoving() {
     digitalWrite(_ena, HIGH);
     digitalWrite(_enb, HIGH);
     
-    leftWheelSpeed = 0;
-    rightWheelSpeed = 0;
+    _leftWheelSpeed = 0;
+    _rightWheelSpeed = 0;
 }
+
+#pragma mark - Getters
+
+int LMotorController::leftWheelSpeed() {
+    return _leftWheelSpeed;
+}
+
+int LMotorController::rightWheelSpeed() {
+    return _rightWheelSpeed;
+}
+
+#pragma mark - Debug
+
+void LMotorController::printSpeedToLCD(LLCD *lcd) {
+    lcd->print(0, 0, "LEFT: ");
+    lcd->print(6, 0, leftWheelSpeed(), 1);
+    lcd->print(0, 1, "RIGHT: ");
+    lcd->print(6, 1, rightWheelSpeed(), 1);
+}
+
+void LMotorController::printSpeedToSerial() {
+    Serial.print("\nLW: ");Serial.println(leftWheelSpeed());Serial.print("    RW: ");Serial.println(rightWheelSpeed());
+}
+
+#pragma mark -

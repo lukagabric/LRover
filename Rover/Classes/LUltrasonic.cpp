@@ -1,7 +1,10 @@
 #include "Arduino.h"
 #include "LUltrasonic.h"
+#include "LLCD.h"
 
 #define MAX_MEASUREABLE_DISTANCE 300
+
+#pragma mark - Constructor
 
 LUltrasonic::LUltrasonic(unsigned int echoPin, unsigned int triggerPin) {
     _echoPin = echoPin;
@@ -11,7 +14,9 @@ LUltrasonic::LUltrasonic(unsigned int echoPin, unsigned int triggerPin) {
     pinMode(_triggerPin, OUTPUT);
 }
 
-unsigned long LUltrasonic::measuredDistance() {
+#pragma mark - Measurment
+
+unsigned long LUltrasonic::singleDistanceMeasurement() {
 	unsigned long duration, measuredDistance;
 
 	digitalWrite(_triggerPin, LOW); 
@@ -25,22 +30,43 @@ unsigned long LUltrasonic::measuredDistance() {
     return measuredDistance <= MAX_MEASUREABLE_DISTANCE ? measuredDistance : LULTRASONIC_INFINITE_DISTANCE;
 }
 
-void LUltrasonic::updateDistance() {
-    distance = measuredDistance();
+#pragma mark - Updates
+
+void LUltrasonic::measureDistance() {
+    _distance = singleDistanceMeasurement();
 }
 
-void LUltrasonic::updateDistance3() {
+void LUltrasonic::measureDistance3() {
     unsigned long measures[3];
     
     int i = 0;
 
     do {
-        unsigned long measuredDistance = measureDistance();
+        unsigned long measuredDistance = singleDistanceMeasurement();
         if (measuredDistance <= MAX_MEASUREABLE_DISTANCE) {
             measures[i++] = measuredDistance;
         }
         delay(2);
     } while (i < 3);
 
-    return min((measures[0] + measures[1]) / 2, min((measures[1] + measures[2]) / 2, (measures[0] + measures[2]) / 2));
+    _distance = min((measures[0] + measures[1]) / 2, min((measures[1] + measures[2]) / 2, (measures[0] + measures[2]) / 2));
 }
+
+#pragma mark - Getter
+
+unsigned long LUltrasonic::distance() {
+    return _distance;
+}
+
+#pragma mark - Debug
+
+void LUltrasonic::printDistanceToLCD(LLCD *lcd) {
+    lcd->print(0, 0, "DISTANCE (cm)");
+    lcd->print(0, 1, distance(), 1);
+}
+
+void LUltrasonic::printDistanceToSerial() {
+    Serial.print("\nDISTANCE: ");Serial.print(distance());Serial.println(" cm");
+}
+
+#pragma mark -

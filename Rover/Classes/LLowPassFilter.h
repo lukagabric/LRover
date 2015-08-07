@@ -10,11 +10,21 @@
 #define __Rover__LLowPassFilter__
 
 class LLowPassFilter {
-protected:
-    double _alpha, _currentValue;
+private:
+    double _alpha, _dt, _RC, _currentFilteredValue, _currentRawValue;
+    void updateAlpha();
 public:
     LLowPassFilter(double RC, double dt);
-    double filteredValue(double rawValue);
+    
+    void setRC(double RC);
+    double RC();
+    void setDt(double dt);
+    double dt();
+    double alpha();
+    
+    double filterValue(double rawValue);
+    double currentFilteredValue();
+    double currentRawValue();
 };
 
 #endif /* defined(__Rover__LLowPassFilter__) */

@@ -1,5 +1,5 @@
 Builds/Classes/LLCD.cpp.o: Classes/LLCD.cpp Classes/LLCD.h \
- Classes/LCD/LCD.h \
+ Classes/ThirdParty/LCD/LCD.h \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/cores/arduino/Arduino.h \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/cores/arduino/binary.h \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/cores/arduino/WCharacter.h \
@@ -13,6 +13,7 @@ Builds/Classes/LLCD.cpp.o: Classes/LLCD.cpp Classes/LLCD.h \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/variants/eightanaloginputs/pins_arduino.h \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/variants/eightanaloginputs/../standard/pins_arduino.h \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/cores/arduino/Print.h \
- Classes/LCD/LiquidCrystal_I2C.h Classes/LCD/I2CIO.h Classes/LCD/LCD.h \
+ Classes/ThirdParty/LCD/LiquidCrystal_I2C.h \
+ Classes/ThirdParty/LCD/I2CIO.h Classes/ThirdParty/LCD/LCD.h \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/libraries/Wire/Wire.h \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/cores/arduino/Stream.h

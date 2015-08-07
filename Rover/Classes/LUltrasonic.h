@@ -2,20 +2,25 @@
 #define LUltrasonic_h
 
 #include <Arduino.h>
+#include "LLCD.h"
 
 #define LULTRASONIC_INFINITE_DISTANCE 999999
 
 class LUltrasonic {
-  protected:
+private:
     unsigned int _echoPin, _triggerPin;
-    unsigned long measuredDistance();
-  public:
+    unsigned long singleDistanceMeasurement();
+    unsigned long _distance;
+public:
     LUltrasonic(unsigned int echoPin, unsigned int triggerPin);
     
-    void updateDistance();
-    void updateDistance3();
+    void measureDistance();
+    void measureDistance3();
     
-    unsigned long distance;
+    unsigned long distance();
+    
+    void printDistanceToLCD(LLCD *lcd);
+    void printDistanceToSerial();
 };
 
 #endif

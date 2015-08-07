@@ -11,14 +11,16 @@ Builds/main.cpp.o: main.cpp \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/cores/arduino/Arduino.h \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/variants/eightanaloginputs/pins_arduino.h \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/variants/eightanaloginputs/../standard/pins_arduino.h \
- Rover.ino Classes/RoverWallFollower.h Classes/LMotorController.h \
- Classes/PID_v1.h Classes/LUltrasonic.h Classes/LLowPassFilter.h \
- Classes/RoverNavigator.h Classes/LCompass.h Classes/HMC5883L.h \
- Classes/I2Cdev.h \
+ Rover.ino Classes/RoverNavigator.h Classes/LMotorController.h \
+ Classes/LLCD.h Classes/ThirdParty/LCD/LCD.h \
+ /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/cores/arduino/Print.h \
+ Classes/ThirdParty/LCD/LiquidCrystal_I2C.h \
+ Classes/ThirdParty/LCD/I2CIO.h Classes/ThirdParty/LCD/LCD.h \
+ Classes/LPID.h Classes/ThirdParty/PID_v1.h Classes/LUltrasonic.h \
+ Classes/LCompass.h Classes/ThirdParty/HMC5883L.h \
+ Classes/ThirdParty/I2Cdev.h \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/libraries/Wire/Wire.h \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/cores/arduino/Stream.h \
- Classes/LLCD.h Classes/LCD/LCD.h \
- /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/cores/arduino/Print.h \
- Classes/LCD/LiquidCrystal_I2C.h Classes/LCD/I2CIO.h Classes/LCD/LCD.h \
- Classes/LGPS.h Classes/TinyGPS.h \
- /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/libraries/SoftwareSerial/SoftwareSerial.h
+ Classes/LLowPassFilter.h Classes/LGPS.h Classes/ThirdParty/TinyGPS.h \
+ /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/libraries/SoftwareSerial/SoftwareSerial.h \
+ Classes/LPIDTuner.h

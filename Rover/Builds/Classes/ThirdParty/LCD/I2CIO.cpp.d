@@ -1,5 +1,5 @@
-Builds/Classes/RoverWallFollower.cpp.o: Classes/RoverWallFollower.cpp \
- Classes/RoverWallFollower.h Classes/LMotorController.h \
+Builds/Classes/ThirdParty/LCD/I2CIO.cpp.o: \
+ Classes/ThirdParty/LCD/I2CIO.cpp \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/cores/arduino/Arduino.h \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/cores/arduino/binary.h \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/cores/arduino/WCharacter.h \
@@ -12,4 +12,6 @@ Builds/Classes/RoverWallFollower.cpp.o: Classes/RoverWallFollower.cpp \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/cores/arduino/Arduino.h \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/variants/eightanaloginputs/pins_arduino.h \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/variants/eightanaloginputs/../standard/pins_arduino.h \
- Classes/PID_v1.h Classes/LUltrasonic.h Classes/LLowPassFilter.h
+ /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/libraries/EEPROM/../Wire/Wire.h \
+ /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/cores/arduino/Stream.h \
+ Classes/ThirdParty/LCD/I2CIO.h

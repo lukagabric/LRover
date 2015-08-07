@@ -1,5 +1,5 @@
-Builds/Classes/LCD/LiquidCrystal_I2C.cpp.o: \
- Classes/LCD/LiquidCrystal_I2C.cpp \
+Builds/Classes/ThirdParty/LCD/LiquidCrystal_SR.cpp.o: \
+ Classes/ThirdParty/LCD/LiquidCrystal_SR.cpp \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/cores/arduino/Arduino.h \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/cores/arduino/binary.h \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/cores/arduino/WCharacter.h \
@@ -12,6 +12,6 @@ Builds/Classes/LCD/LiquidCrystal_I2C.cpp.o: \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/cores/arduino/Arduino.h \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/variants/eightanaloginputs/pins_arduino.h \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/variants/eightanaloginputs/../standard/pins_arduino.h \
- Classes/LCD/I2CIO.h Classes/LCD/LiquidCrystal_I2C.h \
+ Classes/ThirdParty/LCD/LiquidCrystal_SR.h Classes/ThirdParty/LCD/LCD.h \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/cores/arduino/Print.h \
- Classes/LCD/LCD.h
+ Classes/ThirdParty/LCD/FastIO.h

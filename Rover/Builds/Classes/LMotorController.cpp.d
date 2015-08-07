@@ -11,4 +11,8 @@ Builds/Classes/LMotorController.cpp.o: Classes/LMotorController.cpp \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/cores/arduino/USBAPI.h \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/cores/arduino/Arduino.h \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/variants/eightanaloginputs/pins_arduino.h \
- /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/variants/eightanaloginputs/../standard/pins_arduino.h
+ /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/variants/eightanaloginputs/../standard/pins_arduino.h \
+ Classes/LLCD.h Classes/ThirdParty/LCD/LCD.h \
+ /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/cores/arduino/Print.h \
+ Classes/ThirdParty/LCD/LiquidCrystal_I2C.h \
+ Classes/ThirdParty/LCD/I2CIO.h Classes/ThirdParty/LCD/LCD.h

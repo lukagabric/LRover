@@ -1,4 +1,6 @@
-Builds/Classes/LCD/I2CIO.cpp.o: Classes/LCD/I2CIO.cpp \
+Builds/Classes/ThirdParty/LCD/LiquidCrystal_SR2W.cpp.o: \
+ Classes/ThirdParty/LCD/LiquidCrystal_SR2W.cpp \
+ Classes/ThirdParty/LCD/LiquidCrystal_SR2W.h Classes/ThirdParty/LCD/LCD.h \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/cores/arduino/Arduino.h \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/cores/arduino/binary.h \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/cores/arduino/WCharacter.h \
@@ -11,6 +13,5 @@ Builds/Classes/LCD/I2CIO.cpp.o: Classes/LCD/I2CIO.cpp \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/cores/arduino/Arduino.h \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/variants/eightanaloginputs/pins_arduino.h \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/variants/eightanaloginputs/../standard/pins_arduino.h \
- /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/libraries/EEPROM/../Wire/Wire.h \
- /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/cores/arduino/Stream.h \
- Classes/LCD/I2CIO.h
+ /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/cores/arduino/Print.h \
+ Classes/ThirdParty/LCD/FastIO.h

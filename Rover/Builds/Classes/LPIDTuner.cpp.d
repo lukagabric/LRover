@@ -1,4 +1,4 @@
-Builds/Classes/LCD/LCD.cpp.o: Classes/LCD/LCD.cpp \
+Builds/Classes/LPIDTuner.cpp.o: Classes/LPIDTuner.cpp Classes/LPIDTuner.h \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/cores/arduino/Arduino.h \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/cores/arduino/binary.h \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/cores/arduino/WCharacter.h \
@@ -11,5 +11,8 @@ Builds/Classes/LCD/LCD.cpp.o: Classes/LCD/LCD.cpp \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/cores/arduino/Arduino.h \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/variants/eightanaloginputs/pins_arduino.h \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/variants/eightanaloginputs/../standard/pins_arduino.h \
- Classes/LCD/LCD.h \
- /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/cores/arduino/Print.h
+ Classes/LPID.h Classes/LLCD.h Classes/ThirdParty/LCD/LCD.h \
+ /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/cores/arduino/Print.h \
+ Classes/ThirdParty/LCD/LiquidCrystal_I2C.h \
+ Classes/ThirdParty/LCD/I2CIO.h Classes/ThirdParty/LCD/LCD.h \
+ Classes/ThirdParty/PID_v1.h

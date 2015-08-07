@@ -1,5 +1,5 @@
-Builds/Classes/LCD/FastIO.cpp.o: Classes/LCD/FastIO.cpp \
- Classes/LCD/FastIO.h \
+Builds/Classes/ThirdParty/LCD/FastIO.cpp.o: \
+ Classes/ThirdParty/LCD/FastIO.cpp Classes/ThirdParty/LCD/FastIO.h \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/cores/arduino/Arduino.h \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/cores/arduino/binary.h \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/cores/arduino/WCharacter.h \

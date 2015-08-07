@@ -1,4 +1,5 @@
-Builds/Classes/PID_v1.cpp.o: Classes/PID_v1.cpp \
+Builds/Classes/ThirdParty/LCD/LiquidCrystal.cpp.o: \
+ Classes/ThirdParty/LCD/LiquidCrystal.cpp \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/cores/arduino/Arduino.h \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/cores/arduino/binary.h \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/cores/arduino/WCharacter.h \
@@ -11,4 +12,6 @@ Builds/Classes/PID_v1.cpp.o: Classes/PID_v1.cpp \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/cores/arduino/Arduino.h \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/variants/eightanaloginputs/pins_arduino.h \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/variants/eightanaloginputs/../standard/pins_arduino.h \
- Classes/PID_v1.h
+ Classes/ThirdParty/LCD/LiquidCrystal.h Classes/ThirdParty/LCD/LCD.h \
+ /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/cores/arduino/Print.h \
+ Classes/ThirdParty/LCD/FastIO.h

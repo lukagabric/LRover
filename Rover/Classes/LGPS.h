@@ -12,23 +12,31 @@
 #include <Arduino.h>
 #include "TinyGPS.h"
 #include "SoftwareSerial.h"
+#include "LLCD.h"
 
 class LGPS {
 private:
     TinyGPS *_gps;
     SoftwareSerial *_ss;
     unsigned long _time;
+    float _lat, _lon;
+    unsigned long _age;
+    float _altitude;
 public:
     LGPS();
 
-    void updateGPSData();
+    void readGPSData();
 
-    float lat, lon, age;
-    bool locationValid();
+    float latitude();
+    float longitude();
+    unsigned long age();
+    bool isLocationValid();
 
-    float altitude;
+    float altitude();
+    bool isAltitudeValid();
 
     void printLocationToLCD(LLCD *lcd);
+    void printLocationToSerial();
 };
 
 #endif /* defined(__Rover__LGPS__) */

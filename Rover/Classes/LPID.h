@@ -9,10 +9,24 @@
 #ifndef __Rover__LPID__
 #define __Rover__LPID__
 
-#include <stdio.h>
+#include <Arduino.h>
+#include "LLCD.h"
+#include "PID_v1.h"
 
-//double _kp, _ki, _kd;
-//double _headdingOffset, _pidOutput, _pidSetpoint, _currentHeading, _goalHeading;
-
+class LPID : public PID {
+private:
+    double _myInput, _myOutput, _mySetpoint;
+public:
+    LPID(double kp, double ki, double kd, int direction);
+    
+    void setSetpoint(double setpoint);
+    double setpoint();
+    void setInput(double input);
+    double input();
+    double output();
+    
+    void printPIDToLCD(LLCD *lcd);
+    void printPIDToSerial();
+};
 
 #endif /* defined(__Rover__LPID__) */
