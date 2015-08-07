@@ -1,4 +1,4 @@
-#include "RoverNavigator.h"
+#include "LRoverNavigator.h"
 #include "Arduino.h"
 #include "LUltrasonic.h"
 #include <Wire.h>
@@ -30,7 +30,7 @@
 
 #pragma mark - Setup
 
-void RoverNavigator::setup() {
+void LRoverNavigator::setup() {
 #if DEBUG_LOG
     Serial.begin(9600);
 #endif
@@ -62,7 +62,7 @@ void RoverNavigator::setup() {
 
 #pragma mark - Loop
 
-void RoverNavigator::loop() {
+void LRoverNavigator::loop() {
     _gps->readGPSData();
     
     unsigned long currentTime = millis();
@@ -81,17 +81,17 @@ void RoverNavigator::loop() {
     }
 }
 
-void RoverNavigator::loop15s() {
+void LRoverNavigator::loop15s() {
     
 }
 
-void RoverNavigator::loopAt1Hz() {
-#if LCD_DEBUG_LOG
-    debugLogToLCD();
-#endif
-    
+void LRoverNavigator::loopAt1Hz() {
 #if MANUAL_PID_TUNING
     _pidTuner->configurePIDConstants();
+#endif
+
+#if LCD_DEBUG_LOG
+    debugLogToLCD();
 #endif
     
 #if DEBUG_LOG
@@ -99,13 +99,13 @@ void RoverNavigator::loopAt1Hz() {
 #endif
 }
 
-void RoverNavigator::loopAt20Hz() {
+void LRoverNavigator::loopAt20Hz() {
     configureMovement();
 }
 
 #pragma mark - Operations
 
-void RoverNavigator::configureMovement() {
+void LRoverNavigator::configureMovement() {
     _compass->updateHeading();
     _pid->setInput(_compass->offsetFromGoalHeading());
     _pid->Compute();
@@ -117,26 +117,26 @@ void RoverNavigator::configureMovement() {
 
 #pragma mark - Debug
 
-void RoverNavigator::debugLogToLCD() {
-//    switch (state) {
-//        case 0:
-//            _goalHeading = 166; //E
-//            break;
-//        case 1:
-//            _goalHeading = 28; //N
-//            break;
-//        case 2:
-//            _goalHeading = 321; //W
-//            break;
-//        default:
-//            _goalHeading = 262; //S
-//            break;
-//    }
-//    
-//    state = ++state % 4;
+void LRoverNavigator::debugLogToLCD() {
+    switch (_lcdDebugLogState) {
+        case 0:
+            _gps->printLocationToLCD(_lcd);
+            break;
+        case 1:
+            _compass->printHeadingToLCD(_lcd);
+            break;
+        case 2:
+            _pid->printPIDToLCD(_lcd);
+            break;
+        default:
+            _motorController->printSpeedToLCD(_lcd);
+            break;
+    }
+    
+    _lcdDebugLogState = ++_lcdDebugLogState % 4;
 }
 
-void RoverNavigator::debugLog() {
+void LRoverNavigator::debugLog() {
     Serial.println("\n==================================================================================================");
     _gps->printLocationToSerial();
     _compass->printHeadingToSerial();

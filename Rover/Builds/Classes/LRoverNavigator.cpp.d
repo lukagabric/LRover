@@ -1,5 +1,5 @@
-Builds/Classes/RoverNavigator.cpp.o: Classes/RoverNavigator.cpp \
- Classes/RoverNavigator.h Classes/LMotorController.h \
+Builds/Classes/LRoverNavigator.cpp.o: Classes/LRoverNavigator.cpp \
+ Classes/LRoverNavigator.h Classes/LMotorController.h \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/cores/arduino/Arduino.h \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/cores/arduino/binary.h \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/cores/arduino/WCharacter.h \

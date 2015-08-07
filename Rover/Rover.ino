@@ -1,6 +1,6 @@
-#include "RoverNavigator.h"
+#include "LRoverNavigator.h"
 
-RoverNavigator rover;
+LRoverNavigator rover;
 
 void setup() {
     rover.setup();

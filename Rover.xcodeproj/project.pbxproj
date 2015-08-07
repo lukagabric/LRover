@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		410965231B60478300832B47 /* RoverNavigator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 410965211B60478300832B47 /* RoverNavigator.cpp */; };
+		410965231B60478300832B47 /* LRoverNavigator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 410965211B60478300832B47 /* LRoverNavigator.cpp */; };
 		411CB1141B73E0950006CBC3 /* LLCD.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 411CB1121B73E0950006CBC3 /* LLCD.cpp */; };
 		4124D4F31B5D6DEF0065FBF5 /* Rover.ino in Sources */ = {isa = PBXBuildFile; fileRef = 4174D4F31B5D6DEF0065FBF5 /* Rover.ino */; };
 		41372BDE1B602BE2001967CC /* LUltrasonic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41372BDC1B602BE2001967CC /* LUltrasonic.cpp */; };
@@ -421,8 +421,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		410965211B60478300832B47 /* RoverNavigator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RoverNavigator.cpp; sourceTree = "<group>"; };
-		410965221B60478300832B47 /* RoverNavigator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoverNavigator.h; sourceTree = "<group>"; };
+		410965211B60478300832B47 /* LRoverNavigator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LRoverNavigator.cpp; sourceTree = "<group>"; };
+		410965221B60478300832B47 /* LRoverNavigator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LRoverNavigator.h; sourceTree = "<group>"; };
 		411CB1121B73E0950006CBC3 /* LLCD.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LLCD.cpp; sourceTree = "<group>"; };
 		411CB1131B73E0950006CBC3 /* LLCD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLCD.h; sourceTree = "<group>"; };
 		41372BDC1B602BE2001967CC /* LUltrasonic.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LUltrasonic.cpp; sourceTree = "<group>"; };
@@ -1172,8 +1172,8 @@
 				41372BDD1B602BE2001967CC /* LUltrasonic.h */,
 				41D624531B5D7DE200611BC2 /* LMotorController.cpp */,
 				41D624541B5D7DE200611BC2 /* LMotorController.h */,
-				410965211B60478300832B47 /* RoverNavigator.cpp */,
-				410965221B60478300832B47 /* RoverNavigator.h */,
+				410965211B60478300832B47 /* LRoverNavigator.cpp */,
+				410965221B60478300832B47 /* LRoverNavigator.h */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -2631,7 +2631,7 @@
 				AA2A150720200537AA000065 /* YunClient.h in Sources */,
 				AA2A150720200537AA000066 /* YunServer.cpp in Sources */,
 				AA2A150720200537AA000067 /* YunServer.h in Sources */,
-				410965231B60478300832B47 /* RoverNavigator.cpp in Sources */,
+				410965231B60478300832B47 /* LRoverNavigator.cpp in Sources */,
 				AA2A150720200537AA00006A /* Esplora.cpp in Sources */,
 				AA2A150720200537AA00006B /* Esplora.h in Sources */,
 				AA2A150720200537AA00006E /* Dhcp.cpp in Sources */,
