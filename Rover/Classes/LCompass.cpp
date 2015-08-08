@@ -59,17 +59,17 @@ double LCompass::offsetFromGoalHeading() {
     return headingOffset;
 }
 
-#pragma mark - Debug
+#pragma mark - LDebugLog
 
-void LCompass::printHeadingToLCD(LLCD *lcd) {
+void LCompass::printToSerial() {
+    Serial.print("\nHEADING: ");Serial.print(headingDeg());Serial.print("    GOAL HEADING: ");Serial.print(goalHeading());Serial.print("    HEADING OFFSET: ");Serial.println(offsetFromGoalHeading());
+}
+
+void LCompass::printToLCD(LLCD *lcd) {
     lcd->print(0, 0, "HEADING =");
     lcd->print(9, 0, headingDeg(), 2);
     lcd->print(0, 1, "OFFSET  = ");
     lcd->print(0, 1, offsetFromGoalHeading(), 2);
-}
-
-void LCompass::printHeadingToSerial() {
-    Serial.print("\nHEADING: ");Serial.print(headingDeg());Serial.print("    GOAL HEADING: ");Serial.print(goalHeading());Serial.print("    HEADING OFFSET: ");Serial.println(offsetFromGoalHeading());
 }
 
 #pragma mark -

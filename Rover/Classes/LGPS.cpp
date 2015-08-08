@@ -69,9 +69,18 @@ bool LGPS::isAltitudeValid() {
     return altitude() != TinyGPS::GPS_INVALID_F_ALTITUDE;
 }
 
-#pragma mark - Debug
+#pragma mark - LDebugLog
 
-void LGPS::printLocationToLCD(LLCD *lcd) {
+void LGPS::printToSerial() {
+    if (isLocationValid()) {
+        Serial.print("\nLAT: ");Serial.print(latitude());Serial.print("    LON: ");Serial.print(longitude());Serial.print("    AGE: ");Serial.println(age());
+    }
+    else {
+        Serial.println("\nLOCATION UNAVAILABLE");
+    }
+}
+
+void LGPS::printToLCD(LLCD *lcd) {
     if (isLocationValid()) {
         lcd->print(0, 0, "LAT=");
         lcd->print(4, 0, latitude(), 8);
@@ -81,15 +90,6 @@ void LGPS::printLocationToLCD(LLCD *lcd) {
     else {
         lcd->print(0, 0, "LOCATION");
         lcd->print(0, 1, "UNAVAILABLE");
-    }
-}
-
-void LGPS::printLocationToSerial() {
-    if (isLocationValid()) {
-        Serial.print("\nLAT: ");Serial.print(latitude());Serial.print("    LON: ");Serial.print(longitude());Serial.print("    AGE: ");Serial.println(age());
-    }
-    else {
-        Serial.println("\nLOCATION UNAVAILABLE");
     }
 }
 

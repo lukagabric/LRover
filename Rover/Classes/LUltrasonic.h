@@ -3,10 +3,11 @@
 
 #include <Arduino.h>
 #include "LLCD.h"
+#include "LDebugLog.h"
 
 #define LULTRASONIC_INFINITE_DISTANCE 999999
 
-class LUltrasonic {
+class LUltrasonic : public LDebugLog {
 private:
     unsigned int _echoPin, _triggerPin;
     unsigned long singleDistanceMeasurement();
@@ -19,8 +20,8 @@ public:
     
     unsigned long distance();
     
-    void printDistanceToLCD(LLCD *lcd);
-    void printDistanceToSerial();
+    virtual void printToSerial();
+    virtual void printToLCD(LLCD *lcd);
 };
 
 #endif

@@ -15,4 +15,4 @@ Builds/Classes/LPIDTuner.cpp.o: Classes/LPIDTuner.cpp Classes/LPIDTuner.h \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/cores/arduino/Print.h \
  Classes/ThirdParty/LCD/LiquidCrystal_I2C.h \
  Classes/ThirdParty/LCD/I2CIO.h Classes/ThirdParty/LCD/LCD.h \
- Classes/ThirdParty/PID_v1.h
+ Classes/ThirdParty/PID_v1.h Classes/LDebugLog.h

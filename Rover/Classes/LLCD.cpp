@@ -22,6 +22,8 @@
 #define D6_pin  6
 #define D7_pin  7
 
+#pragma mark - Constructor
+
 LLCD::LLCD() {
     _lcd = new LiquidCrystal_I2C(I2C_ADDR, En_pin, Rw_pin, Rs_pin, D4_pin, D5_pin, D6_pin, D7_pin);
     
@@ -30,6 +32,8 @@ LLCD::LLCD() {
     _lcd->setBacklight(HIGH);
     _lcd->home();    
 }
+
+#pragma mark - Print
 
 void LLCD::print(unsigned int column, unsigned int line, const char str[]) {
     if (line > 1) return;
@@ -44,3 +48,5 @@ void LLCD::print(unsigned int column, unsigned int line, double n, int digits) {
     _lcd->setCursor(column, line);
     _lcd->print(n, digits);
 }
+
+#pragma mark -

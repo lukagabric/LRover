@@ -3,8 +3,9 @@
 
 #include "Arduino.h"
 #include "LLCD.h"
+#include "LDebugLog.h"
 
-class LMotorController {
+class LMotorController : public LDebugLog {
 private:
     unsigned int _ena, _in1, _in2, _enb, _in3, _in4;
     double _motorAConst, _motorBConst;
@@ -22,8 +23,8 @@ public:
     void turnRight(int speed, bool kick);
     void stopMoving();
     
-    void printSpeedToLCD(LLCD *lcd);
-    void printSpeedToSerial();
+    virtual void printToSerial();
+    virtual void printToLCD(LLCD *lcd);
 };
 
 #endif

@@ -12,8 +12,9 @@
 #include <Arduino.h>
 #include "LLCD.h"
 #include "PID_v1.h"
+#include "LDebugLog.h"
 
-class LPID : public PID {
+class LPID : public PID, public LDebugLog {
 private:
     double _myInput, _myOutput, _mySetpoint;
 public:
@@ -25,8 +26,8 @@ public:
     double input();
     double output();
     
-    void printPIDToLCD(LLCD *lcd);
-    void printPIDToSerial();
+    void printToSerial();
+    void printToLCD(LLCD *lcd);
 };
 
 #endif /* defined(__Rover__LPID__) */

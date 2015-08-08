@@ -13,8 +13,9 @@
 #include "TinyGPS.h"
 #include "SoftwareSerial.h"
 #include "LLCD.h"
+#include "LDebugLog.h"
 
-class LGPS {
+class LGPS : public LDebugLog {
 private:
     TinyGPS *_gps;
     SoftwareSerial *_ss;
@@ -35,8 +36,8 @@ public:
     float altitude();
     bool isAltitudeValid();
 
-    void printLocationToLCD(LLCD *lcd);
-    void printLocationToSerial();
+    virtual void printToSerial();
+    virtual void printToLCD(LLCD *lcd);
 };
 
 #endif /* defined(__Rover__LGPS__) */

@@ -36,9 +36,13 @@ double LPID::output() {
     return _myOutput;
 }
 
-#pragma mark - Debug
+#pragma mark - LDebugLog
 
-void LPID::printPIDToLCD(LLCD *lcd) {
+void LPID::printToSerial() {
+    Serial.print("\nKp: ");Serial.print(GetKp());Serial.print("    Ki:");Serial.print(GetKi());Serial.print("    Kd:");Serial.print(GetKd());Serial.print("    OUTPUT: ");Serial.println(output());
+}
+
+void LPID::printToLCD(LLCD *lcd) {
     lcd->print(0, 0, "kp=");
     lcd->print(3, 0, GetKp(), 2);
     lcd->print(9, 0, "ki=");
@@ -47,10 +51,6 @@ void LPID::printPIDToLCD(LLCD *lcd) {
     lcd->print(3, 1, GetKd(), 2);
     lcd->print(9, 1, "O=");
     lcd->print(11, 1, output(), 2);
-}
-
-void LPID::printPIDToSerial() {
-    Serial.print("\nKp: ");Serial.print(GetKp());Serial.print("    Ki:");Serial.print(GetKi());Serial.print("    Kd:");Serial.print(GetKd());Serial.print("    OUTPUT: ");Serial.println(output());
 }
 
 #pragma mark -

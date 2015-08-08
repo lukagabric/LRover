@@ -3,30 +3,7 @@
 #include "LUltrasonic.h"
 #include <Wire.h>
 #include "LLowPassFilter.h"
-
-#define DEBUG_LOG 1
-#define LCD_DEBUG_LOG 1
-#define MANUAL_PID_TUNING 1
-#define DRIVE 1
-
-//Motor Controller
-#define ENA 3
-#define IN1 2
-#define IN2 4
-#define IN3 5
-#define IN4 7
-#define ENB 6
-
-#define MINIMUM_WHEEL_SPEED 10
-
-//PID Constants
-#define Kp 5
-#define Ki 0.01
-#define Kd 0.25
-
-//Low-Pass Filter
-#define LPF_RC 0.05
-#define LPF_DT 1/20.0
+#include "LDebugLog.h"
 
 #pragma mark - Setup
 
@@ -34,7 +11,7 @@ void LRoverNavigator::setup() {
 #if DEBUG_LOG
     Serial.begin(9600);
 #endif
-    
+
     delay(100);
     
 #if LCD_DEBUG_LOG
@@ -57,6 +34,14 @@ void LRoverNavigator::setup() {
     
 #if MANUAL_PID_TUNING
     _pidTuner = new LPIDTuner(_pid);
+#endif
+    
+#if DEBUG_LOG || LCD_DEBUG_LOG
+    _logItems = new std::vector<LDebugLog*>;
+    _logItems->push_back(_gps);
+    _logItems->push_back(_compass);
+    _logItems->push_back(_pid);
+    _logItems->push_back(_motorController);
 #endif
 }
 
@@ -118,30 +103,18 @@ void LRoverNavigator::configureMovement() {
 #pragma mark - Debug
 
 void LRoverNavigator::debugLogToLCD() {
-    switch (_lcdDebugLogState) {
-        case 0:
-            _gps->printLocationToLCD(_lcd);
-            break;
-        case 1:
-            _compass->printHeadingToLCD(_lcd);
-            break;
-        case 2:
-            _pid->printPIDToLCD(_lcd);
-            break;
-        default:
-            _motorController->printSpeedToLCD(_lcd);
-            break;
-    }
+    LDebugLog *debugLog = _logItems->at(_lcdDebugLogState);
+    debugLog->printToLCD(_lcd);
     
     _lcdDebugLogState = ++_lcdDebugLogState % 4;
 }
 
 void LRoverNavigator::debugLog() {
     Serial.println("\n==================================================================================================");
-    _gps->printLocationToSerial();
-    _compass->printHeadingToSerial();
-    _pid->printPIDToSerial();
-    _motorController->printSpeedToSerial();
+    for (int i = 0; i < _logItems->size(); i++) {
+        LDebugLog *debugLog = _logItems->at(i);
+        debugLog->printToSerial();
+    }
 }
 
 #pragma mark -

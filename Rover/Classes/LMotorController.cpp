@@ -128,17 +128,17 @@ int LMotorController::rightWheelSpeed() {
     return _rightWheelSpeed;
 }
 
-#pragma mark - Debug
+#pragma mark - LDebugLog
 
-void LMotorController::printSpeedToLCD(LLCD *lcd) {
+void LMotorController::printToSerial() {
+    Serial.print("\nLW: ");Serial.println(leftWheelSpeed());Serial.print("    RW: ");Serial.println(rightWheelSpeed());
+}
+
+void LMotorController::printToLCD(LLCD *lcd) {
     lcd->print(0, 0, "LEFT: ");
     lcd->print(6, 0, leftWheelSpeed(), 1);
     lcd->print(0, 1, "RIGHT: ");
     lcd->print(6, 1, rightWheelSpeed(), 1);
-}
-
-void LMotorController::printSpeedToSerial() {
-    Serial.print("\nLW: ");Serial.println(leftWheelSpeed());Serial.print("    RW: ");Serial.println(rightWheelSpeed());
 }
 
 #pragma mark -

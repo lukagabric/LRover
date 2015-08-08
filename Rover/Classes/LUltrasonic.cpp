@@ -58,15 +58,15 @@ unsigned long LUltrasonic::distance() {
     return _distance;
 }
 
-#pragma mark - Debug
+#pragma mark - LDebugLog
 
-void LUltrasonic::printDistanceToLCD(LLCD *lcd) {
-    lcd->print(0, 0, "DISTANCE (cm)");
-    lcd->print(0, 1, distance(), 1);
+void LUltrasonic::printToSerial() {
+    Serial.print("\nDISTANCE: ");Serial.print(distance());Serial.println(" cm");
 }
 
-void LUltrasonic::printDistanceToSerial() {
-    Serial.print("\nDISTANCE: ");Serial.print(distance());Serial.println(" cm");
+void LUltrasonic::printToLCD(LLCD *lcd) {
+    lcd->print(0, 0, "DISTANCE (cm)");
+    lcd->print(0, 1, distance(), 1);
 }
 
 #pragma mark -

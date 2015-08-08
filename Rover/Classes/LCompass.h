@@ -13,8 +13,9 @@
 #include "HMC5883L.h"
 #include "LLowPassFilter.h"
 #include "LLCD.h"
+#include "LDebugLog.h"
 
-class LCompass {
+class LCompass : public LDebugLog {
 private:
     HMC5883L *_compass;
     LLowPassFilter *_filter;
@@ -33,8 +34,8 @@ public:
     
     double offsetFromGoalHeading(); //Direction: CCW
     
-    void printHeadingToLCD(LLCD *lcd);
-    void printHeadingToSerial();
+    virtual void printToSerial();
+    virtual void printToLCD(LLCD *lcd);
 };
 
 #endif /* defined(__Rover__LCompass__) */

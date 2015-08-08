@@ -17,4 +17,5 @@ Builds/Classes/LCompass.cpp.o: Classes/LCompass.cpp Classes/LCompass.h \
  Classes/LLowPassFilter.h Classes/LLCD.h Classes/ThirdParty/LCD/LCD.h \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/cores/arduino/Print.h \
  Classes/ThirdParty/LCD/LiquidCrystal_I2C.h \
- Classes/ThirdParty/LCD/I2CIO.h Classes/ThirdParty/LCD/LCD.h
+ Classes/ThirdParty/LCD/I2CIO.h Classes/ThirdParty/LCD/LCD.h \
+ Classes/LDebugLog.h
