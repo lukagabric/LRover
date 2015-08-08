@@ -60,6 +60,7 @@
 		4176DD6F1B76126D007E1AD9 /* vector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4176DD431B76126D007E1AD9 /* vector.cpp */; };
 		41857AA81B63A67E008C183B /* LLowPassFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41857AA61B63A67E008C183B /* LLowPassFilter.cpp */; };
 		419955AE1B75084B005AD71E /* LPID.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 419955AC1B75084B005AD71E /* LPID.cpp */; };
+		41A64F201B76ACFD00EDCD79 /* LLogger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41A64F1E1B76ACFD00EDCD79 /* LLogger.cpp */; };
 		41D294D51B71371500D37F64 /* LCompass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41D294D31B71371500D37F64 /* LCompass.cpp */; };
 		41E91A521B754ABB00C6148D /* LPIDTuner.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41E91A501B754ABB00C6148D /* LPIDTuner.cpp */; };
 		41E91A6E1B755B1500C6148D /* HMC5883L.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41E91A541B755B1500C6148D /* HMC5883L.cpp */; };
@@ -705,6 +706,8 @@
 		41857AA71B63A67E008C183B /* LLowPassFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLowPassFilter.h; sourceTree = "<group>"; };
 		419955AC1B75084B005AD71E /* LPID.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LPID.cpp; sourceTree = "<group>"; };
 		419955AD1B75084B005AD71E /* LPID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPID.h; sourceTree = "<group>"; };
+		41A64F1E1B76ACFD00EDCD79 /* LLogger.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LLogger.cpp; sourceTree = "<group>"; };
+		41A64F1F1B76ACFD00EDCD79 /* LLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLogger.h; sourceTree = "<group>"; };
 		41D294D31B71371500D37F64 /* LCompass.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LCompass.cpp; sourceTree = "<group>"; };
 		41D294D41B71371500D37F64 /* LCompass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCompass.h; sourceTree = "<group>"; };
 		41D624531B5D7DE200611BC2 /* LMotorController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LMotorController.cpp; sourceTree = "<group>"; };
@@ -1428,6 +1431,8 @@
 			isa = PBXGroup;
 			children = (
 				41E91A531B755B1500C6148D /* ThirdParty */,
+				41A64F1E1B76ACFD00EDCD79 /* LLogger.cpp */,
+				41A64F1F1B76ACFD00EDCD79 /* LLogger.h */,
 				411EBB0E1B75FDA9002093F3 /* LDebugLog.cpp */,
 				411EBB0F1B75FDA9002093F3 /* LDebugLog.h */,
 				41E91A501B754ABB00C6148D /* LPIDTuner.cpp */,
@@ -2940,6 +2945,7 @@
 				AA2A150720200537AA00007B /* socket.cpp in Sources */,
 				4176DD4D1B76126D007E1AD9 /* deque.cpp in Sources */,
 				AA2A150720200537AA00007C /* socket.h in Sources */,
+				41A64F201B76ACFD00EDCD79 /* LLogger.cpp in Sources */,
 				AA2A150720200537AA00007D /* util.h in Sources */,
 				AA2A150720200537AA00007E /* w5100.cpp in Sources */,
 				AA2A150720200537AA00007F /* w5100.h in Sources */,

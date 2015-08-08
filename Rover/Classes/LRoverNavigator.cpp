@@ -10,14 +10,11 @@
 void LRoverNavigator::setup() {
 #if DEBUG_LOG
     Serial.begin(9600);
+    Serial.println("Starting...");
 #endif
 
     delay(100);
     
-#if LCD_DEBUG_LOG
-    _lcd = new LLCD();
-#endif
-
     LLowPassFilter *compassLPF = new LLowPassFilter(LPF_RC, LPF_DT);
     _compass = new LCompass(compassLPF);
 
@@ -36,16 +33,26 @@ void LRoverNavigator::setup() {
     _pidTuner = new LPIDTuner(_pid);
 #endif
     
+#if LCD_DEBUG_LOG
+    _lcd = new LLCD();
+#endif
+
 #if DEBUG_LOG || LCD_DEBUG_LOG
-    _logItems = new std::vector<LDebugLog*>;
-    _logItems->push_back(_gps);_logItems->push_back(_compass);_logItems->push_back(_pid);_logItems->push_back(_motorController);
+    std::vector<LDebugLog*> logItems;
+    
+    if (_gps) logItems.push_back(_gps);
+    if (_compass) logItems.push_back(_compass);
+    if (_pid) logItems.push_back(_pid);
+    if (_motorController) logItems.push_back(_motorController);
+    
+    _logger = new LLogger(_lcd, logItems);
 #endif
 }
 
 #pragma mark - Loop
 
 void LRoverNavigator::loop() {
-    _gps->readGPSData();
+//    _gps->readGPSData();
     
     unsigned long currentTime = millis();
     
@@ -71,13 +78,11 @@ void LRoverNavigator::loopAt1Hz() {
 #if MANUAL_PID_TUNING
     _pidTuner->configurePIDConstants();
 #endif
-
-#if LCD_DEBUG_LOG
-    debugLogToLCD();
-#endif
-    
 #if DEBUG_LOG
-    debugLog();
+    _logger->debugLogToSerial();
+#endif
+#if LCD_DEBUG_LOG
+    _logger->debugLogToLCD();
 #endif
 }
 
@@ -95,23 +100,6 @@ void LRoverNavigator::configureMovement() {
 #if DRIVE
     _motorController->move(_pid->output(), MINIMUM_WHEEL_SPEED);
 #endif
-}
-
-#pragma mark - Debug
-
-void LRoverNavigator::debugLogToLCD() {
-    LDebugLog *debugLog = _logItems->at(_lcdDebugLogState);
-    debugLog->printToLCD(_lcd);
-    
-    _lcdDebugLogState = ++_lcdDebugLogState % 4;
-}
-
-void LRoverNavigator::debugLog() {
-    Serial.println("\n==================================================================================================");
-    for (int i = 0; i < _logItems->size(); i++) {
-        LDebugLog *debugLog = _logItems->at(i);
-        debugLog->printToSerial();
-    }
 }
 
 #pragma mark -

@@ -1,20 +1,21 @@
 #ifndef LRoverNavigator_h
 #define LRoverNavigator_h
 
-#include "LMotorController.h"
 #include "Arduino.h"
+#include "LMotorController.h"
 #include "LPID.h"
 #include "LUltrasonic.h"
 #include "LCompass.h"
 #include "LLCD.h"
 #include "LGPS.h"
 #include "LPIDTuner.h"
+#include "LLogger.h"
 #include "vector"
 
 #define DEBUG_LOG 1
 #define LCD_DEBUG_LOG 1
 #define MANUAL_PID_TUNING 1
-#define DRIVE 1
+#define DRIVE 0
 
 //Motor Controller
 #define ENA 3
@@ -42,10 +43,8 @@ private:
     LPIDTuner *_pidTuner;
     LPID *_pid;
     LCompass *_compass;
-    
-    unsigned int _lcdDebugLogState;
-    std::vector<LDebugLog*> *_logItems;
-    
+    LLogger *_logger;
+        
     unsigned long _time1Hz, _time20Hz, _time15s;
     void loop15s();
     void loopAt1Hz();

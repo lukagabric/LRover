@@ -12,6 +12,8 @@ LUltrasonic::LUltrasonic(unsigned int echoPin, unsigned int triggerPin) {
     
     pinMode(_echoPin, INPUT);
     pinMode(_triggerPin, OUTPUT);
+    
+    _distance = 0;
 }
 
 #pragma mark - Measurment

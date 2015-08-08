@@ -15,6 +15,8 @@ LCompass::LCompass(LLowPassFilter *filter) {
     _compass = new HMC5883L();
     _compass->initialize();
     _compass->setSampleAveraging(5);
+    _goalHeading = 0;
+    _headingDeg = 0;
 }
 
 #pragma mark - Update Heading

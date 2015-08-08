@@ -1,5 +1,5 @@
 Builds/Classes/LRoverNavigator.cpp.o: Classes/LRoverNavigator.cpp \
- Classes/LRoverNavigator.h Classes/LMotorController.h \
+ Classes/LRoverNavigator.h \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/cores/arduino/Arduino.h \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/cores/arduino/binary.h \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/cores/arduino/WCharacter.h \
@@ -12,7 +12,7 @@ Builds/Classes/LRoverNavigator.cpp.o: Classes/LRoverNavigator.cpp \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/cores/arduino/Arduino.h \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/variants/eightanaloginputs/pins_arduino.h \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/variants/eightanaloginputs/../standard/pins_arduino.h \
- Classes/LLCD.h Classes/ThirdParty/LCD/LCD.h \
+ Classes/LMotorController.h Classes/LLCD.h Classes/ThirdParty/LCD/LCD.h \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/cores/arduino/Print.h \
  Classes/ThirdParty/LCD/LiquidCrystal_I2C.h \
  Classes/ThirdParty/LCD/I2CIO.h Classes/ThirdParty/LCD/LCD.h \
@@ -23,7 +23,7 @@ Builds/Classes/LRoverNavigator.cpp.o: Classes/LRoverNavigator.cpp \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/cores/arduino/Stream.h \
  Classes/LLowPassFilter.h Classes/LGPS.h Classes/ThirdParty/TinyGPS.h \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/libraries/SoftwareSerial/SoftwareSerial.h \
- Classes/LPIDTuner.h Classes/ThirdParty/StdCpp/vector \
+ Classes/LPIDTuner.h Classes/LLogger.h Classes/ThirdParty/StdCpp/vector \
  Classes/ThirdParty/StdCpp/basic_definitions \
  Classes/ThirdParty/StdCpp/system_configuration.h \
  Classes/ThirdParty/StdCpp/memory Classes/ThirdParty/StdCpp/new \

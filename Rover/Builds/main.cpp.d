@@ -23,7 +23,7 @@ Builds/main.cpp.o: main.cpp \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/cores/arduino/Stream.h \
  Classes/LLowPassFilter.h Classes/LGPS.h Classes/ThirdParty/TinyGPS.h \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/libraries/SoftwareSerial/SoftwareSerial.h \
- Classes/LPIDTuner.h Classes/ThirdParty/StdCpp/vector \
+ Classes/LPIDTuner.h Classes/LLogger.h Classes/ThirdParty/StdCpp/vector \
  Classes/ThirdParty/StdCpp/basic_definitions \
  Classes/ThirdParty/StdCpp/system_configuration.h \
  Classes/ThirdParty/StdCpp/memory Classes/ThirdParty/StdCpp/new \

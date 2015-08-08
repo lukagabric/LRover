@@ -4,6 +4,9 @@
 #pragma mark - Constructor
 
 LMotorController::LMotorController(int ena, int in1, int in2, int enb, int in3, int in4, double motorAConst, double motorBConst) {
+    _leftWheelSpeed = 0;
+    _rightWheelSpeed = 0;
+    
     _motorAConst = motorAConst;
     _motorBConst = motorBConst;
     
