@@ -38,10 +38,7 @@ void LRoverNavigator::setup() {
     
 #if DEBUG_LOG || LCD_DEBUG_LOG
     _logItems = new std::vector<LDebugLog*>;
-    _logItems->push_back(_gps);
-    _logItems->push_back(_compass);
-    _logItems->push_back(_pid);
-    _logItems->push_back(_motorController);
+    _logItems->push_back(_gps);_logItems->push_back(_compass);_logItems->push_back(_pid);_logItems->push_back(_motorController);
 #endif
 }
 
