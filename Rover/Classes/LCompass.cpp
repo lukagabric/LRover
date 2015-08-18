@@ -50,16 +50,6 @@ void LCompass::updateHeading() {
     }
     float rawHeadingDeg = rawHeading * 180/M_PI;
 
-//    if (compass_y_scaled > 0) {
-//        rawHeadingDeg = 90-atan(compass_x_scaled/compass_y_scaled)*compass_rad2degree;
-//    }
-//    else if (compass_y_scaled < 0) {
-//        rawHeadingDeg = 270-atan(compass_x_scaled/compass_y_scaled)*compass_rad2degree;
-//    }
-//    else if (compass_y_scaled == 0 && compass_x_scaled < 0) {
-//        rawHeadingDeg = 180;
-//    }
-
     _headingDeg = _filter ? _filter->filterValue(rawHeadingDeg) : rawHeadingDeg;
 }
 
