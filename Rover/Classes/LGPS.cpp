@@ -69,6 +69,40 @@ bool LGPS::isAltitudeValid() {
     return altitude() != TinyGPS::GPS_INVALID_F_ALTITUDE;
 }
 
+#pragma mark - Bearing
+
+double degToRad(double deg) {
+    return (M_PI / 180) * deg;
+}
+
+double radToDeg(double rad) {
+    return (180 / M_PI) * rad;
+}
+
+float LGPS::bearing(float lat1, float lon1, float lat2, float lon2) {
+    double latR1 = degToRad(lat1);
+//    double lonR1 = degToRad(lon1);
+    
+    double latR2 = degToRad(lat2);
+//    double lonR2 = degToRad(lon2);
+    
+//    double dLatR = degToRad(lat2 - lat1);
+    double dLonR = degToRad(lon2 - lon1);
+    
+    double y = sin(dLonR) * cos(latR2);
+    double x = cos(latR1) * sin(latR2) - sin(latR1) * cos(latR2) * cos(dLonR);
+    
+    double theta = radToDeg(atan2(y, x));
+    
+    return fmod(theta + 360, 360);
+}
+
+float LGPS::bearingTo(float lat, float lon) {
+    if (!isLocationValid()) return -1;
+    
+    return bearing(latitude(), longitude(), lat, lon);
+}
+
 #pragma mark - LDebugLog
 
 void LGPS::printToSerial() {

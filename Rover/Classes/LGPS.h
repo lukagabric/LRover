@@ -32,6 +32,9 @@ public:
     float longitude();
     unsigned long age();
     bool isLocationValid();
+    
+    float bearing(float lat1, float lon1, float lat2, float lon2);
+    float bearingTo(float lat, float lon);
 
     float altitude();
     bool isAltitudeValid();
