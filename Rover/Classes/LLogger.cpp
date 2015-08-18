@@ -17,9 +17,13 @@ LLogger::LLogger(LLCD *lcd, std::vector<LDebugLog*> logItems) {
 void LLogger::debugLogToLCD() {
     if (!_lcd) return;
     
+    _lcd->clear();
+    
     LDebugLog *debugLog = _logItems.at(_lcdDebugLogState);
     debugLog->printToLCD(_lcd);
-    
+}
+
+void LLogger::skipNextDebugLogToLCD() {
     _lcdDebugLogState = ++_lcdDebugLogState % _logItems.size();
 }
 

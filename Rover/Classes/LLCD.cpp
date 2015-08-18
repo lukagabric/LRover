@@ -35,6 +35,10 @@ LLCD::LLCD() {
 
 #pragma mark - Print
 
+void LLCD::clear() {
+    _lcd->clear();
+}
+
 void LLCD::print(unsigned int column, unsigned int line, const char str[]) {
     if (line > 1) return;
     

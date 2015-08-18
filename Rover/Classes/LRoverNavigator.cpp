@@ -1,8 +1,7 @@
 #include "LRoverNavigator.h"
 #include "Arduino.h"
-#include "LUltrasonic.h"
 #include <Wire.h>
-#include "LLowPassFilter.h"
+#include "LUltrasonic.h"
 #include "LDebugLog.h"
 
 #pragma mark - Setup
@@ -15,8 +14,7 @@ void LRoverNavigator::setup() {
 
     delay(100);
     
-    LLowPassFilter *compassLPF = new LLowPassFilter(LPF_RC, LPF_DT);
-    _compass = new LCompass(compassLPF);
+    _compass = new LCompass(NULL);
 
     _gps = new LGPS();
     
@@ -52,13 +50,13 @@ void LRoverNavigator::setup() {
 #pragma mark - Loop
 
 void LRoverNavigator::loop() {
-//    _gps->readGPSData();
+    _gps->readGPSData();
     
     unsigned long currentTime = millis();
     
-    if (currentTime - _time15s >= 15000) {
-        _time15s = currentTime;
-        loop15s();
+    if (currentTime - _time5s >= 5000) {
+        _time5s = currentTime;
+        loop5s();
     }
     if (currentTime - _time1Hz >= 1000) {
         _time1Hz = currentTime;
@@ -70,8 +68,10 @@ void LRoverNavigator::loop() {
     }
 }
 
-void LRoverNavigator::loop15s() {
-    
+void LRoverNavigator::loop5s() {
+#if LCD_DEBUG_LOG
+    _logger->skipNextDebugLogToLCD();
+#endif    
 }
 
 void LRoverNavigator::loopAt1Hz() {
@@ -94,7 +94,7 @@ void LRoverNavigator::loopAt20Hz() {
 
 void LRoverNavigator::configureMovement() {
     _compass->updateHeading();
-    _pid->setInput(_compass->offsetFromGoalHeading());
+    _pid->setInput(_compass->offsetFromGoalHeadingDeg());
     _pid->Compute();
     
 #if DRIVE

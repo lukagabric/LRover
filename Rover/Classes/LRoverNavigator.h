@@ -45,8 +45,8 @@ private:
     LCompass *_compass;
     LLogger *_logger;
         
-    unsigned long _time1Hz, _time20Hz, _time15s;
-    void loop15s();
+    unsigned long _time1Hz, _time20Hz, _time5s;
+    void loop5s();
     void loopAt1Hz();
     void loopAt20Hz();
     

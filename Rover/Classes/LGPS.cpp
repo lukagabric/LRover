@@ -73,7 +73,7 @@ bool LGPS::isAltitudeValid() {
 
 void LGPS::printToSerial() {
     if (isLocationValid()) {
-        Serial.print("\nLAT: ");Serial.print(latitude());Serial.print("    LON: ");Serial.print(longitude());Serial.print("    AGE: ");Serial.println(age());
+        Serial.print("\nLAT: ");Serial.print(latitude(), 15);Serial.print("    LON: ");Serial.print(longitude(), 15);Serial.print("    AGE: ");Serial.println(age());
     }
     else {
         Serial.println("\nLOCATION UNAVAILABLE");
@@ -83,9 +83,9 @@ void LGPS::printToSerial() {
 void LGPS::printToLCD(LLCD *lcd) {
     if (isLocationValid()) {
         lcd->print(0, 0, "LAT=");
-        lcd->print(4, 0, latitude(), 8);
+        lcd->print(4, 0, latitude(), 15);
         lcd->print(0, 1, "LON=");
-        lcd->print(4, 1, longitude(), 8);
+        lcd->print(4, 1, longitude(), 15);
     }
     else {
         lcd->print(0, 0, "LOCATION");

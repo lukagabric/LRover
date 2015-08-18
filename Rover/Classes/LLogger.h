@@ -20,6 +20,7 @@ class LLogger {
 public:
     LLogger(LLCD *lcd, std::vector<LDebugLog*> logItems);
     void debugLogToLCD();
+    void skipNextDebugLogToLCD();
     void debugLogToSerial();
 };
 
