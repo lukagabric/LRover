@@ -40,15 +40,16 @@ LCompass::LCompass(LLowPassFilter *filter) {
 void LCompass::updateHeading() {
     _compass->getHeading(&_mx, &_my, &_mz);
 
-    float compass_x_scaled=_mx*compass_gain_fact*compass_x_gainError+compass_x_offset;
-    float compass_y_scaled=_my*compass_gain_fact*compass_y_gainError+compass_y_offset;
+    double compass_x_scaled=_mx*compass_gain_fact*compass_x_gainError+compass_x_offset;
+    double compass_y_scaled=_my*compass_gain_fact*compass_y_gainError+compass_y_offset;
     
-    float rawHeading = atan2(compass_y_scaled, compass_x_scaled);
+    double rawHeading = atan2(compass_y_scaled, compass_x_scaled);
 
     if (rawHeading < 0) {
         rawHeading += 2 * M_PI;
     }
-    float rawHeadingDeg = rawHeading * 180/M_PI;
+
+    double rawHeadingDeg = rawHeading * 180/M_PI;
 
     _headingDeg = _filter ? _filter->filterValue(rawHeadingDeg) : rawHeadingDeg;
 }

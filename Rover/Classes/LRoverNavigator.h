@@ -37,6 +37,8 @@
 
 class LRoverNavigator {
 private:
+    bool _atGoal;
+    
     LLCD *_lcd;
     LGPS *_gps;
     LMotorController *_motorController;
@@ -52,6 +54,8 @@ private:
     
     void configureGoalHeading();
     void configureMovement();
+    
+    void arrivedAtLocation();
     
     void debugLogToLCD();
     void debugLog();

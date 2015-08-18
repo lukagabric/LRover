@@ -53,6 +53,8 @@ void LRoverNavigator::setup() {
 #pragma mark - Loop
 
 void LRoverNavigator::loop() {
+    if (_atGoal) return;
+    
     _gps->readGPSData();
     
     unsigned long currentTime = millis();
@@ -97,13 +99,20 @@ void LRoverNavigator::loopAt20Hz() {
 #pragma mark - Operations
 
 void LRoverNavigator::configureGoalHeading() {
-    float goalHeadingDeg = _gps->bearingDegTo(goalLat, goalLon);
+    double goalHeadingDeg = _gps->bearingDegTo(goalLat, goalLon);
     if (goalHeadingDeg < 0) return;
     
     _compass->setGoalHeadingDeg(goalHeadingDeg);
 }
 
 void LRoverNavigator::configureMovement() {
+    float distanceToLocation = _gps->distanceTo(goalLat, goalLon);
+    
+    if (distanceToLocation < 0.005) {
+        arrivedAtLocation();
+        return;
+    }
+    
     _compass->updateHeading();
     _pid->setInput(_compass->offsetFromGoalHeadingDeg());
     _pid->Compute();
@@ -111,6 +120,18 @@ void LRoverNavigator::configureMovement() {
 #if DRIVE
     _motorController->move(_pid->output(), MINIMUM_WHEEL_SPEED);
 #endif
+}
+
+void LRoverNavigator::arrivedAtLocation() {
+    _atGoal = true;
+    
+    _motorController->turnLeft(255, false);
+    delay(1000);
+    _motorController->stopMoving();
+    delay(1000);
+    _motorController->turnRight(255, false);
+    delay(1000);
+    _motorController->stopMoving();
 }
 
 #pragma mark -

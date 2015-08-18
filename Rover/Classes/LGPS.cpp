@@ -69,7 +69,7 @@ bool LGPS::isAltitudeValid() {
     return altitude() != TinyGPS::GPS_INVALID_F_ALTITUDE;
 }
 
-#pragma mark - Bearing
+#pragma mark - Convenience
 
 double degToRad(double deg) {
     return (M_PI / 180) * deg;
@@ -79,7 +79,34 @@ double radToDeg(double rad) {
     return (180 / M_PI) * rad;
 }
 
-float LGPS::bearingDeg(float lat1, float lon1, float lat2, float lon2) {
+#pragma mark - Distance
+
+double LGPS::distance(double lat1, double lon1, double lat2, double lon2) {
+    double latR1 = degToRad(lat1);
+    //    double lonR1 = degToRad(lon1);
+    
+    double latR2 = degToRad(lat2);
+    //    double lonR2 = degToRad(lon2);
+    
+    double dLatR = degToRad(lat2 - lat1);
+    double dLonR = degToRad(lon2 - lon1);
+    
+    double a = pow(sin(dLatR/2.0), 2) + cos(latR1) * cos(latR2) * pow(sin(dLonR/2.0), 2);
+    double R = 6371000;
+    double c = 2 * atan2(sqrt(a), sqrt(1 - a));
+    
+    return R * c;
+}
+
+double LGPS::distanceTo(double lat, double lon) {
+    if (!isLocationValid()) return -1;
+    
+    return distance(latitude(), longitude(), lat, lon);
+}
+
+#pragma mark - Bearing
+
+double LGPS::bearingDeg(float lat1, float lon1, float lat2, float lon2) {
     double latR1 = degToRad(lat1);
 //    double lonR1 = degToRad(lon1);
     
@@ -97,7 +124,7 @@ float LGPS::bearingDeg(float lat1, float lon1, float lat2, float lon2) {
     return fmod(theta + 360, 360);
 }
 
-float LGPS::bearingDegTo(float lat, float lon) {
+double LGPS::bearingDegTo(float lat, float lon) {
     if (!isLocationValid()) return -1;
     
     return bearingDeg(latitude(), longitude(), lat, lon);

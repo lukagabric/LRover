@@ -32,9 +32,13 @@ public:
     float longitude();
     unsigned long age();
     bool isLocationValid();
+
+    //distance in km
+    double distance(double lat1, double lon1, double lat2, double lon2);
+    double distanceTo(double lat, double lon);
     
-    float bearingDeg(float lat1, float lon1, float lat2, float lon2);
-    float bearingDegTo(float lat, float lon);
+    double bearingDeg(float lat1, float lon1, float lat2, float lon2);
+    double bearingDegTo(float lat, float lon);
 
     float altitude();
     bool isAltitudeValid();
