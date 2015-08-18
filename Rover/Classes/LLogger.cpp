@@ -28,7 +28,7 @@ void LLogger::skipNextDebugLogToLCD() {
 }
 
 void LLogger::debugLogToSerial() {
-    Serial.println("\n==================================================================================================");
+    Serial.println("\n===========================================================================");
     for (int i = 0; i < _logItems.size(); i++) {
         LDebugLog *debugLog = _logItems.at(i);
         debugLog->printToSerial();

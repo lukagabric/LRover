@@ -18,10 +18,10 @@ LPIDTuner::LPIDTuner(LPID *pid) {
     _potKd = A2;
     
     _kpMin = 0;
-    _kpMax = 25000;
+    _kpMax = 2500;
     
     _kiMin = 0;
-    _kiMax = 100000;
+    _kiMax = 100;
     
     _kdMin = 0;
     _kdMax = 500;
