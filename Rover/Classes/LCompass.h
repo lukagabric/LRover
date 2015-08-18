@@ -21,7 +21,7 @@ private:
     LLowPassFilter *_filter;
     int16_t _mx, _my, _mz;
     double _headingDeg;
-    double _goalHeading;
+    double _goalHeadingDeg;
 public:
     LCompass(LLowPassFilter *filter);
     
@@ -29,10 +29,10 @@ public:
     
     double headingDeg();
     
-    void setGoalHeading(double goalHeading);
-    double goalHeading();
+    void setGoalHeadingDeg(double goalHeadingDeg);
+    double goalHeadingDeg();
     
-    double offsetFromGoalHeading(); //Direction: CCW
+    double offsetFromGoalHeadingDeg(); //Direction: CCW
     
     virtual void printToSerial();
     virtual void printToLCD(LLCD *lcd);
