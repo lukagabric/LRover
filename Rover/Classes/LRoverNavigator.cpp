@@ -71,6 +71,10 @@ void LRoverNavigator::loop() {
         _time20Hz = currentTime;
         loopAt20Hz();
     }
+    if (currentTime - _timeBackForth >= 15000) {
+        _timeBackForth = currentTime;
+        _compass->setGoalHeadingDeg(_compass->goalHeadingDeg() == 0 ? 180 : 0);
+    }
 }
 
 void LRoverNavigator::loop5s() {
@@ -89,7 +93,7 @@ void LRoverNavigator::loopAt1Hz() {
 #if LCD_DEBUG_LOG
     _logger->debugLogToLCD();
 #endif
-    configureGoalHeading();
+//    configureGoalHeading();
 }
 
 void LRoverNavigator::loopAt20Hz() {
@@ -99,19 +103,19 @@ void LRoverNavigator::loopAt20Hz() {
 #pragma mark - Operations
 
 void LRoverNavigator::configureGoalHeading() {
-    double goalHeadingDeg = _gps->bearingDegTo(goalLat, goalLon);
-    if (goalHeadingDeg < 0) return;
-    
-    _compass->setGoalHeadingDeg(goalHeadingDeg);
+//    double goalHeadingDeg = _gps->bearingDegTo(goalLat, goalLon);
+//    if (goalHeadingDeg < 0) return;
+//    
+//    _compass->setGoalHeadingDeg(goalHeadingDeg);
 }
 
 void LRoverNavigator::configureMovement() {
-    float distanceToLocation = _gps->distanceTo(goalLat, goalLon);
-    
-    if (distanceToLocation < 0.005) {
-        arrivedAtLocation();
-        return;
-    }
+//    float distanceToLocation = _gps->distanceTo(goalLat, goalLon);
+//    
+//    if (distanceToLocation < 0.005) {
+//        arrivedAtLocation();
+//        return;
+//    }
     
     _compass->updateHeading();
     _pid->setInput(_compass->offsetFromGoalHeadingDeg());
