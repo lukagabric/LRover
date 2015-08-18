@@ -4,6 +4,9 @@
 #include "LUltrasonic.h"
 #include "LDebugLog.h"
 
+#define goalLat 10
+#define goalLon 10
+
 #pragma mark - Setup
 
 void LRoverNavigator::setup() {
@@ -84,6 +87,7 @@ void LRoverNavigator::loopAt1Hz() {
 #if LCD_DEBUG_LOG
     _logger->debugLogToLCD();
 #endif
+    configureGoalHeading();
 }
 
 void LRoverNavigator::loopAt20Hz() {
@@ -91,6 +95,13 @@ void LRoverNavigator::loopAt20Hz() {
 }
 
 #pragma mark - Operations
+
+void LRoverNavigator::configureGoalHeading() {
+    float goalHeadingDeg = _gps->bearingDegTo(goalLat, goalLon);
+    if (goalHeadingDeg < 0) return;
+    
+    _compass->setGoalHeadingDeg(goalHeadingDeg);
+}
 
 void LRoverNavigator::configureMovement() {
     _compass->updateHeading();

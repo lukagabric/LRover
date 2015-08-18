@@ -79,7 +79,7 @@ double radToDeg(double rad) {
     return (180 / M_PI) * rad;
 }
 
-float LGPS::bearing(float lat1, float lon1, float lat2, float lon2) {
+float LGPS::bearingDeg(float lat1, float lon1, float lat2, float lon2) {
     double latR1 = degToRad(lat1);
 //    double lonR1 = degToRad(lon1);
     
@@ -97,10 +97,10 @@ float LGPS::bearing(float lat1, float lon1, float lat2, float lon2) {
     return fmod(theta + 360, 360);
 }
 
-float LGPS::bearingTo(float lat, float lon) {
+float LGPS::bearingDegTo(float lat, float lon) {
     if (!isLocationValid()) return -1;
     
-    return bearing(latitude(), longitude(), lat, lon);
+    return bearingDeg(latitude(), longitude(), lat, lon);
 }
 
 #pragma mark - LDebugLog

@@ -50,6 +50,7 @@ private:
     void loopAt1Hz();
     void loopAt20Hz();
     
+    void configureGoalHeading();
     void configureMovement();
     
     void debugLogToLCD();

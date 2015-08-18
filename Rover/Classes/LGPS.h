@@ -33,8 +33,8 @@ public:
     unsigned long age();
     bool isLocationValid();
     
-    float bearing(float lat1, float lon1, float lat2, float lon2);
-    float bearingTo(float lat, float lon);
+    float bearingDeg(float lat1, float lon1, float lat2, float lon2);
+    float bearingDegTo(float lat, float lon);
 
     float altitude();
     bool isAltitudeValid();
