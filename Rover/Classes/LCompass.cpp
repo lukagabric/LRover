@@ -48,7 +48,7 @@ void LCompass::updateHeading() {
         rawHeading += 2 * M_PI;
     }
 
-    double rawHeadingDeg = rawHeading * 180/M_PI;
+    double rawHeadingDeg = radToDeg(rawHeading);
 
     _headingDeg = _filter ? _filter->filterValue(rawHeadingDeg) : rawHeadingDeg;
 }

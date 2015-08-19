@@ -4,8 +4,8 @@
 #include "LUltrasonic.h"
 #include "LDebugLog.h"
 
-#define goalLat 10
-#define goalLon 10
+#define goalLat 45.550991058349609
+#define goalLon 18.692028045654296
 
 #pragma mark - Setup
 
@@ -58,6 +58,8 @@ void LRoverNavigator::loop() {
     
     _gps->readGPSData();
     
+    if (!_gps->isLocationValid()) return;
+    
     unsigned long currentTime = millis();
     
     if (currentTime - _time5s >= 5000) {
@@ -109,7 +111,7 @@ void LRoverNavigator::configureGoalHeading() {
 void LRoverNavigator::configureMovement() {
     float distanceToLocation = _gps->distanceTo(goalLat, goalLon);
     
-    if (distanceToLocation < 0.005) {
+    if (distanceToLocation >= 0 && distanceToLocation < 5) {
         arrivedAtLocation();
         return;
     }
@@ -127,11 +129,11 @@ void LRoverNavigator::arrivedAtLocation() {
     _atGoal = true;
     
     _motorController->turnLeft(255, false);
-    delay(1000);
+    delay(2000);
     _motorController->stopMoving();
-    delay(1000);
+    delay(500);
     _motorController->turnRight(255, false);
-    delay(1000);
+    delay(2000);
     _motorController->stopMoving();
 }
 

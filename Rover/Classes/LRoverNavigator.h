@@ -12,10 +12,10 @@
 #include "LLogger.h"
 #include "vector"
 
-#define DEBUG_LOG 1
+#define DEBUG_LOG 0
 #define LCD_DEBUG_LOG 1
-#define MANUAL_PID_TUNING 1
-#define DRIVE 0
+#define MANUAL_PID_TUNING 0
+#define DRIVE 1
 
 //Motor Controller
 #define ENA 3
@@ -32,8 +32,8 @@
 #define Kd 0.12
 
 //Low-Pass Filter
-#define LPF_RC 0.05
-#define LPF_DT 1/20.0
+//#define LPF_RC 0.05
+//#define LPF_DT 1/20.0
 
 class LRoverNavigator {
 private:
