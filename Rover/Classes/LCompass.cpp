@@ -56,6 +56,14 @@ void LCompass::updateHeading() {
 
 #pragma mark - Getters/Setters
 
+void LCompass::setDeclinationDeg(double declinationDeg) {
+    _declinationDeg = declinationDeg;
+}
+
+double LCompass::declinationDeg() {
+    return _declinationDeg;
+}
+
 double LCompass::headingDeg() {
     return _headingDeg;
 }
