@@ -134,7 +134,7 @@ int LMotorController::rightWheelSpeed() {
 #pragma mark - LDebugLog
 
 void LMotorController::printToSerial() {
-    Serial.print("\nLW: ");Serial.println(leftWheelSpeed());Serial.print("    RW: ");Serial.println(rightWheelSpeed());
+    Serial.print("\nLW: ");Serial.print(leftWheelSpeed());Serial.print("    RW: ");Serial.println(rightWheelSpeed());
 }
 
 void LMotorController::printToLCD(LLCD *lcd) {

@@ -26,7 +26,7 @@ LGPS::LGPS() {
 #pragma mark - Read Data
 
 void LGPS::readGPSData() {
-    if (millis() - _time < 800) return;
+//    if (millis() - _time < 800) return;
     
     bool newData = false;
     if (_ss->available()) {
