@@ -27,9 +27,9 @@
 #define MINIMUM_WHEEL_SPEED 10
 
 //PID Constants
-#define Kp 5
+#define Kp 15
 #define Ki 0.01
-#define Kd 0.25
+#define Kd 0.12
 
 ////Low-Pass Filter
 //#define LPF_RC 0.05
