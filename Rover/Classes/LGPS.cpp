@@ -26,18 +26,10 @@ LGPS::LGPS() {
 #pragma mark - Read Data
 
 void LGPS::readGPSData() {
-//    if (millis() - _time < 800) return;
-    
-    bool newData = false;
     if (_ss->available()) {
-        newData = true;
         do {
             _gps->encode(_ss->read());
         } while (_ss->available());
-    }
-    
-    if (newData) {
-        _time = millis();
         
         _gps->f_get_position(&_lat, &_lon, &_age);
         _altitude = _gps->f_altitude();

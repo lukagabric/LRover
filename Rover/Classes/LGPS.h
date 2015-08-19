@@ -19,7 +19,6 @@ class LGPS : public LDebugLog {
 private:
     TinyGPS *_gps;
     SoftwareSerial *_ss;
-    unsigned long _time;
     float _lat, _lon;
     unsigned long _age;
     float _altitude;

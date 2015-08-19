@@ -52,7 +52,8 @@ private:
     void loopAt1Hz();
     void loopAt20Hz();
     
-    void configureGoalHeading();
+    void configureDistance();
+    void configureHeading();
     void configureMovement();
     
     void arrivedAtLocation();
