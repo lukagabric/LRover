@@ -46,6 +46,8 @@ private:
     LPID *_pid;
     LCompass *_compass;
     LLogger *_logger;
+    
+    float _lat, _lon;
         
     unsigned long _time1Hz, _time20Hz, _time5s;
     void loop5s();

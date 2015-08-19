@@ -58,8 +58,6 @@ void LRoverNavigator::loop() {
     
     _gps->readGPSData();
     
-    if (!_gps->isLocationValid()) return;
-    
     unsigned long currentTime = millis();
     
     if (currentTime - _time5s >= 5000) {
@@ -95,11 +93,19 @@ void LRoverNavigator::loopAt1Hz() {
 }
 
 void LRoverNavigator::loopAt20Hz() {
-    configureDistance();
+    if (!_gps->isLocationValid()) return;
+
+    if (_lat != _gps->latitude() || _lon != _gps->longitude()) {
+        _lat = _gps->latitude();
+        _lon = _gps->longitude();
+        
+        configureDistance();
+
+        if (_atGoal) return;
+        
+        configureHeading();
+    }
     
-    if (_atGoal) return;
-    
-    configureHeading();
     configureMovement();
 }
 
@@ -107,8 +113,6 @@ void LRoverNavigator::loopAt20Hz() {
 
 void LRoverNavigator::configureDistance() {
     float distanceToLocation = _gps->distanceTo(goalLat, goalLon);
-    
-    if (distanceToLocation < 0) return;
     
     if (distanceToLocation < 5) {
         arrivedAtLocation();
