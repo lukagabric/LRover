@@ -17,6 +17,10 @@
 #define MANUAL_PID_TUNING 0
 #define DRIVE 1
 
+#define GOAL_LAT 45.550991058349609
+#define GOAL_LON 18.692028045654296
+#define GOAL_RADIUS_METERS 5
+
 //Motor Controller
 #define ENA 3
 #define IN1 2
@@ -54,11 +58,13 @@ private:
     void loopAt1Hz();
     void loopAt20Hz();
     
-    void configureDistance();
+    bool newGPSData();
+    
     void configureHeading();
     void configureMovement();
     
-    void arrivedAtLocation();
+    bool currentEqualsGoalLocation();
+    void arrivedAtGoal();
     
     void debugLogToLCD();
     void debugLog();

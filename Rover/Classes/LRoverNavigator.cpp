@@ -4,9 +4,6 @@
 #include "LUltrasonic.h"
 #include "LDebugLog.h"
 
-#define goalLat 45.550991058349609
-#define goalLon 18.692028045654296
-
 #pragma mark - Setup
 
 void LRoverNavigator::setup() {
@@ -95,13 +92,11 @@ void LRoverNavigator::loopAt1Hz() {
 void LRoverNavigator::loopAt20Hz() {
     if (!_gps->isLocationValid()) return;
 
-    if (_lat != _gps->latitude() || _lon != _gps->longitude()) {
-        _lat = _gps->latitude();
-        _lon = _gps->longitude();
-        
-        configureDistance();
-
-        if (_atGoal) return;
+    if (newGPSData()) {
+        if (currentEqualsGoalLocation()) {
+            arrivedAtGoal();
+            return;
+        }
         
         configureHeading();
     }
@@ -111,18 +106,37 @@ void LRoverNavigator::loopAt20Hz() {
 
 #pragma mark - Operations
 
-void LRoverNavigator::configureDistance() {
-    float distanceToLocation = _gps->distanceTo(goalLat, goalLon);
-    
-    if (distanceToLocation < 5) {
-        arrivedAtLocation();
+bool LRoverNavigator::newGPSData() {
+    if (_lat != _gps->latitude() || _lon != _gps->longitude()) {
+        _lat = _gps->latitude();
+        _lon = _gps->longitude();
+        
+        return true;
     }
+    
+    return false;
 }
 
-void LRoverNavigator::configureHeading() {
-    double goalHeadingDeg = _gps->bearingDegTo(goalLat, goalLon);
-    if (goalHeadingDeg < 0) return;
+bool LRoverNavigator::currentEqualsGoalLocation() {
+    float distanceToLocation = _gps->distanceTo(GOAL_LAT, GOAL_LON);
+    return distanceToLocation < GOAL_RADIUS_METERS;
+}
+
+void LRoverNavigator::arrivedAtGoal() {
+    _atGoal = true;
     
+    _motorController->turnLeft(255, false);
+    delay(2000);
+    _motorController->stopMoving();
+    delay(500);
+    _motorController->turnRight(255, false);
+    delay(2000);
+    _motorController->stopMoving();
+}
+
+
+void LRoverNavigator::configureHeading() {
+    double goalHeadingDeg = _gps->bearingDegTo(GOAL_LAT, GOAL_LON);
     _compass->setGoalHeadingDeg(goalHeadingDeg);
 }
 
@@ -134,18 +148,6 @@ void LRoverNavigator::configureMovement() {
 #if DRIVE
     _motorController->move(_pid->output(), MINIMUM_WHEEL_SPEED);
 #endif
-}
-
-void LRoverNavigator::arrivedAtLocation() {
-    _atGoal = true;
-    
-    _motorController->turnLeft(255, false);
-    delay(2000);
-    _motorController->stopMoving();
-    delay(500);
-    _motorController->turnRight(255, false);
-    delay(2000);
-    _motorController->stopMoving();
 }
 
 #pragma mark -
