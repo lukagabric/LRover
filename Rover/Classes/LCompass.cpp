@@ -20,8 +20,6 @@
 
 #define compass_gain_fact 1.22
 
-#define compass_rad2degree 57.2957795
-
 #pragma mark - Constructor
 
 LCompass::LCompass(LLowPassFilter *filter) {
@@ -35,6 +33,16 @@ LCompass::LCompass(LLowPassFilter *filter) {
     _headingDeg = 0;
 }
 
+#pragma mark - Convenience
+
+double degToRad(double deg) {
+    return (M_PI / 180) * deg;
+}
+
+double radToDeg(double rad) {
+    return (180 / M_PI) * rad;
+}
+
 #pragma mark - Update Heading
 
 void LCompass::updateHeading() {
@@ -43,7 +51,7 @@ void LCompass::updateHeading() {
     double compass_x_scaled=_mx*compass_gain_fact*compass_x_gainError+compass_x_offset;
     double compass_y_scaled=_my*compass_gain_fact*compass_y_gainError+compass_y_offset;
     
-    double rawHeading = atan2(compass_y_scaled, compass_x_scaled);
+    double rawHeading = atan2(compass_y_scaled, compass_x_scaled) + degToRad(_declinationDeg);
 
     if (rawHeading < 0) {
         rawHeading += 2 * M_PI;
