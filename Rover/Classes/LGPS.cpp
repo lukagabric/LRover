@@ -8,6 +8,7 @@
 
 #include "LGPS.h"
 #include "LLCD.h"
+#include "LConverters.h"
 
 #pragma mark - Constructor
 
@@ -67,16 +68,6 @@ float LGPS::altitude() {
 
 bool LGPS::isAltitudeValid() {
     return altitude() != TinyGPS::GPS_INVALID_F_ALTITUDE;
-}
-
-#pragma mark - Convenience
-
-double degToRad(double deg) {
-    return (M_PI / 180) * deg;
-}
-
-double radToDeg(double rad) {
-    return (180 / M_PI) * rad;
 }
 
 #pragma mark - Distance

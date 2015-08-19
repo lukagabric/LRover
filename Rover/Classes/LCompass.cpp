@@ -7,6 +7,7 @@
 //
 
 #include "LCompass.h"
+#include "LConverters.h"
 
 #define compass_cal_x_offset 116   // Manually calculated offset in X direction
 #define compass_cal_y_offset 225   // Manually calculated offset in Y direction
@@ -19,8 +20,6 @@
 #define compass_y_gainError 0.93
 
 #define compass_gain_fact 1.22
-
-#define compass_rad2degree 57.2957795
 
 #pragma mark - Constructor
 
@@ -43,7 +42,7 @@ void LCompass::updateHeading() {
     double compass_x_scaled=_mx*compass_gain_fact*compass_x_gainError+compass_x_offset;
     double compass_y_scaled=_my*compass_gain_fact*compass_y_gainError+compass_y_offset;
     
-    double rawHeading = atan2(compass_y_scaled, compass_x_scaled);
+    double rawHeading = atan2(compass_y_scaled, compass_x_scaled) + degToRad(_declinationDeg);
 
     if (rawHeading < 0) {
         rawHeading += 2 * M_PI;
