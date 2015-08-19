@@ -7,6 +7,7 @@
 //
 
 #include "LCompass.h"
+#include "LConverters.h"
 
 #define compass_cal_x_offset 116   // Manually calculated offset in X direction
 #define compass_cal_y_offset 225   // Manually calculated offset in Y direction
@@ -31,16 +32,6 @@ LCompass::LCompass(LLowPassFilter *filter) {
     _compass->setDataRate(HMC5883L_RATE_30);
     _goalHeadingDeg = 0;
     _headingDeg = 0;
-}
-
-#pragma mark - Convenience
-
-double degToRad(double deg) {
-    return (M_PI / 180) * deg;
-}
-
-double radToDeg(double rad) {
-    return (180 / M_PI) * rad;
 }
 
 #pragma mark - Update Heading
