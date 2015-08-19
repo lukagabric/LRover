@@ -22,6 +22,7 @@ private:
     int16_t _mx, _my, _mz;
     double _headingDeg;
     double _goalHeadingDeg;
+    double _declinationDeg;
 public:
     LCompass(LLowPassFilter *filter);
     
@@ -31,6 +32,9 @@ public:
     
     void setGoalHeadingDeg(double goalHeadingDeg);
     double goalHeadingDeg();
+    
+    void setDeclinationDeg(double declinationDeg);
+    double declinationDeg();
     
     double offsetFromGoalHeadingDeg(); //Direction: CCW
     

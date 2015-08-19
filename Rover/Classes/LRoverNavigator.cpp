@@ -18,7 +18,8 @@ void LRoverNavigator::setup() {
     delay(100);
     
     _compass = new LCompass(NULL);
-
+    _compass->setDeclinationDeg(4.183333);
+    
     _gps = new LGPS();
     
 #if DRIVE
