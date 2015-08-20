@@ -23,13 +23,13 @@
 //#define GOAL_LAT 45.550991058349609
 //#define GOAL_LON 18.692028045654296
 
-//Dvorište Ernestinovo
+//Dvorište, Ernestinovo
 //#define GOAL_LAT 45.453231811523437
 //#define GOAL_LON 18.661836624145507
 
-//Stadionska Ernestinovo
-#define GOAL_LAT 45.453636169433593
-#define GOAL_LON 18.663724899291992
+//Prilaz kući, Ernestinovo
+#define GOAL_LAT 45.452903747558593
+#define GOAL_LON 18.662023544311523
 
 #define GOAL_RADIUS_METERS 1
 
