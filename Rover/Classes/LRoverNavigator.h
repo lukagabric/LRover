@@ -12,10 +12,10 @@
 #include "LLogger.h"
 #include "vector"
 
-#define DEBUG_LOG 0
+#define DEBUG_LOG 1
 #define LCD_DEBUG_LOG 1
 #define MANUAL_PID_TUNING 0
-#define DRIVE 1
+#define DRIVE 0
 
 //Centar terena Sloga, Ernestinovo: 45.452608, 18.662766
 

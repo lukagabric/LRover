@@ -18,8 +18,8 @@ void LRoverNavigator::setup() {
     _compass->setDeclinationDeg(4.183333);
     
     _gps = new LGPS();
-    _gps->_goalLat = GOAL_LAT;
-    _gps->_goalLon = GOAL_LON;
+//    _gps->_goalLat = GOAL_LAT;
+//    _gps->_goalLon = GOAL_LON;
     
 #if DRIVE
     _motorController = new LMotorController(ENA, IN1, IN2, ENB, IN3, IN4, 1, 1);
@@ -42,9 +42,9 @@ void LRoverNavigator::setup() {
     std::vector<LDebugLog*> logItems;
     
     if (_gps) logItems.push_back(_gps);
-    if (_compass) logItems.push_back(_compass);
-    if (_pid) logItems.push_back(_pid);
-    if (_motorController) logItems.push_back(_motorController);
+//    if (_compass) logItems.push_back(_compass);
+//    if (_pid) logItems.push_back(_pid);
+//    if (_motorController) logItems.push_back(_motorController);
     
     _logger = new LLogger(_lcd, logItems);
 #endif
