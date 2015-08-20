@@ -18,6 +18,8 @@ void LRoverNavigator::setup() {
     _compass->setDeclinationDeg(4.183333);
     
     _gps = new LGPS();
+    _gps->_goalLat = GOAL_LAT;
+    _gps->_goalLon = GOAL_LON;
     
 #if DRIVE
     _motorController = new LMotorController(ENA, IN1, IN2, ENB, IN3, IN4, 1, 1);

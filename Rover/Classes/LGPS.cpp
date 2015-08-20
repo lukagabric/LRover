@@ -20,7 +20,11 @@ LGPS::LGPS() {
     
     _lat = TinyGPS::GPS_INVALID_F_ANGLE;
     _lon = TinyGPS::GPS_INVALID_F_ANGLE;
+
     _altitude = TinyGPS::GPS_INVALID_F_ALTITUDE;
+    
+    _goalLat = TinyGPS::GPS_INVALID_F_ANGLE;
+    _goalLon = TinyGPS::GPS_INVALID_F_ANGLE;
 }
 
 #pragma mark - Read Data
@@ -126,10 +130,20 @@ void LGPS::printToSerial() {
 
 void LGPS::printToLCD(LLCD *lcd) {
     if (isLocationValid()) {
-        lcd->print(0, 0, "LAT=");
-        lcd->print(4, 0, latitude(), 15);
-        lcd->print(0, 1, "LON=");
-        lcd->print(4, 1, longitude(), 15);
+        if (_goalLat != TinyGPS::GPS_INVALID_F_ANGLE && _goalLon != TinyGPS::GPS_INVALID_F_ANGLE) {
+            lcd->print(0, 0, "LAT=");
+            lcd->print(4, 0, latitude(), 3);
+            lcd->print(8, 0, "LON=");
+            lcd->print(11, 0, longitude(), 3);
+            lcd->print(0, 1, "D=");
+            lcd->print(3, 1, distanceTo(_goalLat, _goalLon), 15);
+        }
+        else {
+            lcd->print(0, 0, "LAT=");
+            lcd->print(4, 0, latitude(), 15);
+            lcd->print(0, 1, "LON=");
+            lcd->print(4, 1, longitude(), 15);
+        }
     }
     else {
         lcd->print(0, 0, "LOCATION");

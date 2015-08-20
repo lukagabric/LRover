@@ -11,7 +11,9 @@
 #pragma mark - Constructor
 
 LPID::LPID(double kp, double ki, double kd, int direction) : PID(&_myInput, &_myOutput, &_mySetpoint, kp, ki, kd, DIRECT) {
-    
+    _mySetpoint = 0;
+    _myInput = 0;
+    _myOutput = 0;
 }
 
 #pragma mark - Getters/Setters

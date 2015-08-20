@@ -17,9 +17,17 @@
 #define MANUAL_PID_TUNING 0
 #define DRIVE 1
 
-#define GOAL_LAT 45.550991058349609
-#define GOAL_LON 18.692028045654296
-#define GOAL_RADIUS_METERS 5
+//Centar terena Sloga, Ernestinovo: 45.452608, 18.662766
+
+//Pet Centar
+//#define GOAL_LAT 45.550991058349609
+//#define GOAL_LON 18.692028045654296
+
+//Dvorište Ernestinovo
+#define GOAL_LAT 45.453231811523437
+#define GOAL_LON 18.661836624145507
+
+#define GOAL_RADIUS_METERS 1
 
 //Motor Controller
 #define ENA 3

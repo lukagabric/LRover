@@ -31,6 +31,8 @@ public:
     float longitude();
     unsigned long age();
     bool isLocationValid();
+    
+    float _goalLat, _goalLon;
 
     //distance in km
     double distance(double lat1, double lon1, double lat2, double lon2);
