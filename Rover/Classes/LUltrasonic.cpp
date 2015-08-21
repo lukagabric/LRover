@@ -2,8 +2,6 @@
 #include "LUltrasonic.h"
 #include "LLCD.h"
 
-#define MAX_MEASUREABLE_DISTANCE 300
-
 #pragma mark - Constructor
 
 LUltrasonic::LUltrasonic(unsigned int echoPin, unsigned int triggerPin) {
@@ -26,10 +24,10 @@ unsigned long LUltrasonic::singleDistanceMeasurement() {
 	digitalWrite(_triggerPin, HIGH);
 	delayMicroseconds(20);
 	digitalWrite(_triggerPin, LOW);
-	duration = pulseIn(_echoPin, HIGH, 2500);
+	duration = pulseIn(_echoPin, HIGH, 3000);
 	measuredDistance = duration / 29 / 2;
     
-    return measuredDistance <= MAX_MEASUREABLE_DISTANCE ? measuredDistance : LULTRASONIC_INFINITE_DISTANCE;
+    return measuredDistance <= MAX_MEASUREABLE_DISTANCE && measuredDistance > 0 ? measuredDistance : LULTRASONIC_INFINITE_DISTANCE;
 }
 
 #pragma mark - Updates

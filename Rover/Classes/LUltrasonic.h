@@ -6,6 +6,7 @@
 #include "LDebugLog.h"
 
 #define LULTRASONIC_INFINITE_DISTANCE 999999
+#define MAX_MEASUREABLE_DISTANCE 60
 
 class LUltrasonic : public LDebugLog {
 private:
