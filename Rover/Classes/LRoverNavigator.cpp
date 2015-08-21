@@ -17,6 +17,8 @@ void LRoverNavigator::setup() {
     _compass = new LCompass(NULL);
     _compass->setDeclinationDeg(4.183333);
     
+    _sonics = new LRoverSonics();
+    
     _gps = new LGPS();
     _gps->_goalLat = GOAL_LAT;
     _gps->_goalLon = GOAL_LON;
@@ -41,6 +43,7 @@ void LRoverNavigator::setup() {
 #if DEBUG_LOG || LCD_DEBUG_LOG
     std::vector<LDebugLog*> logItems;
     
+    if (_sonics) logItems.push_back(_sonics);
     if (_gps) logItems.push_back(_gps);
     if (_compass) logItems.push_back(_compass);
     if (_pid) logItems.push_back(_pid);
@@ -63,7 +66,7 @@ void LRoverNavigator::loop() {
     }
     
     currentTime = millis();
-    if (currentTime - _time20Hz > 15) return;
+    if (currentTime - _time20Hz > 20) return;
     
     _gps->readGPSData();
     if (currentTime - _time1Hz >= 1000) {
@@ -96,6 +99,8 @@ void LRoverNavigator::loopAt1Hz() {
 
 void LRoverNavigator::loopAt20Hz() {
     if (!_gps->isLocationValid()) return;
+    
+    _sonics->performNextMeasurement();
 
     if (isGPSDataNew()) {
         if (isCurrentEqualToGoalLocation()) {

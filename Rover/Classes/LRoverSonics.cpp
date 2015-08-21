@@ -39,3 +39,20 @@ unsigned long LRoverSonics::rightDistance() {
 unsigned long LRoverSonics::leftDistance() {
     return _leftSonic->distance();
 }
+
+#pragma mark - LDebugLog
+
+void LRoverSonics::printToSerial() {
+    Serial.print("\nF: ");Serial.print(_frontSonic->distance());Serial.print("\nL: ");Serial.print(_leftSonic->distance());Serial.print("\nR: ");Serial.println(_rightSonic->distance());
+}
+
+void LRoverSonics::printToLCD(LLCD *lcd) {
+    lcd->print(0, 0, "F=");
+    lcd->print(0, 2, _frontSonic->distance(), 1);
+    lcd->print(1, 0, "L=");
+    lcd->print(1, 2, _leftSonic->distance(), 1);
+    lcd->print(1, 9, "R=");
+    lcd->print(1, 11, _rightSonic->distance(), 1);
+}
+
+#pragma mark -

@@ -13,7 +13,7 @@
 #include "LDebugLog.h"
 #include "LUltrasonic.h"
 
-class LRoverSonics {
+class LRoverSonics : public LDebugLog {
 private:
     LUltrasonic *_rightSonic;
     LUltrasonic *_leftSonic;
@@ -27,6 +27,9 @@ public:
     unsigned long frontDistance();
     unsigned long rightDistance();
     unsigned long leftDistance();
+    
+    virtual void printToSerial();
+    virtual void printToLCD(LLCD *lcd);
 };
 
 #endif /* defined(__Rover__LRoverSonics__) */
