@@ -33,6 +33,17 @@
 
 #define GOAL_RADIUS_METERS 1
 
+//Ultrasonic
+
+#define SONIC_FRONT_ECHO 1
+#define SONIC_FRONT_TRIG 1
+
+#define SONIC_RIGHT_ECHO 1
+#define SONIC_RIGHT_TRIG 1
+
+#define SONIC_LEFT_ECHO 1
+#define SONIC_LEFT_TRIG 1
+
 //Motor Controller
 #define ENA 3
 #define IN1 2
