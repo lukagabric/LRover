@@ -130,10 +130,6 @@ void LRoverNavigator::arrivedAtGoal() {
     _motorController->turnLeft(255, false);
     delay(4000);
     _motorController->stopMoving();
-    delay(300);
-    _motorController->turnRight(255, false);
-    delay(4000);
-    _motorController->stopMoving();
 }
 
 
