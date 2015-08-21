@@ -63,18 +63,16 @@ void LRoverNavigator::loop() {
     }
     
     currentTime = millis();
+    if (currentTime - _time20Hz > 30) return;
     
-    if (currentTime - _time20Hz < 30) {
-        _gps->readGPSData();
-
-        if (currentTime - _time1Hz >= 1000) {
-            _time1Hz = currentTime;
-            loopAt1Hz();
-        }
-        if (currentTime - _time5s >= 5000) {
-            _time5s = currentTime;
-            loop5s();
-        }
+    _gps->readGPSData();
+    if (currentTime - _time1Hz >= 1000) {
+        _time1Hz = currentTime;
+        loopAt1Hz();
+    }
+    if (currentTime - _time5s >= 5000) {
+        _time5s = currentTime;
+        loop5s();
     }
 }
 
