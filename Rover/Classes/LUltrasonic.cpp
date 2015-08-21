@@ -26,7 +26,7 @@ unsigned long LUltrasonic::singleDistanceMeasurement() {
 	digitalWrite(_triggerPin, HIGH);
 	delayMicroseconds(20);
 	digitalWrite(_triggerPin, LOW);
-	duration = pulseIn(_echoPin, HIGH);
+	duration = pulseIn(_echoPin, HIGH, 2500);
 	measuredDistance = duration / 29 / 2;
     
     return measuredDistance <= MAX_MEASUREABLE_DISTANCE ? measuredDistance : LULTRASONIC_INFINITE_DISTANCE;
