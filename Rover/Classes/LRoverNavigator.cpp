@@ -142,12 +142,13 @@ void LRoverNavigator::arrivedAtGoal() {
 
 
 void LRoverNavigator::configureHeading() {
+    _compass->updateHeading();
+
     double goalHeadingDeg = _gps->bearingDegTo(GOAL_LAT, GOAL_LON);
     _compass->setGoalHeadingDeg(goalHeadingDeg);
 }
 
 void LRoverNavigator::configureMovement() {
-    _compass->updateHeading();
     _pid->setInput(_compass->offsetFromGoalHeadingDeg());
     _pid->Compute();
     
