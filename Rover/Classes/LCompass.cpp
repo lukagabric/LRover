@@ -30,6 +30,7 @@ LCompass::LCompass(LLowPassFilter *filter) {
     _compass->setSampleAveraging(HMC5883L_AVERAGING_8);
     _compass->setGain(HMC5883L_GAIN_820);
     _compass->setDataRate(HMC5883L_RATE_30);
+    _compass->setMode(HMC5883L_MODE_CONTINUOUS);
     _goalHeadingDeg = 0;
     _headingDeg = 0;
 }
