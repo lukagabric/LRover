@@ -55,21 +55,26 @@ void LRoverNavigator::setup() {
 void LRoverNavigator::loop() {
     if (_atGoal) return;
     
-    _gps->readGPSData();
-    
     unsigned long currentTime = millis();
     
     if (currentTime - _time20Hz >= 50) {
         _time20Hz = currentTime;
         loopAt20Hz();
     }
-    if (currentTime - _time1Hz >= 1000) {
-        _time1Hz = currentTime;
-        loopAt1Hz();
-    }
-    if (currentTime - _time5s >= 5000) {
-        _time5s = currentTime;
-        loop5s();
+    
+    currentTime = millis();
+    
+    if (currentTime - _time20Hz < 30) {
+        _gps->readGPSData();
+
+        if (currentTime - _time1Hz >= 1000) {
+            _time1Hz = currentTime;
+            loopAt1Hz();
+        }
+        if (currentTime - _time5s >= 5000) {
+            _time5s = currentTime;
+            loop5s();
+        }
     }
 }
 
@@ -94,8 +99,8 @@ void LRoverNavigator::loopAt1Hz() {
 void LRoverNavigator::loopAt20Hz() {
     if (!_gps->isLocationValid()) return;
 
-    if (newGPSData()) {
-        if (currentEqualsGoalLocation()) {
+    if (isGPSDataNew()) {
+        if (isCurrentEqualToGoalLocation()) {
             arrivedAtGoal();
             return;
         }
@@ -108,7 +113,7 @@ void LRoverNavigator::loopAt20Hz() {
 
 #pragma mark - Operations
 
-bool LRoverNavigator::newGPSData() {
+bool LRoverNavigator::isGPSDataNew() {
     if (_lat != _gps->latitude() || _lon != _gps->longitude()) {
         _lat = _gps->latitude();
         _lon = _gps->longitude();
@@ -119,7 +124,7 @@ bool LRoverNavigator::newGPSData() {
     return false;
 }
 
-bool LRoverNavigator::currentEqualsGoalLocation() {
+bool LRoverNavigator::isCurrentEqualToGoalLocation() {
     float distanceToLocation = _gps->distanceTo(GOAL_LAT, GOAL_LON);
     return distanceToLocation < GOAL_RADIUS_METERS;
 }

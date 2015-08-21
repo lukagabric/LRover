@@ -64,18 +64,18 @@ private:
     LLogger *_logger;
     
     float _lat, _lon;
-        
+    
     unsigned long _time1Hz, _time20Hz, _time5s;
     void loop5s();
     void loopAt1Hz();
     void loopAt20Hz();
     
-    bool newGPSData();
+    bool isGPSDataNew();
     
     void configureHeading();
     void configureMovement();
     
-    bool currentEqualsGoalLocation();
+    bool isCurrentEqualToGoalLocation();
     void arrivedAtGoal();
     
     void debugLogToLCD();
