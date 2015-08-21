@@ -36,14 +36,14 @@
 
 //Ultrasonic
 
-#define SONIC_FRONT_ECHO 1
-#define SONIC_FRONT_TRIG 1
+#define SONIC_FRONT_ECHO A3
+#define SONIC_FRONT_TRIG A2
 
-#define SONIC_RIGHT_ECHO 1
-#define SONIC_RIGHT_TRIG 1
+#define SONIC_RIGHT_ECHO 9
+#define SONIC_RIGHT_TRIG 8
 
-#define SONIC_LEFT_ECHO 1
-#define SONIC_LEFT_TRIG 1
+#define SONIC_LEFT_ECHO 12
+#define SONIC_LEFT_TRIG 13
 
 //Motor Controller
 #define ENA 3

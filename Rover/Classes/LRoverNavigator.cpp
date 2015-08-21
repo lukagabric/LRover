@@ -98,10 +98,10 @@ void LRoverNavigator::loopAt1Hz() {
 }
 
 void LRoverNavigator::loopAt20Hz() {
-    if (!_gps->isLocationValid()) return;
-    
     _sonics->performNextMeasurement();
 
+    if (!_gps->isLocationValid()) return;
+    
     if (isGPSDataNew()) {
         if (isCurrentEqualToGoalLocation()) {
             arrivedAtGoal();

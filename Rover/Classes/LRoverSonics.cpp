@@ -24,7 +24,6 @@ LRoverSonics::LRoverSonics() {
 void LRoverSonics::performNextMeasurement() {
     LUltrasonic *sonic = _sonics.at(_measureState);
     sonic->measureDistance();
-
     _measureState = ++_measureState % _sonics.size();
 }
 
@@ -43,16 +42,16 @@ unsigned long LRoverSonics::leftDistance() {
 #pragma mark - LDebugLog
 
 void LRoverSonics::printToSerial() {
-    Serial.print("\nF: ");Serial.print(_frontSonic->distance());Serial.print("\nL: ");Serial.print(_leftSonic->distance());Serial.print("\nR: ");Serial.println(_rightSonic->distance());
+    Serial.print("\nF: ");Serial.print(_frontSonic->distance());Serial.print("    L: ");Serial.print(_leftSonic->distance());Serial.print("    R: ");Serial.println(_rightSonic->distance());
 }
 
 void LRoverSonics::printToLCD(LLCD *lcd) {
     lcd->print(0, 0, "F=");
-    lcd->print(0, 2, _frontSonic->distance(), 1);
-    lcd->print(1, 0, "L=");
-    lcd->print(1, 2, _leftSonic->distance(), 1);
-    lcd->print(1, 9, "R=");
-    lcd->print(1, 11, _rightSonic->distance(), 1);
+    lcd->print(2, 0, _frontSonic->distance(), 1);
+    lcd->print(0, 1, "L=");
+    lcd->print(2, 1, _leftSonic->distance(), 1);
+    lcd->print(9, 1, "R=");
+    lcd->print(11, 1, _rightSonic->distance(), 1);
 }
 
 #pragma mark -
