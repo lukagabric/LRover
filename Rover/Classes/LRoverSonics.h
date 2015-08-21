@@ -15,9 +15,9 @@
 
 class LRoverSonics : public LDebugLog {
 private:
-    LUltrasonic *_rightSonic;
-    LUltrasonic *_leftSonic;
     LUltrasonic *_frontSonic;
+    LUltrasonic *_frontRightSonic;
+    LUltrasonic *_frontLeftSonic;
     unsigned int _measureState;
     std::vector<LUltrasonic *> _sonics;
 public:
@@ -25,8 +25,8 @@ public:
     
     void performNextMeasurement();
     unsigned long frontDistance();
-    unsigned long rightDistance();
-    unsigned long leftDistance();
+    unsigned long frontRightDistance();
+    unsigned long frontLeftDistance();
     
     virtual void printToSerial();
     virtual void printToLCD(LLCD *lcd);
