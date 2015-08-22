@@ -18,8 +18,13 @@ private:
     LUltrasonic *_frontSonic;
     LUltrasonic *_frontRightSonic;
     LUltrasonic *_frontLeftSonic;
+    LUltrasonic *_rightSonic;
+    LUltrasonic *_leftSonic;
+    
     unsigned int _measureState;
+    
     std::vector<LUltrasonic *> _sonics;
+    
 public:
     LRoverSonics();
     

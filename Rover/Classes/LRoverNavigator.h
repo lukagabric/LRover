@@ -13,7 +13,7 @@
 #include "vector"
 #include "LRoverSonics.h"
 
-#define DEBUG_LOG 1
+#define DEBUG_LOG 0
 #define LCD_DEBUG_LOG 1
 #define MANUAL_PID_TUNING 0
 #define DRIVE 0
@@ -39,11 +39,17 @@
 #define SONIC_FRONT_ECHO A3
 #define SONIC_FRONT_TRIG A2
 
-#define SONIC_RIGHT_ECHO 9
-#define SONIC_RIGHT_TRIG 8
+#define SONIC_FRONT_RIGHT_ECHO 9
+#define SONIC_FRONT_RIGHT_TRIG 8
 
-#define SONIC_LEFT_ECHO 12
-#define SONIC_LEFT_TRIG 13
+#define SONIC_FRONT_LEFT_ECHO 12
+#define SONIC_FRONT_LEFT_TRIG 13
+
+#define SONIC_RIGHT_ECHO A1
+#define SONIC_RIGHT_TRIG A0
+
+#define SONIC_LEFT_ECHO 1
+#define SONIC_LEFT_TRIG 0
 
 //Motor Controller
 #define ENA 3
@@ -79,7 +85,7 @@ private:
     float _lat, _lon;
     
     unsigned long _time1Hz, _time20Hz, _time5s;
-    void loop5s();
+    void loopAt5s();
     void loopAt1Hz();
     void loopAt20Hz();
     

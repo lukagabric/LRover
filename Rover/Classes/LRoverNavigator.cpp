@@ -44,10 +44,10 @@ void LRoverNavigator::setup() {
     std::vector<LDebugLog*> logItems;
     
     if (_sonics) logItems.push_back(_sonics);
-    if (_gps) logItems.push_back(_gps);
-    if (_compass) logItems.push_back(_compass);
-    if (_pid) logItems.push_back(_pid);
-    if (_motorController) logItems.push_back(_motorController);
+//    if (_gps) logItems.push_back(_gps);
+//    if (_compass) logItems.push_back(_compass);
+//    if (_pid) logItems.push_back(_pid);
+//    if (_motorController) logItems.push_back(_motorController);
     
     _logger = new LLogger(_lcd, logItems);
 #endif
@@ -75,11 +75,11 @@ void LRoverNavigator::loop() {
     }
     if (currentTime - _time5s >= 5000) {
         _time5s = currentTime;
-        loop5s();
+        loopAt5s();
     }
 }
 
-void LRoverNavigator::loop5s() {
+void LRoverNavigator::loopAt5s() {
 #if LCD_DEBUG_LOG
     _logger->skipNextDebugLogToLCD();
 #endif    
