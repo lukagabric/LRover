@@ -10,12 +10,10 @@
 
 #pragma mark - Constructor
 
-LPIDTuner::LPIDTuner(LPID *pid) {
+LPIDTuner::LPIDTuner(LPID *pid, uint8_t potKp, uint8_t potKi, uint8_t potKd) {
     _pid = pid;
-    
-    _potKp = A0;
-    _potKi = A1;
-    _potKd = A2;
+
+    setPots(potKp, potKi, potKd);
     
     _kpMin = 0;
     _kpMax = 2500;

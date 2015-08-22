@@ -18,7 +18,7 @@ private:
     uint8_t _potKp, _potKi, _potKd;
     unsigned long _kpMin, _kpMax, _kiMin, _kiMax, _kdMin, _kdMax;
 public:
-    LPIDTuner(LPID *pid);
+    LPIDTuner(LPID *pid, uint8_t potKp, uint8_t potKi, uint8_t potKd);
     void configurePIDConstants();
 
     void setPots(uint8_t potKp, uint8_t potKi, uint8_t potKd);

@@ -13,9 +13,9 @@
 #include "vector"
 #include "LRoverSonics.h"
 
-#define DEBUG_LOG 0
+#define DEBUG_LOG 1
 #define LCD_DEBUG_LOG 1
-#define MANUAL_PID_TUNING 0
+#define MANUAL_PID_TUNING 1
 #define DRIVE 0
 
 //Centar terena Sloga, Ernestinovo: 45.452608, 18.662766
@@ -36,20 +36,20 @@
 
 //Ultrasonic
 
-#define SONIC_FRONT_ECHO A3
-#define SONIC_FRONT_TRIG A2
+#define SONIC_FRONT_ECHO 12
+#define SONIC_FRONT_TRIG 12
 
-#define SONIC_FRONT_RIGHT_ECHO 9
-#define SONIC_FRONT_RIGHT_TRIG 8
+#define SONIC_FRONT_RIGHT_ECHO A0
+#define SONIC_FRONT_RIGHT_TRIG A0
 
-#define SONIC_FRONT_LEFT_ECHO 12
+#define SONIC_FRONT_LEFT_ECHO 13
 #define SONIC_FRONT_LEFT_TRIG 13
 
-#define SONIC_RIGHT_ECHO A1
-#define SONIC_RIGHT_TRIG A0
+#define SONIC_RIGHT_ECHO 8
+#define SONIC_RIGHT_TRIG 8
 
-#define SONIC_LEFT_ECHO 1
-#define SONIC_LEFT_TRIG 0
+#define SONIC_LEFT_ECHO 9
+#define SONIC_LEFT_TRIG 9
 
 //Motor Controller
 #define ENA 3
@@ -60,10 +60,13 @@
 #define ENB 6
 #define MINIMUM_WHEEL_SPEED 10
 
-//PID Constants
+//PID
 #define Kp 15
 #define Ki 0.01
 #define Kd 0.12
+#define POT_Kp A7
+#define POT_Ki A6
+#define POT_Kd A1
 
 //Low-Pass Filter
 //#define LPF_RC 0.05

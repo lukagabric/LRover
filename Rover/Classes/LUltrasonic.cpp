@@ -8,9 +8,6 @@ LUltrasonic::LUltrasonic(unsigned int echoPin, unsigned int triggerPin) {
     _echoPin = echoPin;
     _triggerPin = triggerPin;
     
-    pinMode(_echoPin, INPUT);
-    pinMode(_triggerPin, OUTPUT);
-    
     _distance = LULTRASONIC_INFINITE_DISTANCE;
 }
 
@@ -19,11 +16,13 @@ LUltrasonic::LUltrasonic(unsigned int echoPin, unsigned int triggerPin) {
 unsigned long LUltrasonic::singleDistanceMeasurement() {
 	unsigned long duration, measuredDistance;
 
-	digitalWrite(_triggerPin, LOW); 
+    pinMode(_triggerPin, OUTPUT);
+	digitalWrite(_triggerPin, LOW);
 	delayMicroseconds(10); 
 	digitalWrite(_triggerPin, HIGH);
 	delayMicroseconds(20);
 	digitalWrite(_triggerPin, LOW);
+    pinMode(_echoPin, INPUT);
 	duration = pulseIn(_echoPin, HIGH, 3000);
 	measuredDistance = duration / 29 / 2;
     

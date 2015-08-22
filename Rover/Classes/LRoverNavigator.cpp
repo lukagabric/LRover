@@ -25,7 +25,7 @@ void LRoverNavigator::setup() {
     
 #if DRIVE
     _motorController = new LMotorController(ENA, IN1, IN2, ENB, IN3, IN4, 1, 1);
-#endif
+#endif 
     
     _pid = new LPID(Kp, Ki, Kd, DIRECT);
     _pid->SetMode(AUTOMATIC);
@@ -33,7 +33,7 @@ void LRoverNavigator::setup() {
     _pid->SetSampleTime(50);
     
 #if MANUAL_PID_TUNING
-    _pidTuner = new LPIDTuner(_pid);
+    _pidTuner = new LPIDTuner(_pid, POT_Kp, POT_Ki, POT_Kd);
 #endif
     
 #if LCD_DEBUG_LOG
@@ -46,7 +46,7 @@ void LRoverNavigator::setup() {
     if (_sonics) logItems.push_back(_sonics);
 //    if (_gps) logItems.push_back(_gps);
 //    if (_compass) logItems.push_back(_compass);
-//    if (_pid) logItems.push_back(_pid);
+    if (_pid) logItems.push_back(_pid);
 //    if (_motorController) logItems.push_back(_motorController);
     
     _logger = new LLogger(_lcd, logItems);
