@@ -91,7 +91,7 @@ private:
     
     bool isGPSDataNew();
     
-    void configureHeading();
+    void updateGoalHeading();
     void configureMovement();
     
     bool isCurrentEqualToGoalLocation();

@@ -102,19 +102,35 @@ void LRoverNavigator::loopAt20Hz() {
 
     if (!_gps->isLocationValid()) return;
     
+    _compass->updateHeading();
+    
     if (isGPSDataNew()) {
         if (isCurrentEqualToGoalLocation()) {
             arrivedAtGoal();
             return;
         }
         
-        configureHeading();
+        updateGoalHeading();
     }
     
     configureMovement();
 }
 
 #pragma mark - Operations
+
+void LRoverNavigator::updateGoalHeading() {
+    double goalHeadingDeg = _gps->bearingDegTo(GOAL_LAT, GOAL_LON);
+    _compass->setGoalHeadingDeg(goalHeadingDeg);
+}
+
+void LRoverNavigator::configureMovement() {
+    _pid->setInput(_compass->offsetFromGoalHeadingDeg());
+    _pid->Compute();
+    
+#if DRIVE
+    _motorController->move(_pid->output(), MINIMUM_WHEEL_SPEED);
+#endif
+}
 
 bool LRoverNavigator::isGPSDataNew() {
     if (_lat != _gps->latitude() || _lon != _gps->longitude()) {
@@ -138,23 +154,6 @@ void LRoverNavigator::arrivedAtGoal() {
     _motorController->turnLeft(255, false);
     delay(4000);
     _motorController->stopMoving();
-}
-
-
-void LRoverNavigator::configureHeading() {
-    _compass->updateHeading();
-
-    double goalHeadingDeg = _gps->bearingDegTo(GOAL_LAT, GOAL_LON);
-    _compass->setGoalHeadingDeg(goalHeadingDeg);
-}
-
-void LRoverNavigator::configureMovement() {
-    _pid->setInput(_compass->offsetFromGoalHeadingDeg());
-    _pid->Compute();
-    
-#if DRIVE
-    _motorController->move(_pid->output(), MINIMUM_WHEEL_SPEED);
-#endif
 }
 
 #pragma mark -
