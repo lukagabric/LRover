@@ -9,11 +9,9 @@
 #ifndef __Rover__LPID__
 #define __Rover__LPID__
 
-#include "LLCD.h"
 #include "PID_v1.h"
-#include "LDebugLog.h"
 
-class LPID : public PID, public LDebugLog {
+class LPID : public PID {
 private:
     double _myInput, _myOutput, _mySetpoint;
 public:
@@ -24,9 +22,6 @@ public:
     void setInput(double input);
     double input();
     double output();
-    
-    void printToSerial();
-    void printToLCD(LLCD *lcd);
 };
 
 #endif /* defined(__Rover__LPID__) */

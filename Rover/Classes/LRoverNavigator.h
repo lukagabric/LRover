@@ -13,6 +13,7 @@
 #include "vector"
 #include "LRoverSonics.h"
 #include "LGPSLogger.h"
+#include "LPIDLogger.h"
 
 #define DEBUG_LOG 1
 #define LCD_DEBUG_LOG 1
@@ -83,6 +84,7 @@ private:
     LMotorController *_motorController;
     LPIDTuner *_cruisePIDTuner;
     LPID *_cruisePID;
+    LPIDLogger *_cruisePIDLogger;
     LCompass *_compass;
     LRoverSonics *_sonics;
     LLogger *_logger;

@@ -37,4 +37,5 @@ Builds/Classes/LRoverSonics.cpp.o: Classes/LRoverSonics.cpp \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/cores/arduino/Stream.h \
  Classes/LLowPassFilter.h Classes/LGPS.h Classes/ThirdParty/TinyGPS.h \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/libraries/SoftwareSerial/SoftwareSerial.h \
- Classes/LPIDTuner.h Classes/LLogger.h Classes/LGPSLogger.h
+ Classes/LPIDTuner.h Classes/LLogger.h Classes/LGPSLogger.h \
+ Classes/LPIDLogger.h
