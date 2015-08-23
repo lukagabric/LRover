@@ -36,4 +36,5 @@ Builds/Classes/LRoverNavigator.cpp.o: Classes/LRoverNavigator.cpp \
  Classes/ThirdParty/StdCpp/func_exception \
  Classes/ThirdParty/StdCpp/algorithm Classes/ThirdParty/StdCpp/functional \
  Classes/ThirdParty/StdCpp/type_traits \
- Classes/ThirdParty/StdCpp/initializer_list Classes/LRoverSonics.h
+ Classes/ThirdParty/StdCpp/initializer_list Classes/LRoverSonics.h \
+ Classes/LGPSLogger.h

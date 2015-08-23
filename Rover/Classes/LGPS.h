@@ -12,10 +12,8 @@
 #include <Arduino.h>
 #include "TinyGPS.h"
 #include "SoftwareSerial.h"
-#include "LLCD.h"
-#include "LDebugLog.h"
 
-class LGPS : public LDebugLog {
+class LGPS {
 private:
     TinyGPS *_gps;
     SoftwareSerial *_ss;
@@ -43,9 +41,6 @@ public:
 
     float altitude();
     bool isAltitudeValid();
-
-    virtual void printToSerial();
-    virtual void printToLCD(LLCD *lcd);
 };
 
 #endif /* defined(__Rover__LGPS__) */

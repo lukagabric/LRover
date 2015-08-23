@@ -44,7 +44,11 @@ void LRoverNavigator::setup() {
     std::vector<LDebugLog*> logItems;
     
     if (_sonics) logItems.push_back(_sonics);
-//    if (_gps) logItems.push_back(_gps);
+    
+    if (_gps) {
+        _gpsLogger = new LGPSLogger(_gps);
+        logItems.push_back(_gpsLogger);
+    }
 //    if (_compass) logItems.push_back(_compass);
     if (_cruisePID) logItems.push_back(_cruisePID);
 //    if (_motorController) logItems.push_back(_motorController);

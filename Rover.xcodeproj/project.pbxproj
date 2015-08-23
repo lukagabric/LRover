@@ -14,6 +14,7 @@
 		41372BDE1B602BE2001967CC /* LUltrasonic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41372BDC1B602BE2001967CC /* LUltrasonic.cpp */; };
 		417127F91B7269E1001885C9 /* LGPS.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 417127F71B7269E1001885C9 /* LGPS.cpp */; };
 		417276F41B89E80100E8BBB3 /* NewPing.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 417276F21B89E80100E8BBB3 /* NewPing.cpp */; };
+		417277071B8A7E9500E8BBB3 /* LGPSLogger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 417277051B8A7E9500E8BBB3 /* LGPSLogger.cpp */; };
 		4174D4771B5D6DEF0065FBF5 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4174D4761B5D6DEF0065FBF5 /* main.cpp */; };
 		4176DD441B76126D007E1AD9 /* algorithm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4176DCD81B76126D007E1AD9 /* algorithm.cpp */; };
 		4176DD451B76126D007E1AD9 /* associative_base.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4176DCDA1B76126D007E1AD9 /* associative_base.cpp */; };
@@ -482,6 +483,8 @@
 		417127F81B7269E1001885C9 /* LGPS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGPS.h; sourceTree = "<group>"; };
 		417276F21B89E80100E8BBB3 /* NewPing.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NewPing.cpp; sourceTree = "<group>"; };
 		417276F31B89E80100E8BBB3 /* NewPing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewPing.h; sourceTree = "<group>"; };
+		417277051B8A7E9500E8BBB3 /* LGPSLogger.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LGPSLogger.cpp; sourceTree = "<group>"; };
+		417277061B8A7E9500E8BBB3 /* LGPSLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGPSLogger.h; sourceTree = "<group>"; };
 		4174D4731B5D6DEF0065FBF5 /* Index */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Index; sourceTree = BUILT_PRODUCTS_DIR; };
 		4174D4761B5D6DEF0065FBF5 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		4174D4781B5D6DEF0065FBF5 /* Makefile */ = {isa = PBXFileReference; explicitFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
@@ -1452,6 +1455,8 @@
 				411CB1131B73E0950006CBC3 /* LLCD.h */,
 				419955AC1B75084B005AD71E /* LPID.cpp */,
 				419955AD1B75084B005AD71E /* LPID.h */,
+				417277051B8A7E9500E8BBB3 /* LGPSLogger.cpp */,
+				417277061B8A7E9500E8BBB3 /* LGPSLogger.h */,
 				417127F71B7269E1001885C9 /* LGPS.cpp */,
 				417127F81B7269E1001885C9 /* LGPS.h */,
 				41D294D31B71371500D37F64 /* LCompass.cpp */,
@@ -3252,6 +3257,7 @@
 				AA2A150720200537AA0001CE /* wifiHD.hex in Sources */,
 				AA2A150720200537AA0001D0 /* ard_spi.c in Sources */,
 				AA2A150720200537AA0001D1 /* ard_spi.h in Sources */,
+				417277071B8A7E9500E8BBB3 /* LGPSLogger.cpp in Sources */,
 				AA2A150720200537AA0001D2 /* ard_tcp.c in Sources */,
 				4176DD671B76126D007E1AD9 /* stack.cpp in Sources */,
 				AA2A150720200537AA0001D3 /* ard_tcp.h in Sources */,

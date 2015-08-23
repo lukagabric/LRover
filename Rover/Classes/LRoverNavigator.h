@@ -12,6 +12,7 @@
 #include "LLogger.h"
 #include "vector"
 #include "LRoverSonics.h"
+#include "LGPSLogger.h"
 
 #define DEBUG_LOG 1
 #define LCD_DEBUG_LOG 1
@@ -77,6 +78,7 @@ private:
     bool _atGoal;
     
     LLCD *_lcd;
+    LGPSLogger *_gpsLogger;
     LGPS *_gps;
     LMotorController *_motorController;
     LPIDTuner *_cruisePIDTuner;
