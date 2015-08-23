@@ -98,20 +98,29 @@ void LRoverNavigator::loopAt1Hz() {
 }
 
 void LRoverNavigator::loopAt20Hz() {
+    //perception
     updateSensorReadings();
-
-    if (!_gps->isLocationValid()) return;
     
-    if (isGPSDataNew()) {
-        if (isCurrentEqualToGoalLocation()) {
-            arrivedAtGoal();
-            return;
+    bool gpsDataNew = isGPSDataNew();
+
+    //localization
+    if (gpsDataNew && isCurrentEqualToGoalLocation()) {
+        arrivedAtGoal();
+        return;
+    }
+
+    //path planning
+    if (_sonics->isObstacleTooClose()) {
+        //wall follow
+    }
+    else {
+        //navigate to goal
+        if (gpsDataNew) {
+            configureGoalHeading();
         }
         
-        configureGoalHeading();
+        configureMovement();
     }
-    
-    configureMovement();
 }
 
 #pragma mark - Operations
@@ -136,7 +145,7 @@ void LRoverNavigator::configureMovement() {
 }
 
 bool LRoverNavigator::isGPSDataNew() {
-    if (_lat != _gps->latitude() || _lon != _gps->longitude()) {
+    if (_gps->isLocationValid() && (_lat != _gps->latitude() || _lon != _gps->longitude())) {
         _lat = _gps->latitude();
         _lon = _gps->longitude();
         

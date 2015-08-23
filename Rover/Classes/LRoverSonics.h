@@ -13,6 +13,8 @@
 #include "LDebugLog.h"
 #include "LUltrasonic.h"
 
+#define OBSTACLE_DISTANCE_THRESHOLD 30
+
 class LRoverSonics : public LDebugLog {
 private:
     LUltrasonic *_frontSonic;
@@ -32,6 +34,15 @@ public:
     unsigned long frontDistance();
     unsigned long frontRightDistance();
     unsigned long frontLeftDistance();
+    unsigned long rightDistance();
+    unsigned long leftDistance();
+    
+    bool isObstacleTooClose();
+    bool isObstacleFront();
+    bool isObstacleFrontRight();
+    bool isObstacleFrontLeft();
+    bool isObstacleRight();
+    bool isObstacleLeft();
     
     virtual void printToSerial();
     virtual void printToLCD(LLCD *lcd);

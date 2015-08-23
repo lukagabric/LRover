@@ -44,6 +44,38 @@ unsigned long LRoverSonics::frontLeftDistance() {
     return _frontLeftSonic->distance();
 }
 
+unsigned long LRoverSonics::rightDistance() {
+    return _rightSonic->distance();
+}
+
+unsigned long LRoverSonics::leftDistance() {
+    return _leftSonic->distance();
+}
+
+bool LRoverSonics::isObstacleTooClose() {
+    return isObstacleFront() || isObstacleFrontRight() || isObstacleFrontLeft() || isObstacleRight() || isObstacleLeft();
+}
+
+bool LRoverSonics::isObstacleFront() {
+    return frontDistance() < OBSTACLE_DISTANCE_THRESHOLD;
+}
+
+bool LRoverSonics::isObstacleFrontRight() {
+    return frontRightDistance() < OBSTACLE_DISTANCE_THRESHOLD;
+}
+
+bool LRoverSonics::isObstacleFrontLeft() {
+    return frontLeftDistance() < OBSTACLE_DISTANCE_THRESHOLD;
+}
+
+bool LRoverSonics::isObstacleRight() {
+    return rightDistance() < OBSTACLE_DISTANCE_THRESHOLD;
+}
+
+bool LRoverSonics::isObstacleLeft() {
+    return leftDistance() < OBSTACLE_DISTANCE_THRESHOLD;
+}
+
 #pragma mark - LDebugLog
 
 void LRoverSonics::printToSerial() {
