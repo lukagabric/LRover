@@ -18,7 +18,6 @@ public:
     
     void move(int leftSpeed, int rightSpeed);
     void move(int speed);
-    void move(double pidOutput, int minWheelSpeed);
     void turnLeft(int speed, bool kick);
     void turnRight(int speed, bool kick);
     void stopMoving();

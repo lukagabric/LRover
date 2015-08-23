@@ -47,24 +47,6 @@ void LMotorController::move(int speed) {
     move(speed, speed);
 }
 
-void LMotorController::move(double pidOutput, int minWheelSpeed) {
-    int leftWheelSpeed = 255;
-    int rightWheelSpeed = 255;
-    
-    if (pidOutput > 0) {
-        //turn left
-        leftWheelSpeed -= pidOutput;
-        leftWheelSpeed = max(minWheelSpeed, leftWheelSpeed);
-    }
-    else {
-        //turn right
-        rightWheelSpeed += pidOutput;
-        rightWheelSpeed = max(minWheelSpeed, rightWheelSpeed);
-    }
-    
-    move(leftWheelSpeed, rightWheelSpeed);
-}
-
 void LMotorController::turnRight(int speed, bool kick) {
     speed = max(speed, 0);
     

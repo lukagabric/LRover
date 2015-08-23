@@ -9,7 +9,6 @@
 #ifndef __Rover__LPID__
 #define __Rover__LPID__
 
-#include <Arduino.h>
 #include "LLCD.h"
 #include "PID_v1.h"
 #include "LDebugLog.h"

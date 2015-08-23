@@ -1,5 +1,5 @@
-#include "LRoverNavigator.h"
 #include "Arduino.h"
+#include "LRoverNavigator.h"
 #include <Wire.h>
 #include "LUltrasonic.h"
 #include "LDebugLog.h"
@@ -27,13 +27,13 @@ void LRoverNavigator::setup() {
     _motorController = new LMotorController(ENA, IN1, IN2, ENB, IN3, IN4, 1, 1);
 #endif 
     
-    _pid = new LPID(Kp, Ki, Kd, DIRECT);
-    _pid->SetMode(AUTOMATIC);
-    _pid->SetOutputLimits(-255, 255);
-    _pid->SetSampleTime(50);
+    _cruisePID = new LPID(Kp, Ki, Kd, DIRECT);
+    _cruisePID->SetMode(AUTOMATIC);
+    _cruisePID->SetOutputLimits(-255, 255);
+    _cruisePID->SetSampleTime(50);
     
 #if MANUAL_PID_TUNING
-    _pidTuner = new LPIDTuner(_pid, POT_Kp, POT_Ki, POT_Kd);
+    _cruisePIDTuner = new LPIDTuner(_cruisePID, POT_Kp, POT_Ki, POT_Kd);
 #endif
     
 #if LCD_DEBUG_LOG
@@ -46,7 +46,7 @@ void LRoverNavigator::setup() {
     if (_sonics) logItems.push_back(_sonics);
 //    if (_gps) logItems.push_back(_gps);
 //    if (_compass) logItems.push_back(_compass);
-    if (_pid) logItems.push_back(_pid);
+    if (_cruisePID) logItems.push_back(_cruisePID);
 //    if (_motorController) logItems.push_back(_motorController);
     
     _logger = new LLogger(_lcd, logItems);
@@ -87,7 +87,7 @@ void LRoverNavigator::loopAt5s() {
 
 void LRoverNavigator::loopAt1Hz() {
 #if MANUAL_PID_TUNING
-    _pidTuner->configurePIDConstants();
+    _cruisePIDTuner->configurePIDConstants();
 #endif
 #if DEBUG_LOG
     _logger->debugLogToSerial();
@@ -100,59 +100,55 @@ void LRoverNavigator::loopAt1Hz() {
 void LRoverNavigator::loopAt20Hz() {
     //perception
     updateSensorReadings();
-    
-    bool gpsDataNew = isGPSDataNew();
 
     //localization
-    if (gpsDataNew && isCurrentEqualToGoalLocation()) {
+    readLocation();
+    if (_locationChanged && isCurrentEqualToGoalLocation()) {
         arrivedAtGoal();
         return;
     }
-
+    
     //path planning
-    if (_sonics->isObstacleTooClose()) {
-        //wall follow
+    bool followWall = _sonics->isObstacleTooClose();
+    int leftWheelSpeed, rightWheelSpeed;
+
+    if (followWall) {
+        
     }
-    else {
-        //navigate to goal
-        if (gpsDataNew) {
-            configureGoalHeading();
+    else if (_gps->isLocationValid()) {
+        if (_locationChanged) {
+            configureCruiseGoalHeading();
         }
         
-        configureMovement();
+        updateCruisePID();
+        configureCruiseWheelSpeeds(&leftWheelSpeed, &rightWheelSpeed);
     }
+    
+    //path execution
+#if DRIVE
+    _motorController->move(leftWheelSpeed, rightWheelSpeed);
+#endif
 }
 
-#pragma mark - Operations
+#pragma mark - Perception
 
 void LRoverNavigator::updateSensorReadings() {
     _sonics->performNextMeasurement();
     _compass->updateHeading();
 }
 
-void LRoverNavigator::configureGoalHeading() {
-    double goalHeadingDeg = _gps->bearingDegTo(GOAL_LAT, GOAL_LON);
-    _compass->setGoalHeadingDeg(goalHeadingDeg);
-}
+#pragma mark - Localization
 
-void LRoverNavigator::configureMovement() {
-    _pid->setInput(_compass->offsetFromGoalHeadingDeg());
-    _pid->Compute();
-    
-#if DRIVE
-    _motorController->move(_pid->output(), MINIMUM_WHEEL_SPEED);
-#endif
-}
-
-bool LRoverNavigator::isGPSDataNew() {
+void LRoverNavigator::readLocation() {
     if (_gps->isLocationValid() && (_lat != _gps->latitude() || _lon != _gps->longitude())) {
         _lat = _gps->latitude();
         _lon = _gps->longitude();
         
-        return true;
+        _locationChanged = true;
     }
-    
-    return false;
+    else {
+        _locationChanged = false;
+    }
 }
 
 bool LRoverNavigator::isCurrentEqualToGoalLocation() {
@@ -167,5 +163,40 @@ void LRoverNavigator::arrivedAtGoal() {
     delay(4000);
     _motorController->stopMoving();
 }
+
+#pragma mark - Cruise
+
+void LRoverNavigator::configureCruiseGoalHeading() {
+    double goalHeadingDeg = _gps->bearingDegTo(GOAL_LAT, GOAL_LON);
+    _compass->setGoalHeadingDeg(goalHeadingDeg);
+}
+
+void LRoverNavigator::updateCruisePID() {
+    _cruisePID->setInput(_compass->offsetFromGoalHeadingDeg());
+    _cruisePID->Compute();
+}
+
+void LRoverNavigator::configureCruiseWheelSpeeds(int *left, int *right) {
+    int leftWheelSpeed = 255;
+    int rightWheelSpeed = 255;
+    
+    double pidOutput = _cruisePID->output();
+    
+    if (pidOutput > 0) {
+        //turn left
+        leftWheelSpeed -= pidOutput;
+        leftWheelSpeed = std::max(MINIMUM_FORWARD_WHEEL_SPEED, leftWheelSpeed);
+    }
+    else {
+        //turn right
+        rightWheelSpeed += pidOutput;
+        rightWheelSpeed = std::max(MINIMUM_FORWARD_WHEEL_SPEED, rightWheelSpeed);
+    }
+    
+    *left = leftWheelSpeed;
+    *right = rightWheelSpeed;
+}
+
+#pragma mark - Wall Follow
 
 #pragma mark -

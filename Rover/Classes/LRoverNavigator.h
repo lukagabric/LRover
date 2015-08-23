@@ -16,7 +16,7 @@
 #define DEBUG_LOG 1
 #define LCD_DEBUG_LOG 1
 #define MANUAL_PID_TUNING 1
-#define DRIVE 0
+#define DRIVE 1
 
 //Centar terena Sloga, Ernestinovo: 45.452608, 18.662766
 
@@ -58,7 +58,7 @@
 #define IN3 5
 #define IN4 7
 #define ENB 6
-#define MINIMUM_WHEEL_SPEED 10
+#define MINIMUM_FORWARD_WHEEL_SPEED 10
 
 //PID
 #define Kp 15
@@ -79,28 +79,29 @@ private:
     LLCD *_lcd;
     LGPS *_gps;
     LMotorController *_motorController;
-    LPIDTuner *_pidTuner;
-    LPID *_pid;
+    LPIDTuner *_cruisePIDTuner;
+    LPID *_cruisePID;
     LCompass *_compass;
     LRoverSonics *_sonics;
     LLogger *_logger;
-    
-    float _lat, _lon;
     
     unsigned long _time1Hz, _time20Hz, _time5s;
     void loopAt5s();
     void loopAt1Hz();
     void loopAt20Hz();
     
-    bool isGPSDataNew();
-    
-    void updateSensorReadings();
-    
-    void configureGoalHeading();
-    void configureMovement();
-    
     bool isCurrentEqualToGoalLocation();
     void arrivedAtGoal();
+        
+    void updateSensorReadings();
+
+    void readLocation();
+    float _lat, _lon;
+    bool _locationChanged;
+    
+    void configureCruiseGoalHeading();
+    void updateCruisePID();
+    void configureCruiseWheelSpeeds(int *left, int *right);
     
     void debugLogToLCD();
     void debugLog();
