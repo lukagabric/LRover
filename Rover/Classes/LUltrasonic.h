@@ -4,15 +4,16 @@
 #include <Arduino.h>
 #include "LLCD.h"
 #include "LDebugLog.h"
+#include "NewPing.h"
 
 #define LULTRASONIC_INFINITE_DISTANCE 999999
 #define MAX_MEASUREABLE_DISTANCE 60
 
 class LUltrasonic : public LDebugLog {
 private:
-    unsigned int _echoPin, _triggerPin;
     unsigned long singleDistanceMeasurement();
     unsigned long _distance;
+    NewPing *_sonic;
 public:
     LUltrasonic(unsigned int echoPin, unsigned int triggerPin);
     

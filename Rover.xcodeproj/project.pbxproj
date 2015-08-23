@@ -13,6 +13,7 @@
 		4124D4F31B5D6DEF0065FBF5 /* Rover.ino in Sources */ = {isa = PBXBuildFile; fileRef = 4174D4F31B5D6DEF0065FBF5 /* Rover.ino */; };
 		41372BDE1B602BE2001967CC /* LUltrasonic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41372BDC1B602BE2001967CC /* LUltrasonic.cpp */; };
 		417127F91B7269E1001885C9 /* LGPS.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 417127F71B7269E1001885C9 /* LGPS.cpp */; };
+		417276F41B89E80100E8BBB3 /* NewPing.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 417276F21B89E80100E8BBB3 /* NewPing.cpp */; };
 		4174D4771B5D6DEF0065FBF5 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4174D4761B5D6DEF0065FBF5 /* main.cpp */; };
 		4176DD441B76126D007E1AD9 /* algorithm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4176DCD81B76126D007E1AD9 /* algorithm.cpp */; };
 		4176DD451B76126D007E1AD9 /* associative_base.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4176DCDA1B76126D007E1AD9 /* associative_base.cpp */; };
@@ -479,6 +480,8 @@
 		41372BDD1B602BE2001967CC /* LUltrasonic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LUltrasonic.h; sourceTree = "<group>"; };
 		417127F71B7269E1001885C9 /* LGPS.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LGPS.cpp; sourceTree = "<group>"; };
 		417127F81B7269E1001885C9 /* LGPS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGPS.h; sourceTree = "<group>"; };
+		417276F21B89E80100E8BBB3 /* NewPing.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NewPing.cpp; sourceTree = "<group>"; };
+		417276F31B89E80100E8BBB3 /* NewPing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewPing.h; sourceTree = "<group>"; };
 		4174D4731B5D6DEF0065FBF5 /* Index */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Index; sourceTree = BUILT_PRODUCTS_DIR; };
 		4174D4761B5D6DEF0065FBF5 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		4174D4781B5D6DEF0065FBF5 /* Makefile */ = {isa = PBXFileReference; explicitFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
@@ -1480,6 +1483,8 @@
 				41E91A6B1B755B1500C6148D /* PID_v1.h */,
 				41E91A6C1B755B1500C6148D /* TinyGPS.cpp */,
 				41E91A6D1B755B1500C6148D /* TinyGPS.h */,
+				417276F21B89E80100E8BBB3 /* NewPing.cpp */,
+				417276F31B89E80100E8BBB3 /* NewPing.h */,
 			);
 			path = ThirdParty;
 			sourceTree = "<group>";
@@ -2973,6 +2978,7 @@
 				AA2A150720200537AA000093 /* GSM3MobileAccessProvider.h in Sources */,
 				AA2A150720200537AA000094 /* GSM3MobileCellManagement.cpp in Sources */,
 				AA2A150720200537AA000095 /* GSM3MobileCellManagement.h in Sources */,
+				417276F41B89E80100E8BBB3 /* NewPing.cpp in Sources */,
 				AA2A150720200537AA000096 /* GSM3MobileClientProvider.cpp in Sources */,
 				AA2A150720200537AA000097 /* GSM3MobileClientProvider.h in Sources */,
 				AA2A150720200537AA000098 /* GSM3MobileClientService.cpp in Sources */,
