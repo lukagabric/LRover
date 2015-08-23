@@ -98,11 +98,9 @@ void LRoverNavigator::loopAt1Hz() {
 }
 
 void LRoverNavigator::loopAt20Hz() {
-    _sonics->performNextMeasurement();
+    updateSensorReadings();
 
     if (!_gps->isLocationValid()) return;
-    
-    _compass->updateHeading();
     
     if (isGPSDataNew()) {
         if (isCurrentEqualToGoalLocation()) {
@@ -110,7 +108,7 @@ void LRoverNavigator::loopAt20Hz() {
             return;
         }
         
-        updateGoalHeading();
+        configureGoalHeading();
     }
     
     configureMovement();
@@ -118,7 +116,12 @@ void LRoverNavigator::loopAt20Hz() {
 
 #pragma mark - Operations
 
-void LRoverNavigator::updateGoalHeading() {
+void LRoverNavigator::updateSensorReadings() {
+    _sonics->performNextMeasurement();
+    _compass->updateHeading();
+}
+
+void LRoverNavigator::configureGoalHeading() {
     double goalHeadingDeg = _gps->bearingDegTo(GOAL_LAT, GOAL_LON);
     _compass->setGoalHeadingDeg(goalHeadingDeg);
 }
