@@ -90,21 +90,27 @@ private:
     void loopAt1Hz();
     void loopAt20Hz();
     
-    bool isCurrentEqualToGoalLocation();
-    void arrivedAtGoal();
-        
     void updateSensorReadings();
 
     void readLocation();
     float _lat, _lon;
     bool _locationChanged;
     
+    bool isCurrentEqualToGoalLocation();
+    void arrivedAtGoal();
+    
+    void configureCruiseOutput(int *leftWheelSpeed, int *rightWheelSpeed);
     void configureCruiseGoalHeading();
     void updateCruisePID();
-    void configureCruiseWheelSpeeds(int *left, int *right);
+    void configureCruiseWheelSpeeds(int *leftSpeed, int *rightSpeed);
+    
+    void configureWallFollowOutput(int *leftWheelSpeed, int *rightWheelSpeed);
+    
+    void move(int leftWheelSpeed, int rightWheelSpeed);
     
     void debugLogToLCD();
     void debugLog();
+    
 public:
     void setup();
     void loop();

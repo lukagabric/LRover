@@ -103,31 +103,25 @@ void LRoverNavigator::loopAt20Hz() {
 
     //localization
     readLocation();
+    
+    //path planning
     if (_locationChanged && isCurrentEqualToGoalLocation()) {
         arrivedAtGoal();
         return;
     }
-    
-    //path planning
+
     bool followWall = _sonics->isObstacleTooClose();
     int leftWheelSpeed, rightWheelSpeed;
 
     if (followWall) {
-        
+        configureWallFollowOutput(&leftWheelSpeed, &rightWheelSpeed);
     }
-    else if (_gps->isLocationValid()) {
-        if (_locationChanged) {
-            configureCruiseGoalHeading();
-        }
-        
-        updateCruisePID();
-        configureCruiseWheelSpeeds(&leftWheelSpeed, &rightWheelSpeed);
+    else {
+        configureCruiseOutput(&leftWheelSpeed, &rightWheelSpeed);
     }
     
     //path execution
-#if DRIVE
-    _motorController->move(leftWheelSpeed, rightWheelSpeed);
-#endif
+    move(leftWheelSpeed, rightWheelSpeed);
 }
 
 #pragma mark - Perception
@@ -151,6 +145,8 @@ void LRoverNavigator::readLocation() {
     }
 }
 
+#pragma mark - Path Planning
+
 bool LRoverNavigator::isCurrentEqualToGoalLocation() {
     float distanceToLocation = _gps->distanceTo(GOAL_LAT, GOAL_LON);
     return distanceToLocation < GOAL_RADIUS_METERS;
@@ -166,6 +162,17 @@ void LRoverNavigator::arrivedAtGoal() {
 
 #pragma mark - Cruise
 
+void LRoverNavigator::configureCruiseOutput(int *leftWheelSpeed, int *rightWheelSpeed) {
+    if (!_gps->isLocationValid()) return;
+    
+    if (_locationChanged) {
+        configureCruiseGoalHeading();
+    }
+    
+    updateCruisePID();
+    configureCruiseWheelSpeeds(leftWheelSpeed, rightWheelSpeed);
+}
+
 void LRoverNavigator::configureCruiseGoalHeading() {
     double goalHeadingDeg = _gps->bearingDegTo(GOAL_LAT, GOAL_LON);
     _compass->setGoalHeadingDeg(goalHeadingDeg);
@@ -176,7 +183,7 @@ void LRoverNavigator::updateCruisePID() {
     _cruisePID->Compute();
 }
 
-void LRoverNavigator::configureCruiseWheelSpeeds(int *left, int *right) {
+void LRoverNavigator::configureCruiseWheelSpeeds(int *leftSpeed, int *rightSpeed) {
     int leftWheelSpeed = 255;
     int rightWheelSpeed = 255;
     
@@ -193,10 +200,23 @@ void LRoverNavigator::configureCruiseWheelSpeeds(int *left, int *right) {
         rightWheelSpeed = std::max(MINIMUM_FORWARD_WHEEL_SPEED, rightWheelSpeed);
     }
     
-    *left = leftWheelSpeed;
-    *right = rightWheelSpeed;
+    *leftSpeed = leftWheelSpeed;
+    *rightSpeed = rightWheelSpeed;
 }
 
 #pragma mark - Wall Follow
+
+void LRoverNavigator::configureWallFollowOutput(int *leftWheelSpeed, int *rightWheelSpeed) {
+    *leftWheelSpeed = 0;
+    *rightWheelSpeed = 0;
+}
+
+#pragma mark - Path Execution
+
+void LRoverNavigator::move(int leftWheelSpeed, int rightWheelSpeed) {
+#if DRIVE
+    _motorController->move(leftWheelSpeed, rightWheelSpeed);
+#endif
+}
 
 #pragma mark -
