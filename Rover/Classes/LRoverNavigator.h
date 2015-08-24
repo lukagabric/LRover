@@ -20,6 +20,7 @@
 #include "LGeoLocation.h"
 #include "LWheelSpeeds.h"
 #include "LCruiseController.h"
+#include "LWallFollowController.h"
 
 #define DEBUG_LOG 1
 #define LCD_DEBUG_LOG 1
@@ -59,6 +60,8 @@
 #define SONIC_LEFT_ECHO 9
 #define SONIC_LEFT_TRIG 9
 
+#define WALL_FOLLOW_DISTANCE_SETPOINT 30
+
 //Motor Controller
 #define ENA 3
 #define IN1 2
@@ -80,6 +83,8 @@
 //#define LPF_RC 0.05
 //#define LPF_DT 1/20.0
 
+enum LRoverState {CRUISE = 0, WALLFOLLOW = 1};
+
 class LRoverNavigator {
 private:
     bool _atGoal;
@@ -97,7 +102,12 @@ private:
     LCompassLogger *_compassLogger;
     LRoverSonics *_sonics;
     LRoverSonicsLogger *_sonicsLogger;
+    LWallFollowController *_wallFollowController;
+    LPID *_wallFollowPID;
+    LPIDTuner *_wallFollowPIDTuner;
     LLogger *_logger;
+    
+    LRoverState _state;
     
     LGeoLocation _goalLocation;
     

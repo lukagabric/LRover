@@ -66,23 +66,23 @@ bool LRoverSonics::isObstacleTooClose() {
 }
 
 bool LRoverSonics::isObstacleFront() {
-    return frontDistance() < OBSTACLE_DISTANCE_THRESHOLD;
+    return frontDistance() < WALL_FOLLOW_DISTANCE_SETPOINT;
 }
 
 bool LRoverSonics::isObstacleFrontRight() {
-    return frontRightDistance() < OBSTACLE_DISTANCE_THRESHOLD;
+    return frontRightDistance() < WALL_FOLLOW_DISTANCE_SETPOINT;
 }
 
 bool LRoverSonics::isObstacleFrontLeft() {
-    return frontLeftDistance() < OBSTACLE_DISTANCE_THRESHOLD;
+    return frontLeftDistance() < WALL_FOLLOW_DISTANCE_SETPOINT;
 }
 
 bool LRoverSonics::isObstacleRight() {
-    return rightDistance() < OBSTACLE_DISTANCE_THRESHOLD;
+    return rightDistance() < WALL_FOLLOW_DISTANCE_SETPOINT;
 }
 
 bool LRoverSonics::isObstacleLeft() {
-    return leftDistance() < OBSTACLE_DISTANCE_THRESHOLD;
+    return leftDistance() < WALL_FOLLOW_DISTANCE_SETPOINT;
 }
 
 #pragma mark -

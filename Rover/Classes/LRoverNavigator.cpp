@@ -36,8 +36,17 @@ void LRoverNavigator::setup() {
     _cruiseController = new LCruiseController(_cruisePID);
     _cruiseController->minimumForwardWheelSpeed = MINIMUM_FORWARD_WHEEL_SPEED;
     
+    _wallFollowPID = new LPID(Kp, Ki, Kd, DIRECT);
+    _wallFollowPID->SetMode(AUTOMATIC);
+    _wallFollowPID->SetOutputLimits(-255, 255);
+    _wallFollowPID->SetSampleTime(50);
+    _wallFollowPID->setSetpoint(WALL_FOLLOW_DISTANCE_SETPOINT);
+    
+    _wallFollowController = new LWallFollowController(_wallFollowPID);
+    
 #if MANUAL_PID_TUNING
-    _cruisePIDTuner = new LPIDTuner(_cruisePID, POT_Kp, POT_Ki, POT_Kd);
+//    _cruisePIDTuner = new LPIDTuner(_cruisePID, POT_Kp, POT_Ki, POT_Kd);
+    _wallFollowPIDTuner = new LPIDTuner(_wallFollowPID, POT_Kp, POT_Ki, POT_Kd);
 #endif
     
 #if LCD_DEBUG_LOG

@@ -12,8 +12,6 @@
 #include "vector"
 #include "LUltrasonic.h"
 
-#define OBSTACLE_DISTANCE_THRESHOLD 30
-
 class LRoverSonics {
 private:
     LUltrasonic *_frontSonic;

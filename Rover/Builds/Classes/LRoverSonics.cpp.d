@@ -40,4 +40,5 @@ Builds/Classes/LRoverSonics.cpp.o: Classes/LRoverSonics.cpp \
  Classes/LGeoLocation.h Classes/LPIDTuner.h Classes/LLogger.h \
  Classes/LDebugLog.h Classes/LGPSLogger.h Classes/LPIDLogger.h \
  Classes/LCompassLogger.h Classes/LMotorControllerLogger.h \
- Classes/LRoverSonicsLogger.h Classes/LCruiseController.h
+ Classes/LRoverSonicsLogger.h Classes/LCruiseController.h \
+ Classes/LWallFollowController.h
