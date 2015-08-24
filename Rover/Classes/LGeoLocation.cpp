@@ -44,7 +44,7 @@ bool LGeoLocation::isEqualTo(LGeoLocation location) {
     return latitude() == location.latitude() && latitude() == location.longitude();
 }
 
-double LGeoLocation::bearingDegTo(LGeoLocation location) {
+double LGeoLocation::headingDegTo(LGeoLocation location) {
     double fromLatR = degToRad(latitude());
 //    double fromLonR = degToRad(longitude());
     

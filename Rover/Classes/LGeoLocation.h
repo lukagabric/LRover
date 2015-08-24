@@ -24,7 +24,7 @@ public:
     bool isValid();
     bool isEqualTo(LGeoLocation location);
     
-    double bearingDegTo(LGeoLocation location);
+    double headingDegTo(LGeoLocation location);
     double distanceTo(LGeoLocation location);
     
     double degToRad(double deg);

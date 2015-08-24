@@ -66,7 +66,7 @@ double LGPS::distanceToGoalLocation() {
 #pragma mark - Bearing
 
 double LGPS::bearingDegToGoalLocation() {
-    return location().bearingDegTo(goalLocation());
+    return location().headingDegTo(goalLocation());
 }
 
 #pragma mark -

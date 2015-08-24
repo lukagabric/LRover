@@ -16,4 +16,4 @@ Builds/Classes/LMotorControllerLogger.cpp.o: \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/cores/arduino/Print.h \
  Classes/ThirdParty/LCD/LiquidCrystal_I2C.h \
  Classes/ThirdParty/LCD/I2CIO.h Classes/ThirdParty/LCD/LCD.h \
- Classes/LMotorController.h
+ Classes/LMotorController.h Classes/LWheelSpeeds.h

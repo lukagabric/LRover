@@ -19,8 +19,10 @@ void LRoverNavigator::setup() {
     
     _sonics = new LRoverSonics();
     
+    _goalLocation = LGeoLocation(GOAL_LAT, GOAL_LON);
+    
     _gps = new LGPS();
-    _gps->setGoalLocation(LGeoLocation(GOAL_LAT, GOAL_LON));
+    _gps->setGoalLocation(_goalLocation);
     
 #if DRIVE
     _motorController = new LMotorController(ENA, IN1, IN2, ENB, IN3, IN4, 1, 1);
@@ -30,6 +32,8 @@ void LRoverNavigator::setup() {
     _cruisePID->SetMode(AUTOMATIC);
     _cruisePID->SetOutputLimits(-255, 255);
     _cruisePID->SetSampleTime(50);
+    
+    _cruiseController = new LCruiseController(_cruisePID);
     
 #if MANUAL_PID_TUNING
     _cruisePIDTuner = new LPIDTuner(_cruisePID, POT_Kp, POT_Ki, POT_Kd);
@@ -116,26 +120,28 @@ void LRoverNavigator::loopAt20Hz() {
     updateSensorReadings();
 
     //localization
-    readLocation();
+    LGeoLocation currentLocation = _gps->location();
     
     //path planning
-    if (_locationChanged && isCurrentEqualToGoalLocation()) {
+    if (currentLocation.isValid() && isCurrentEqualToGoalLocation()) {
         arrivedAtGoal();
         return;
     }
 
     bool followWall = _sonics->isObstacleTooClose();
-    int leftWheelSpeed, rightWheelSpeed;
-
+    
+    LWheelSpeeds wheelSpeeds;
     if (followWall) {
-        configureWallFollowOutput(&leftWheelSpeed, &rightWheelSpeed);
+        wheelSpeeds = wallFollowOutput();
     }
     else {
-        configureCruiseOutput(&leftWheelSpeed, &rightWheelSpeed);
+        wheelSpeeds = _cruiseController->cruiseOutput(currentLocation, _goalLocation, _compass->headingDeg());
     }
     
     //path execution
-    move(leftWheelSpeed, rightWheelSpeed);
+#if DRIVE
+    _motorController->move(wheelSpeeds.leftWheelSpeed, wheelSpeeds.rightWheelSpeed);
+#endif
 }
 
 #pragma mark - Perception
@@ -143,19 +149,6 @@ void LRoverNavigator::loopAt20Hz() {
 void LRoverNavigator::updateSensorReadings() {
     _sonics->performNextMeasurement();
     _compass->updateHeading();
-}
-
-#pragma mark - Localization
-
-void LRoverNavigator::readLocation() {
-    if (_gps->location().isValid() && !_lastLocation.isEqualTo(_gps->location())) {
-        _lastLocation = _gps->location();
-        
-        _locationChanged = true;
-    }
-    else {
-        _locationChanged = false;
-    }
 }
 
 #pragma mark - Path Planning
@@ -173,63 +166,10 @@ void LRoverNavigator::arrivedAtGoal() {
     _motorController->stopMoving();
 }
 
-#pragma mark - Cruise
-
-void LRoverNavigator::configureCruiseOutput(int *leftWheelSpeed, int *rightWheelSpeed) {
-    if (!_gps->location().isValid()) return;
-    
-    if (_locationChanged) {
-        configureCruiseGoalHeading();
-    }
-    
-    updateCruisePID();
-    configureCruiseWheelSpeeds(leftWheelSpeed, rightWheelSpeed);
-}
-
-void LRoverNavigator::configureCruiseGoalHeading() {
-    double goalHeadingDeg = _gps->bearingDegToGoalLocation();
-    _compass->setGoalHeadingDeg(goalHeadingDeg);
-}
-
-void LRoverNavigator::updateCruisePID() {
-    _cruisePID->setInput(_compass->offsetFromGoalHeadingDeg());
-    _cruisePID->Compute();
-}
-
-void LRoverNavigator::configureCruiseWheelSpeeds(int *leftSpeed, int *rightSpeed) {
-    int leftWheelSpeed = 255;
-    int rightWheelSpeed = 255;
-    
-    double pidOutput = _cruisePID->output();
-    
-    if (pidOutput > 0) {
-        //turn left
-        leftWheelSpeed -= pidOutput;
-        leftWheelSpeed = std::max(MINIMUM_FORWARD_WHEEL_SPEED, leftWheelSpeed);
-    }
-    else {
-        //turn right
-        rightWheelSpeed += pidOutput;
-        rightWheelSpeed = std::max(MINIMUM_FORWARD_WHEEL_SPEED, rightWheelSpeed);
-    }
-    
-    *leftSpeed = leftWheelSpeed;
-    *rightSpeed = rightWheelSpeed;
-}
-
 #pragma mark - Wall Follow
 
-void LRoverNavigator::configureWallFollowOutput(int *leftWheelSpeed, int *rightWheelSpeed) {
-    *leftWheelSpeed = 0;
-    *rightWheelSpeed = 0;
-}
-
-#pragma mark - Path Execution
-
-void LRoverNavigator::move(int leftWheelSpeed, int rightWheelSpeed) {
-#if DRIVE
-    _motorController->move(leftWheelSpeed, rightWheelSpeed);
-#endif
+LWheelSpeeds LRoverNavigator::wallFollowOutput() {
+    return {0, 0};
 }
 
 #pragma mark -

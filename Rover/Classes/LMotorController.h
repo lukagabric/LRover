@@ -2,6 +2,7 @@
 #define LMotorController_h
 
 #include "Arduino.h"
+#include "LWheelSpeeds.h"
 
 class LMotorController {
 private:
@@ -16,6 +17,7 @@ public:
     
     void move(int leftSpeed, int rightSpeed);
     void move(int speed);
+    void move(LWheelSpeeds wheelSpeeds);
     void turnLeft(int speed, bool kick);
     void turnRight(int speed, bool kick);
     void stopMoving();

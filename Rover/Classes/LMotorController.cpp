@@ -47,6 +47,10 @@ void LMotorController::move(int speed) {
     move(speed, speed);
 }
 
+void LMotorController::move(LWheelSpeeds wheelSpeeds) {
+    move(wheelSpeeds.leftWheelSpeed, wheelSpeeds.rightWheelSpeed);
+}
+
 void LMotorController::turnRight(int speed, bool kick) {
     speed = max(speed, 0);
     

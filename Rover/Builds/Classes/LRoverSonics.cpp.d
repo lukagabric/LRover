@@ -26,9 +26,9 @@ Builds/Classes/LRoverSonics.cpp.o: Classes/LRoverSonics.cpp \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/variants/eightanaloginputs/pins_arduino.h \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/variants/eightanaloginputs/../standard/pins_arduino.h \
  Classes/ThirdParty/NewPing.h Classes/LRoverNavigator.h \
- Classes/LMotorController.h Classes/LPID.h Classes/ThirdParty/PID_v1.h \
- Classes/LCompass.h Classes/ThirdParty/HMC5883L.h \
- Classes/ThirdParty/I2Cdev.h \
+ Classes/LMotorController.h Classes/LWheelSpeeds.h Classes/LPID.h \
+ Classes/ThirdParty/PID_v1.h Classes/LCompass.h \
+ Classes/ThirdParty/HMC5883L.h Classes/ThirdParty/I2Cdev.h \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/libraries/Wire/Wire.h \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/cores/arduino/Stream.h \
  Classes/LLowPassFilter.h Classes/LLCD.h Classes/ThirdParty/LCD/LCD.h \
@@ -40,4 +40,4 @@ Builds/Classes/LRoverSonics.cpp.o: Classes/LRoverSonics.cpp \
  Classes/LGeoLocation.h Classes/LPIDTuner.h Classes/LLogger.h \
  Classes/LDebugLog.h Classes/LGPSLogger.h Classes/LPIDLogger.h \
  Classes/LCompassLogger.h Classes/LMotorControllerLogger.h \
- Classes/LRoverSonicsLogger.h
+ Classes/LRoverSonicsLogger.h Classes/LCruiseController.h

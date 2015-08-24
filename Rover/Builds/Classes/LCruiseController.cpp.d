@@ -1,4 +1,7 @@
-Builds/main.cpp.o: main.cpp \
+Builds/Classes/LCruiseController.cpp.o: Classes/LCruiseController.cpp \
+ Classes/LCruiseController.h Classes/LGeoLocation.h \
+ Classes/LWheelSpeeds.h Classes/LPID.h Classes/ThirdParty/PID_v1.h \
+ Classes/LRoverNavigator.h \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/cores/arduino/Arduino.h \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/cores/arduino/binary.h \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/cores/arduino/WCharacter.h \
@@ -11,9 +14,8 @@ Builds/main.cpp.o: main.cpp \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/cores/arduino/Arduino.h \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/variants/eightanaloginputs/pins_arduino.h \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/variants/eightanaloginputs/../standard/pins_arduino.h \
- Rover.ino Classes/LRoverNavigator.h Classes/LMotorController.h \
- Classes/LWheelSpeeds.h Classes/LPID.h Classes/ThirdParty/PID_v1.h \
- Classes/LUltrasonic.h Classes/ThirdParty/NewPing.h Classes/LCompass.h \
+ Classes/LMotorController.h Classes/LUltrasonic.h \
+ Classes/ThirdParty/NewPing.h Classes/LCompass.h \
  Classes/ThirdParty/HMC5883L.h Classes/ThirdParty/I2Cdev.h \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/libraries/Wire/Wire.h \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/cores/arduino/Stream.h \
@@ -23,8 +25,7 @@ Builds/main.cpp.o: main.cpp \
  Classes/ThirdParty/LCD/I2CIO.h Classes/ThirdParty/LCD/LCD.h \
  Classes/LGPS.h Classes/ThirdParty/TinyGPS.h \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/libraries/SoftwareSerial/SoftwareSerial.h \
- Classes/LGeoLocation.h Classes/LPIDTuner.h Classes/LLogger.h \
- Classes/ThirdParty/StdCpp/vector \
+ Classes/LPIDTuner.h Classes/LLogger.h Classes/ThirdParty/StdCpp/vector \
  Classes/ThirdParty/StdCpp/basic_definitions \
  Classes/ThirdParty/StdCpp/system_configuration.h \
  Classes/ThirdParty/StdCpp/memory Classes/ThirdParty/StdCpp/new \
@@ -40,4 +41,4 @@ Builds/main.cpp.o: main.cpp \
  Classes/ThirdParty/StdCpp/initializer_list Classes/LDebugLog.h \
  Classes/LRoverSonics.h Classes/LGPSLogger.h Classes/LPIDLogger.h \
  Classes/LCompassLogger.h Classes/LMotorControllerLogger.h \
- Classes/LRoverSonicsLogger.h Classes/LCruiseController.h
+ Classes/LRoverSonicsLogger.h

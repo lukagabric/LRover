@@ -11,9 +11,9 @@ Builds/Classes/LRoverNavigator.cpp.o: Classes/LRoverNavigator.cpp \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/cores/arduino/Arduino.h \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/variants/eightanaloginputs/pins_arduino.h \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/variants/eightanaloginputs/../standard/pins_arduino.h \
- Classes/LRoverNavigator.h Classes/LMotorController.h Classes/LPID.h \
- Classes/ThirdParty/PID_v1.h Classes/LUltrasonic.h \
- Classes/ThirdParty/NewPing.h Classes/LCompass.h \
+ Classes/LRoverNavigator.h Classes/LMotorController.h \
+ Classes/LWheelSpeeds.h Classes/LPID.h Classes/ThirdParty/PID_v1.h \
+ Classes/LUltrasonic.h Classes/ThirdParty/NewPing.h Classes/LCompass.h \
  Classes/ThirdParty/HMC5883L.h Classes/ThirdParty/I2Cdev.h \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/libraries/Wire/Wire.h \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/cores/arduino/Stream.h \
@@ -40,4 +40,4 @@ Builds/Classes/LRoverNavigator.cpp.o: Classes/LRoverNavigator.cpp \
  Classes/ThirdParty/StdCpp/initializer_list Classes/LDebugLog.h \
  Classes/LRoverSonics.h Classes/LGPSLogger.h Classes/LPIDLogger.h \
  Classes/LCompassLogger.h Classes/LMotorControllerLogger.h \
- Classes/LRoverSonicsLogger.h
+ Classes/LRoverSonicsLogger.h Classes/LCruiseController.h

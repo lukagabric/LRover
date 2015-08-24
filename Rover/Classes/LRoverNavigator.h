@@ -18,6 +18,8 @@
 #include "LMotorControllerLogger.h"
 #include "LRoverSonicsLogger.h"
 #include "LGeoLocation.h"
+#include "LWheelSpeeds.h"
+#include "LCruiseController.h"
 
 #define DEBUG_LOG 1
 #define LCD_DEBUG_LOG 1
@@ -90,11 +92,14 @@ private:
     LPIDTuner *_cruisePIDTuner;
     LPID *_cruisePID;
     LPIDLogger *_cruisePIDLogger;
+    LCruiseController *_cruiseController;
     LCompass *_compass;
     LCompassLogger *_compassLogger;
     LRoverSonics *_sonics;
     LRoverSonicsLogger *_sonicsLogger;
     LLogger *_logger;
+    
+    LGeoLocation _goalLocation;
     
     unsigned long _time1Hz, _time20Hz, _time5s;
     void loopAt5s();
@@ -104,18 +109,11 @@ private:
     void updateSensorReadings();
 
     void readLocation();
-    LGeoLocation _lastLocation;
-    bool _locationChanged;
     
     bool isCurrentEqualToGoalLocation();
     void arrivedAtGoal();
-    
-    void configureCruiseOutput(int *leftWheelSpeed, int *rightWheelSpeed);
-    void configureCruiseGoalHeading();
-    void updateCruisePID();
-    void configureCruiseWheelSpeeds(int *leftSpeed, int *rightSpeed);
-    
-    void configureWallFollowOutput(int *leftWheelSpeed, int *rightWheelSpeed);
+        
+    LWheelSpeeds wallFollowOutput();
     
     void move(int leftWheelSpeed, int rightWheelSpeed);
     
