@@ -13,9 +13,8 @@
 #include "HMC5883L.h"
 #include "LLowPassFilter.h"
 #include "LLCD.h"
-#include "LDebugLog.h"
 
-class LCompass : public LDebugLog {
+class LCompass {
 private:
     HMC5883L *_compass;
     LLowPassFilter *_filter;
@@ -36,10 +35,7 @@ public:
     void setDeclinationDeg(double declinationDeg);
     double declinationDeg();
     
-    double offsetFromGoalHeadingDeg(); //Direction: CCW
-    
-    virtual void printToSerial();
-    virtual void printToLCD(LLCD *lcd);
+    double offsetFromGoalHeadingDeg(); //Direction: CCW    
 };
 
 #endif /* defined(__Rover__LCompass__) */

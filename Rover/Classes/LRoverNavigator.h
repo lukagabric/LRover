@@ -14,6 +14,7 @@
 #include "LRoverSonics.h"
 #include "LGPSLogger.h"
 #include "LPIDLogger.h"
+#include "LCompassLogger.h"
 
 #define DEBUG_LOG 1
 #define LCD_DEBUG_LOG 1
@@ -86,6 +87,7 @@ private:
     LPID *_cruisePID;
     LPIDLogger *_cruisePIDLogger;
     LCompass *_compass;
+    LCompassLogger *_compassLogger;
     LRoverSonics *_sonics;
     LLogger *_logger;
     

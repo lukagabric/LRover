@@ -49,7 +49,10 @@ void LRoverNavigator::setup() {
         _gpsLogger = new LGPSLogger(_gps);
         logItems.push_back(_gpsLogger);
     }
-//    if (_compass) logItems.push_back(_compass);
+    if (_compass) {
+        _compassLogger = new LCompassLogger(_compass);
+        logItems.push_back(_compassLogger);
+    }
     if (_cruisePID) {
         _cruisePIDLogger = new LPIDLogger(_cruisePID);
         logItems.push_back(_cruisePIDLogger);
