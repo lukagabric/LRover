@@ -47,7 +47,6 @@ void LRoverNavigator::setup() {
         _sonicsLogger = new LRoverSonicsLogger(_sonics);
         logItems.push_back(_sonicsLogger);
     }
-    
     if (_gps) {
         _gpsLogger = new LGPSLogger(_gps);
         logItems.push_back(_gpsLogger);

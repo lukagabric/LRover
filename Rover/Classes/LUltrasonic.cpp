@@ -21,7 +21,6 @@ unsigned long LUltrasonic::singleDistanceMeasurement() {
 void LUltrasonic::measureDistance() {
     unsigned long currentTime = millis();
     _distance = singleDistanceMeasurement();
-    Serial.print(_distance);Serial.print("\t");Serial.println(millis() - currentTime);
 }
 
 void LUltrasonic::measureDistance3() {
