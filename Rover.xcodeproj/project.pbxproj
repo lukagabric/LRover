@@ -1493,11 +1493,11 @@
 				41D624541B5D7DE200611BC2 /* LMotorController.h */,
 				41E25F101B87B882000B9F79 /* LRoverSonics.cpp */,
 				41E25F111B87B882000B9F79 /* LRoverSonics.h */,
-				410965211B60478300832B47 /* LRoverNavigator.cpp */,
-				410965221B60478300832B47 /* LRoverNavigator.h */,
 				417D50BD1B8B445A00C9EE59 /* LGeoLocation.h */,
 				417D50BF1B8B4C6D00C9EE59 /* LGeoLocation.cpp */,
 				417D50BE1B8B448B00C9EE59 /* LWheelSpeeds.h */,
+				410965211B60478300832B47 /* LRoverNavigator.cpp */,
+				410965221B60478300832B47 /* LRoverNavigator.h */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
