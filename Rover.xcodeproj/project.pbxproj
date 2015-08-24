@@ -65,6 +65,7 @@
 		419955AE1B75084B005AD71E /* LPID.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 419955AC1B75084B005AD71E /* LPID.cpp */; };
 		41A64F201B76ACFD00EDCD79 /* LLogger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41A64F1E1B76ACFD00EDCD79 /* LLogger.cpp */; };
 		41AA254A1B8AEA1E002A5D60 /* LCompassLogger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41AA25481B8AEA1E002A5D60 /* LCompassLogger.cpp */; };
+		41AA254D1B8AEB3E002A5D60 /* LUltrasonicLogger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41AA254B1B8AEB3E002A5D60 /* LUltrasonicLogger.cpp */; };
 		41D294D51B71371500D37F64 /* LCompass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41D294D31B71371500D37F64 /* LCompass.cpp */; };
 		41E25F121B87B882000B9F79 /* LRoverSonics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41E25F101B87B882000B9F79 /* LRoverSonics.cpp */; };
 		41E91A521B754ABB00C6148D /* LPIDTuner.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41E91A501B754ABB00C6148D /* LPIDTuner.cpp */; };
@@ -722,6 +723,8 @@
 		41A64F1F1B76ACFD00EDCD79 /* LLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLogger.h; sourceTree = "<group>"; };
 		41AA25481B8AEA1E002A5D60 /* LCompassLogger.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LCompassLogger.cpp; sourceTree = "<group>"; };
 		41AA25491B8AEA1E002A5D60 /* LCompassLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCompassLogger.h; sourceTree = "<group>"; };
+		41AA254B1B8AEB3E002A5D60 /* LUltrasonicLogger.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LUltrasonicLogger.cpp; sourceTree = "<group>"; };
+		41AA254C1B8AEB3E002A5D60 /* LUltrasonicLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LUltrasonicLogger.h; sourceTree = "<group>"; };
 		41D294D31B71371500D37F64 /* LCompass.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LCompass.cpp; sourceTree = "<group>"; };
 		41D294D41B71371500D37F64 /* LCompass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCompass.h; sourceTree = "<group>"; };
 		41D624531B5D7DE200611BC2 /* LMotorController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LMotorController.cpp; sourceTree = "<group>"; };
@@ -1457,6 +1460,8 @@
 				417277091B8A809900E8BBB3 /* LPIDLogger.h */,
 				41AA25481B8AEA1E002A5D60 /* LCompassLogger.cpp */,
 				41AA25491B8AEA1E002A5D60 /* LCompassLogger.h */,
+				41AA254B1B8AEB3E002A5D60 /* LUltrasonicLogger.cpp */,
+				41AA254C1B8AEB3E002A5D60 /* LUltrasonicLogger.h */,
 				41A64F1E1B76ACFD00EDCD79 /* LLogger.cpp */,
 				41A64F1F1B76ACFD00EDCD79 /* LLogger.h */,
 				41EAD6971B849FF900617930 /* LConverters.cpp */,
@@ -3119,6 +3124,7 @@
 				AA2A150720200537AA000109 /* lineFollow.cpp in Sources */,
 				AA2A150720200537AA00010A /* LineFollow.h in Sources */,
 				AA2A150720200537AA00010B /* Multiplexer.cpp in Sources */,
+				41AA254D1B8AEB3E002A5D60 /* LUltrasonicLogger.cpp in Sources */,
 				41857AA81B63A67E008C183B /* LLowPassFilter.cpp in Sources */,
 				AA2A150720200537AA00010C /* Multiplexer.h in Sources */,
 				4176DD5D1B76126D007E1AD9 /* new_handler.cpp in Sources */,

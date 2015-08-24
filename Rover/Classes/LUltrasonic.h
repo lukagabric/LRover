@@ -2,14 +2,12 @@
 #define LUltrasonic_h
 
 #include <Arduino.h>
-#include "LLCD.h"
-#include "LDebugLog.h"
 #include "NewPing.h"
 
 #define LULTRASONIC_INFINITE_DISTANCE 999999
 #define MAX_MEASUREABLE_DISTANCE 60
 
-class LUltrasonic : public LDebugLog {
+class LUltrasonic {
 private:
     unsigned long singleDistanceMeasurement();
     unsigned long _distance;
@@ -20,10 +18,7 @@ public:
     void measureDistance();
     void measureDistance3();
     
-    unsigned long distance();
-    
-    virtual void printToSerial();
-    virtual void printToLCD(LLCD *lcd);
+    unsigned long distance();    
 };
 
 #endif

@@ -1,6 +1,5 @@
 #include "Arduino.h"
 #include "LUltrasonic.h"
-#include "LLCD.h"
 
 #pragma mark - Constructor
 
@@ -45,17 +44,6 @@ void LUltrasonic::measureDistance3() {
 
 unsigned long LUltrasonic::distance() {
     return _distance;
-}
-
-#pragma mark - LDebugLog
-
-void LUltrasonic::printToSerial() {
-    Serial.print("\nDISTANCE: ");Serial.print(distance());Serial.println(" cm");
-}
-
-void LUltrasonic::printToLCD(LLCD *lcd) {
-    lcd->print(0, 0, "DISTANCE (cm)");
-    lcd->print(0, 1, distance(), 1);
 }
 
 #pragma mark -
