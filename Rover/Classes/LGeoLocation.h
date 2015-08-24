@@ -9,9 +9,26 @@
 #ifndef Rover_LGeoLocation_h
 #define Rover_LGeoLocation_h
 
-struct LGeoLocation {
-    double latitude;
-    double longitude;
+class LGeoLocation {
+private:
+    double _latitude;
+    double _longitude;
+    
+public:
+    LGeoLocation();
+    LGeoLocation(double latitude, double longitude);
+    
+    double latitude();
+    double longitude();
+
+    bool isValid();
+    bool isEqualTo(LGeoLocation location);
+    
+    double bearingDegTo(LGeoLocation location);
+    double distanceTo(LGeoLocation location);
+    
+    double degToRad(double deg);
+    double radToDeg(double rad);
 };
 
 #endif

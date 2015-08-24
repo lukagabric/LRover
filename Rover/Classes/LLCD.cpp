@@ -24,33 +24,31 @@
 
 #pragma mark - Constructor
 
-LLCD::LLCD() {
-    _lcd = new LiquidCrystal_I2C(I2C_ADDR, En_pin, Rw_pin, Rs_pin, D4_pin, D5_pin, D6_pin, D7_pin);
-    
-    _lcd->begin(20,2);
-    _lcd->setBacklightPin(BACKLIGHT_PIN, POSITIVE);
-    _lcd->setBacklight(HIGH);
-    _lcd->home();    
+LLCD::LLCD() : _lcd(I2C_ADDR, En_pin, Rw_pin, Rs_pin, D4_pin, D5_pin, D6_pin, D7_pin) {
+    _lcd.begin(20,2);
+    _lcd.setBacklightPin(BACKLIGHT_PIN, POSITIVE);
+    _lcd.setBacklight(HIGH);
+    _lcd.home();
 }
 
 #pragma mark - Print
 
 void LLCD::clear() {
-    _lcd->clear();
+    _lcd.clear();
 }
 
 void LLCD::print(unsigned int column, unsigned int line, const char str[]) {
     if (line > 1) return;
     
-    _lcd->setCursor(column, line);
-    _lcd->print(str);
+    _lcd.setCursor(column, line);
+    _lcd.print(str);
 }
 
 void LLCD::print(unsigned int column, unsigned int line, double n, int digits) {
     if (line > 1) return;
     
-    _lcd->setCursor(column, line);
-    _lcd->print(n, digits);
+    _lcd.setCursor(column, line);
+    _lcd.print(n, digits);
 }
 
 #pragma mark -

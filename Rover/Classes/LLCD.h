@@ -14,7 +14,7 @@
 
 class LLCD {
 private:
-    LiquidCrystal_I2C *_lcd;
+    LiquidCrystal_I2C _lcd;
 public:
     LLCD();
     void clear();

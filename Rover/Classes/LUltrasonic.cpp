@@ -3,15 +3,14 @@
 
 #pragma mark - Constructor
 
-LUltrasonic::LUltrasonic(unsigned int echoPin, unsigned int triggerPin) {
-    _sonic = new NewPing(triggerPin, echoPin, MAX_MEASUREABLE_DISTANCE);
+LUltrasonic::LUltrasonic(unsigned int echoPin, unsigned int triggerPin) : _sonic(triggerPin, echoPin, MAX_MEASUREABLE_DISTANCE) {
     _distance = LULTRASONIC_INFINITE_DISTANCE;
 }
 
 #pragma mark - Measurment
 
 unsigned long LUltrasonic::singleDistanceMeasurement() {
-    unsigned long measuredDistance = _sonic->ping_cm();
+    unsigned long measuredDistance = _sonic.ping_cm();
     
     return measuredDistance <= MAX_MEASUREABLE_DISTANCE && measuredDistance > 0 ? measuredDistance : LULTRASONIC_INFINITE_DISTANCE;
 }

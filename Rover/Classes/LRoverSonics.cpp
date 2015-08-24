@@ -26,6 +26,15 @@ LRoverSonics::LRoverSonics() {
     _measureState = 0;
 }
 
+LRoverSonics::~LRoverSonics() {
+    delete _frontSonic;
+    delete _frontRightSonic;
+    delete _frontLeftSonic;
+    delete _rightSonic;
+    delete _leftSonic;
+}
+
+
 void LRoverSonics::performNextMeasurement() {
     _measureState = ++_measureState % _sonics.size();
     LUltrasonic *sonic = _sonics.at(_measureState);

@@ -28,6 +28,7 @@ private:
     
 public:
     LRoverSonics();
+    ~LRoverSonics();
     
     void performNextMeasurement();
     unsigned long frontDistance();

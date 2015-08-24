@@ -16,7 +16,7 @@
 
 class LCompass {
 private:
-    HMC5883L *_compass;
+    HMC5883L _compass;
     LLowPassFilter *_filter;
     int16_t _mx, _my, _mz;
     double _headingDeg;

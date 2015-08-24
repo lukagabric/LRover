@@ -20,7 +20,7 @@ void LRoverNavigator::setup() {
     _sonics = new LRoverSonics();
     
     _gps = new LGPS();
-    _gps->goalLocation = {GOAL_LAT, GOAL_LON};
+    _gps->setGoalLocation(LGeoLocation(GOAL_LAT, GOAL_LON));
     
 #if DRIVE
     _motorController = new LMotorController(ENA, IN1, IN2, ENB, IN3, IN4, 1, 1);
@@ -148,7 +148,7 @@ void LRoverNavigator::updateSensorReadings() {
 #pragma mark - Localization
 
 void LRoverNavigator::readLocation() {
-    if (_gps->isLocationValid() && (_lastLocation.latitude != _gps->location().latitude || _lastLocation.longitude != _gps->location().longitude)) {
+    if (_gps->location().isValid() && !_lastLocation.isEqualTo(_gps->location())) {
         _lastLocation = _gps->location();
         
         _locationChanged = true;
@@ -176,7 +176,7 @@ void LRoverNavigator::arrivedAtGoal() {
 #pragma mark - Cruise
 
 void LRoverNavigator::configureCruiseOutput(int *leftWheelSpeed, int *rightWheelSpeed) {
-    if (!_gps->isLocationValid()) return;
+    if (!_gps->location().isValid()) return;
     
     if (_locationChanged) {
         configureCruiseGoalHeading();
