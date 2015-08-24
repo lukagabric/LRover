@@ -35,7 +35,10 @@ public:
     void setDeclinationDeg(double declinationDeg);
     double declinationDeg();
     
-    double offsetFromGoalHeadingDeg(); //Direction: CCW    
+    double offsetFromGoalHeadingDeg(); //Direction: CCW
+    
+    double degToRad(double deg);
+    double radToDeg(double rad);
 };
 
 #endif /* defined(__Rover__LCompass__) */

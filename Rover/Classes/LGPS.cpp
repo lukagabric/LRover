@@ -7,7 +7,6 @@
 //
 
 #include "LGPS.h"
-#include "LConverters.h"
 
 #pragma mark - Constructor
 

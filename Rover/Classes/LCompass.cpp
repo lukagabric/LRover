@@ -7,7 +7,6 @@
 //
 
 #include "LCompass.h"
-#include "LConverters.h"
 
 #define compass_cal_x_offset 116   // Manually calculated offset in X direction
 #define compass_cal_y_offset 225   // Manually calculated offset in Y direction
@@ -86,6 +85,14 @@ double LCompass::offsetFromGoalHeadingDeg() {
     }
 
     return headingOffset;
+}
+
+double LCompass::degToRad(double deg) {
+    return (M_PI / 180) * deg;
+}
+
+double LCompass::radToDeg(double rad) {
+    return (180 / M_PI) * rad;
 }
 
 #pragma mark -

@@ -84,7 +84,6 @@
 		41E91A771B755B1500C6148D /* LiquidCrystal_SR3W.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41E91A681B755B1500C6148D /* LiquidCrystal_SR3W.cpp */; };
 		41E91A781B755B1500C6148D /* PID_v1.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41E91A6A1B755B1500C6148D /* PID_v1.cpp */; };
 		41E91A791B755B1500C6148D /* TinyGPS.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41E91A6C1B755B1500C6148D /* TinyGPS.cpp */; };
-		41EAD6981B849FF900617930 /* LConverters.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41EAD6971B849FF900617930 /* LConverters.cpp */; };
 		AA2A150720200537AA000006 /* abi.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAAA150720200537AA000006 /* abi.cpp */; };
 		AA2A150720200537AA000007 /* Arduino.h in Sources */ = {isa = PBXBuildFile; fileRef = AAAA150720200537AA000007 /* Arduino.h */; };
 		AA2A150720200537AA000008 /* binary.h in Sources */ = {isa = PBXBuildFile; fileRef = AAAA150720200537AA000008 /* binary.h */; };
@@ -768,8 +767,6 @@
 		41E91A6B1B755B1500C6148D /* PID_v1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PID_v1.h; sourceTree = "<group>"; };
 		41E91A6C1B755B1500C6148D /* TinyGPS.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TinyGPS.cpp; sourceTree = "<group>"; };
 		41E91A6D1B755B1500C6148D /* TinyGPS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TinyGPS.h; sourceTree = "<group>"; };
-		41EAD6961B849F0400617930 /* LConverters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LConverters.h; sourceTree = "<group>"; };
-		41EAD6971B849FF900617930 /* LConverters.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LConverters.cpp; path = Rover/Classes/LConverters.cpp; sourceTree = SOURCE_ROOT; };
 		AAAA150720200537AA000006 /* abi.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = abi.cpp; sourceTree = "<group>"; };
 		AAAA150720200537AA000007 /* Arduino.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Arduino.h; sourceTree = "<group>"; };
 		AAAA150720200537AA000008 /* binary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = binary.h; sourceTree = "<group>"; };
@@ -1478,8 +1475,6 @@
 				41D260D91B8AF97A00989473 /* LRoverSonicsLogger.h */,
 				41A64F1E1B76ACFD00EDCD79 /* LLogger.cpp */,
 				41A64F1F1B76ACFD00EDCD79 /* LLogger.h */,
-				41EAD6971B849FF900617930 /* LConverters.cpp */,
-				41EAD6961B849F0400617930 /* LConverters.h */,
 				41857AA61B63A67E008C183B /* LLowPassFilter.cpp */,
 				41857AA71B63A67E008C183B /* LLowPassFilter.h */,
 				41E91A501B754ABB00C6148D /* LPIDTuner.cpp */,
@@ -3049,7 +3044,6 @@
 				AA2A150720200537AA0000AF /* GSM3ShieldV1BandManagement.h in Sources */,
 				AA2A150720200537AA0000B0 /* GSM3ShieldV1BaseProvider.cpp in Sources */,
 				AA2A150720200537AA0000B1 /* GSM3ShieldV1BaseProvider.h in Sources */,
-				41EAD6981B849FF900617930 /* LConverters.cpp in Sources */,
 				AA2A150720200537AA0000B2 /* GSM3ShieldV1CellManagement.cpp in Sources */,
 				AA2A150720200537AA0000B3 /* GSM3ShieldV1CellManagement.h in Sources */,
 				AA2A150720200537AA0000B4 /* GSM3ShieldV1ClientProvider.cpp in Sources */,

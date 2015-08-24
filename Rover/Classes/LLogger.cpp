@@ -8,11 +8,15 @@
 
 #include "LLogger.h"
 
+#pragma mark - Constructor
+
 LLogger::LLogger(LLCD *lcd, std::vector<LDebugLog*> logItems) {
     _lcd = lcd;
     _logItems = logItems;
     _lcdDebugLogState = 0;
 }
+
+#pragma mark - Debug Log
 
 void LLogger::debugLogToLCD() {
     if (!_lcd) return;
@@ -34,3 +38,5 @@ void LLogger::debugLogToSerial() {
         debugLog->printToSerial();
     }
 }
+
+#pragma mark -

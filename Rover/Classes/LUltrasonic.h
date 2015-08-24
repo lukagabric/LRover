@@ -9,9 +9,9 @@
 
 class LUltrasonic {
 private:
+    NewPing _sonic;
     unsigned long singleDistanceMeasurement();
     unsigned long _distance;
-    NewPing _sonic;
 public:
     LUltrasonic(unsigned int echoPin, unsigned int triggerPin);
     

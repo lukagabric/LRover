@@ -9,6 +9,8 @@
 #include "LGeoLocation.h"
 #include "math.h"
 
+#pragma mark - Constructors
+
 LGeoLocation::LGeoLocation() {
     _latitude = 999;
     _longitude = 999;
@@ -18,6 +20,8 @@ LGeoLocation::LGeoLocation(double latitude, double longitude) {
     _latitude = latitude;
     _longitude = longitude;
 }
+
+#pragma mark - Getters
 
 double LGeoLocation::latitude() {
     return _latitude;
@@ -82,3 +86,5 @@ double LGeoLocation::degToRad(double deg) {
 double LGeoLocation::radToDeg(double rad) {
     return (180 / M_PI) * rad;
 }
+
+#pragma mark -
