@@ -10,12 +10,11 @@
 #define __Rover__LRoverSonics__
 
 #include "vector"
-#include "LDebugLog.h"
 #include "LUltrasonic.h"
 
 #define OBSTACLE_DISTANCE_THRESHOLD 30
 
-class LRoverSonics : public LDebugLog {
+class LRoverSonics {
 private:
     LUltrasonic *_frontSonic;
     LUltrasonic *_frontRightSonic;
@@ -43,9 +42,6 @@ public:
     bool isObstacleFrontLeft();
     bool isObstacleRight();
     bool isObstacleLeft();
-    
-    virtual void printToSerial();
-    virtual void printToLCD(LLCD *lcd);
 };
 
 #endif /* defined(__Rover__LRoverSonics__) */

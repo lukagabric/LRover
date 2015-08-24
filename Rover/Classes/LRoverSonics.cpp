@@ -76,22 +76,4 @@ bool LRoverSonics::isObstacleLeft() {
     return leftDistance() < OBSTACLE_DISTANCE_THRESHOLD;
 }
 
-#pragma mark - LDebugLog
-
-void LRoverSonics::printToSerial() {
-    Serial.print("\nF: ");Serial.print(_frontSonic->distance());
-    Serial.print("    FL: ");Serial.print(_frontLeftSonic->distance());
-    Serial.print("    FR: ");Serial.print(_frontRightSonic->distance());
-    Serial.print("    L: ");Serial.print(_leftSonic->distance());
-    Serial.print("    R: ");Serial.println(_rightSonic->distance());
-}
-
-void LRoverSonics::printToLCD(LLCD *lcd) {
-    lcd->print(1, 0, _frontLeftSonic->distance(), 0);
-    lcd->print(7, 0, _frontSonic->distance(), 0);
-    lcd->print(13, 0, _frontRightSonic->distance(), 0);
-    lcd->print(1, 1, _leftSonic->distance(), 0);
-    lcd->print(13, 1, _rightSonic->distance(), 0);
-}
-
 #pragma mark -

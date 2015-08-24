@@ -38,4 +38,5 @@ Builds/main.cpp.o: main.cpp \
  Classes/ThirdParty/StdCpp/type_traits \
  Classes/ThirdParty/StdCpp/initializer_list Classes/LDebugLog.h \
  Classes/LRoverSonics.h Classes/LGPSLogger.h Classes/LPIDLogger.h \
- Classes/LCompassLogger.h Classes/LMotorControllerLogger.h
+ Classes/LCompassLogger.h Classes/LMotorControllerLogger.h \
+ Classes/LRoverSonicsLogger.h

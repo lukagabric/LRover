@@ -43,7 +43,10 @@ void LRoverNavigator::setup() {
 #if DEBUG_LOG || LCD_DEBUG_LOG
     std::vector<LDebugLog*> logItems;
     
-    if (_sonics) logItems.push_back(_sonics);
+    if (_sonics) {
+        _sonicsLogger = new LRoverSonicsLogger(_sonics);
+        logItems.push_back(_sonicsLogger);
+    }
     
     if (_gps) {
         _gpsLogger = new LGPSLogger(_gps);

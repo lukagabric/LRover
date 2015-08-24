@@ -16,6 +16,7 @@
 #include "LPIDLogger.h"
 #include "LCompassLogger.h"
 #include "LMotorControllerLogger.h"
+#include "LRoverSonicsLogger.h"
 
 #define DEBUG_LOG 1
 #define LCD_DEBUG_LOG 1
@@ -91,6 +92,7 @@ private:
     LCompass *_compass;
     LCompassLogger *_compassLogger;
     LRoverSonics *_sonics;
+    LRoverSonicsLogger *_sonicsLogger;
     LLogger *_logger;
     
     unsigned long _time1Hz, _time20Hz, _time5s;

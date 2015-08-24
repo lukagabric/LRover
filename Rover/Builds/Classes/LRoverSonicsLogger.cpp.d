@@ -1,5 +1,6 @@
-Builds/Classes/LRoverSonics.cpp.o: Classes/LRoverSonics.cpp \
- Classes/LRoverSonics.h Classes/ThirdParty/StdCpp/vector \
+Builds/Classes/LRoverSonicsLogger.cpp.o: Classes/LRoverSonicsLogger.cpp \
+ Classes/LRoverSonicsLogger.h Classes/LRoverSonics.h \
+ Classes/ThirdParty/StdCpp/vector \
  Classes/ThirdParty/StdCpp/basic_definitions \
  Classes/ThirdParty/StdCpp/system_configuration.h \
  Classes/ThirdParty/StdCpp/memory Classes/ThirdParty/StdCpp/new \
@@ -25,18 +26,8 @@ Builds/Classes/LRoverSonics.cpp.o: Classes/LRoverSonics.cpp \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/cores/arduino/Arduino.h \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/variants/eightanaloginputs/pins_arduino.h \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/variants/eightanaloginputs/../standard/pins_arduino.h \
- Classes/ThirdParty/NewPing.h Classes/LRoverNavigator.h \
- Classes/LMotorController.h Classes/LPID.h Classes/ThirdParty/PID_v1.h \
- Classes/LCompass.h Classes/ThirdParty/HMC5883L.h \
- Classes/ThirdParty/I2Cdev.h \
- /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/libraries/Wire/Wire.h \
- /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/cores/arduino/Stream.h \
- Classes/LLowPassFilter.h Classes/LLCD.h Classes/ThirdParty/LCD/LCD.h \
+ Classes/ThirdParty/NewPing.h Classes/LDebugLog.h Classes/LLCD.h \
+ Classes/ThirdParty/LCD/LCD.h \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/cores/arduino/Print.h \
  Classes/ThirdParty/LCD/LiquidCrystal_I2C.h \
- Classes/ThirdParty/LCD/I2CIO.h Classes/ThirdParty/LCD/LCD.h \
- Classes/LGPS.h Classes/ThirdParty/TinyGPS.h \
- /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/libraries/SoftwareSerial/SoftwareSerial.h \
- Classes/LPIDTuner.h Classes/LLogger.h Classes/LDebugLog.h \
- Classes/LGPSLogger.h Classes/LPIDLogger.h Classes/LCompassLogger.h \
- Classes/LMotorControllerLogger.h Classes/LRoverSonicsLogger.h
+ Classes/ThirdParty/LCD/I2CIO.h Classes/ThirdParty/LCD/LCD.h
