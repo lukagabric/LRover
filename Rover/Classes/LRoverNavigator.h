@@ -17,6 +17,7 @@
 #include "LCompassLogger.h"
 #include "LMotorControllerLogger.h"
 #include "LRoverSonicsLogger.h"
+#include "LGeoLocation.h"
 
 #define DEBUG_LOG 1
 #define LCD_DEBUG_LOG 1
@@ -103,7 +104,7 @@ private:
     void updateSensorReadings();
 
     void readLocation();
-    float _lat, _lon;
+    LGeoLocation _lastLocation;
     bool _locationChanged;
     
     bool isCurrentEqualToGoalLocation();

@@ -12,6 +12,7 @@
 #include <Arduino.h>
 #include "TinyGPS.h"
 #include "SoftwareSerial.h"
+#include "LGeoLocation.h"
 
 class LGPS {
 private:
@@ -25,20 +26,21 @@ public:
 
     void readGPSData();
 
-    float latitude();
-    float longitude();
+    LGeoLocation goalLocation;
+    
+    LGeoLocation location();
     unsigned long age();
     bool isLocationValid();
     
-    float _goalLat, _goalLon;
-
     //distance in km
-    double distance(double lat1, double lon1, double lat2, double lon2);
-    double distanceTo(double lat, double lon);
+    double distance(LGeoLocation fromLocation, LGeoLocation toLocation);
+    double distanceTo(LGeoLocation toLocation);
+    double distanceToGoalLocation();
     
-    double bearingDeg(float lat1, float lon1, float lat2, float lon2);
-    double bearingDegTo(float lat, float lon);
-
+    double bearingDeg(LGeoLocation fromLocation, LGeoLocation toLocation);
+    double bearingDegTo(LGeoLocation toLocation);
+    double bearingDegToGoalLocation();
+    
     float altitude();
     bool isAltitudeValid();
 };

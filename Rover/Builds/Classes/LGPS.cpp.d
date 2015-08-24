@@ -14,4 +14,4 @@ Builds/Classes/LGPS.cpp.o: Classes/LGPS.cpp Classes/LGPS.h \
  Classes/ThirdParty/TinyGPS.h \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/libraries/SoftwareSerial/SoftwareSerial.h \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/cores/arduino/Stream.h \
- Classes/LConverters.h
+ Classes/LGeoLocation.h Classes/LConverters.h

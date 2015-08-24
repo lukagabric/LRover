@@ -61,6 +61,7 @@
 		4176DD6D1B76126D007E1AD9 /* utility.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4176DD3E1B76126D007E1AD9 /* utility.cpp */; };
 		4176DD6E1B76126D007E1AD9 /* valarray.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4176DD411B76126D007E1AD9 /* valarray.cpp */; };
 		4176DD6F1B76126D007E1AD9 /* vector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4176DD431B76126D007E1AD9 /* vector.cpp */; };
+		417D50C01B8B4C6D00C9EE59 /* LGeoLocation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 417D50BF1B8B4C6D00C9EE59 /* LGeoLocation.cpp */; };
 		41857AA81B63A67E008C183B /* LLowPassFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41857AA61B63A67E008C183B /* LLowPassFilter.cpp */; };
 		419955AE1B75084B005AD71E /* LPID.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 419955AC1B75084B005AD71E /* LPID.cpp */; };
 		41A64F201B76ACFD00EDCD79 /* LLogger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41A64F1E1B76ACFD00EDCD79 /* LLogger.cpp */; };
@@ -717,6 +718,9 @@
 		4176DD411B76126D007E1AD9 /* valarray.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = valarray.cpp; sourceTree = "<group>"; };
 		4176DD421B76126D007E1AD9 /* vector */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = vector; sourceTree = "<group>"; };
 		4176DD431B76126D007E1AD9 /* vector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = vector.cpp; sourceTree = "<group>"; };
+		417D50BD1B8B445A00C9EE59 /* LGeoLocation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGeoLocation.h; sourceTree = "<group>"; };
+		417D50BE1B8B448B00C9EE59 /* LWheelSpeeds.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWheelSpeeds.h; sourceTree = "<group>"; };
+		417D50BF1B8B4C6D00C9EE59 /* LGeoLocation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LGeoLocation.cpp; sourceTree = "<group>"; };
 		41857AA61B63A67E008C183B /* LLowPassFilter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LLowPassFilter.cpp; sourceTree = "<group>"; };
 		41857AA71B63A67E008C183B /* LLowPassFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLowPassFilter.h; sourceTree = "<group>"; };
 		419955AC1B75084B005AD71E /* LPID.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LPID.cpp; sourceTree = "<group>"; };
@@ -1496,6 +1500,9 @@
 				41E25F111B87B882000B9F79 /* LRoverSonics.h */,
 				410965211B60478300832B47 /* LRoverNavigator.cpp */,
 				410965221B60478300832B47 /* LRoverNavigator.h */,
+				417D50BD1B8B445A00C9EE59 /* LGeoLocation.h */,
+				417D50BF1B8B4C6D00C9EE59 /* LGeoLocation.cpp */,
+				417D50BE1B8B448B00C9EE59 /* LWheelSpeeds.h */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -3314,6 +3321,7 @@
 				41E91A711B755B1500C6148D /* I2CIO.cpp in Sources */,
 				AA2A150720200537AA0001E7 /* lwipopts.h in Sources */,
 				AA2A150720200537AA0001E8 /* main.c in Sources */,
+				417D50C01B8B4C6D00C9EE59 /* LGeoLocation.cpp in Sources */,
 				AA2A150720200537AA0001E9 /* nvram.c in Sources */,
 				41E91A731B755B1500C6148D /* LiquidCrystal.cpp in Sources */,
 				AA2A150720200537AA0001EA /* nvram.h in Sources */,

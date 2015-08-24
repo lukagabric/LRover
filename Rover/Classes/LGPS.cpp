@@ -22,8 +22,7 @@ LGPS::LGPS() {
 
     _altitude = TinyGPS::GPS_INVALID_F_ALTITUDE;
     
-    _goalLat = TinyGPS::GPS_INVALID_F_ANGLE;
-    _goalLon = TinyGPS::GPS_INVALID_F_ANGLE;
+    goalLocation = {TinyGPS::GPS_INVALID_F_ANGLE, TinyGPS::GPS_INVALID_F_ANGLE};
 }
 
 #pragma mark - Read Data
@@ -41,12 +40,8 @@ void LGPS::readGPSData() {
 
 #pragma mark - Getters
 
-float LGPS::latitude() {
-    return _lat;
-}
-
-float LGPS::longitude() {
-    return _lon;
+LGeoLocation LGPS::location() {
+    return {_lat, _lon};
 }
 
 unsigned long LGPS::age() {
@@ -54,7 +49,7 @@ unsigned long LGPS::age() {
 }
 
 bool LGPS::isLocationValid() {
-    return (latitude() != TinyGPS::GPS_INVALID_F_ANGLE && longitude() != TinyGPS::GPS_INVALID_F_ANGLE);
+    return (location().latitude != TinyGPS::GPS_INVALID_F_ANGLE && location().longitude != TinyGPS::GPS_INVALID_F_ANGLE);
 }
 
 float LGPS::altitude() {
@@ -67,53 +62,69 @@ bool LGPS::isAltitudeValid() {
 
 #pragma mark - Distance
 
-double LGPS::distance(double lat1, double lon1, double lat2, double lon2) {
-    double latR1 = degToRad(lat1);
-    //    double lonR1 = degToRad(lon1);
+double LGPS::distance(LGeoLocation fromLocation, LGeoLocation toLocation) {
+    double fromLatR = degToRad(fromLocation.latitude);
+//    double fromLonR = degToRad(fromLocation.longitude);
     
-    double latR2 = degToRad(lat2);
-    //    double lonR2 = degToRad(lon2);
+    double toLatR = degToRad(toLocation.latitude);
+//    double toLonR = degToRad(toLocation.longitude);
     
-    double dLatR = degToRad(lat2 - lat1);
-    double dLonR = degToRad(lon2 - lon1);
+    double dLatR = degToRad(toLocation.latitude - fromLocation.latitude);
+    double dLonR = degToRad(toLocation.longitude - fromLocation.longitude);
     
-    double a = pow(sin(dLatR/2.0), 2) + cos(latR1) * cos(latR2) * pow(sin(dLonR/2.0), 2);
+    double a = pow(sin(dLatR/2.0), 2) + cos(fromLatR) * cos(toLatR) * pow(sin(dLonR/2.0), 2);
     double R = 6371000;
     double c = 2 * atan2(sqrt(a), sqrt(1 - a));
     
     return R * c;
 }
 
-double LGPS::distanceTo(double lat, double lon) {
+double LGPS::distanceTo(LGeoLocation toLocation) {
     if (!isLocationValid()) return -1;
     
-    return distance(latitude(), longitude(), lat, lon);
+    return distance(location(), toLocation);
+}
+
+double LGPS::distanceToGoalLocation() {
+    if (!isLocationValid() ||
+        goalLocation.latitude == TinyGPS::GPS_INVALID_F_ANGLE ||
+        goalLocation.longitude == TinyGPS::GPS_INVALID_F_ANGLE) return -1;
+
+    return distance(location(), goalLocation);
 }
 
 #pragma mark - Bearing
 
-double LGPS::bearingDeg(float lat1, float lon1, float lat2, float lon2) {
-    double latR1 = degToRad(lat1);
-//    double lonR1 = degToRad(lon1);
+double LGPS::bearingDeg(LGeoLocation fromLocation, LGeoLocation toLocation) {
+    double fromLatR = degToRad(fromLocation.latitude);
+//    double fromLonR = degToRad(fromLocation.longitude);
     
-    double latR2 = degToRad(lat2);
-//    double lonR2 = degToRad(lon2);
+    double toLatR = degToRad(toLocation.latitude);
+//    double toLonR = degToRad(toLocation.longitude);
     
-//    double dLatR = degToRad(lat2 - lat1);
-    double dLonR = degToRad(lon2 - lon1);
+//    double dLatR = degToRad(toLocation.latitude - fromLocation.latitude);
+    double dLonR = degToRad(toLocation.longitude - fromLocation.longitude);
     
-    double y = sin(dLonR) * cos(latR2);
-    double x = cos(latR1) * sin(latR2) - sin(latR1) * cos(latR2) * cos(dLonR);
+    double y = sin(dLonR) * cos(toLatR);
+    double x = cos(fromLatR) * sin(toLatR) - sin(fromLatR) * cos(toLatR) * cos(dLonR);
     
     double theta = radToDeg(atan2(y, x));
     
     return fmod(theta + 360, 360);
 }
 
-double LGPS::bearingDegTo(float lat, float lon) {
+double LGPS::bearingDegTo(LGeoLocation toLocation) {
     if (!isLocationValid()) return -1;
     
-    return bearingDeg(latitude(), longitude(), lat, lon);
+    return bearingDeg(location(), toLocation);
+}
+
+double LGPS::bearingDegToGoalLocation() {
+    if (!isLocationValid() ||
+        goalLocation.latitude == TinyGPS::GPS_INVALID_F_ANGLE ||
+        goalLocation.longitude == TinyGPS::GPS_INVALID_F_ANGLE) return -1;
+    
+    return bearingDeg(location(), goalLocation);
 }
 
 #pragma mark -

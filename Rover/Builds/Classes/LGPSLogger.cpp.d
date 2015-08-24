@@ -18,4 +18,5 @@ Builds/Classes/LGPSLogger.cpp.o: Classes/LGPSLogger.cpp \
  Classes/ThirdParty/LCD/I2CIO.h Classes/ThirdParty/LCD/LCD.h \
  Classes/LGPS.h Classes/ThirdParty/TinyGPS.h \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/libraries/SoftwareSerial/SoftwareSerial.h \
- /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/cores/arduino/Stream.h
+ /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/cores/arduino/Stream.h \
+ Classes/LGeoLocation.h

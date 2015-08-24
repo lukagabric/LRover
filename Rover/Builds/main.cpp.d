@@ -23,7 +23,8 @@ Builds/main.cpp.o: main.cpp \
  Classes/ThirdParty/LCD/I2CIO.h Classes/ThirdParty/LCD/LCD.h \
  Classes/LGPS.h Classes/ThirdParty/TinyGPS.h \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/libraries/SoftwareSerial/SoftwareSerial.h \
- Classes/LPIDTuner.h Classes/LLogger.h Classes/ThirdParty/StdCpp/vector \
+ Classes/LGeoLocation.h Classes/LPIDTuner.h Classes/LLogger.h \
+ Classes/ThirdParty/StdCpp/vector \
  Classes/ThirdParty/StdCpp/basic_definitions \
  Classes/ThirdParty/StdCpp/system_configuration.h \
  Classes/ThirdParty/StdCpp/memory Classes/ThirdParty/StdCpp/new \

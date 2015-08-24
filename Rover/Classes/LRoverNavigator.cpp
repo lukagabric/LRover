@@ -20,8 +20,7 @@ void LRoverNavigator::setup() {
     _sonics = new LRoverSonics();
     
     _gps = new LGPS();
-    _gps->_goalLat = GOAL_LAT;
-    _gps->_goalLon = GOAL_LON;
+    _gps->goalLocation = {GOAL_LAT, GOAL_LON};
     
 #if DRIVE
     _motorController = new LMotorController(ENA, IN1, IN2, ENB, IN3, IN4, 1, 1);
@@ -149,9 +148,8 @@ void LRoverNavigator::updateSensorReadings() {
 #pragma mark - Localization
 
 void LRoverNavigator::readLocation() {
-    if (_gps->isLocationValid() && (_lat != _gps->latitude() || _lon != _gps->longitude())) {
-        _lat = _gps->latitude();
-        _lon = _gps->longitude();
+    if (_gps->isLocationValid() && (_lastLocation.latitude != _gps->location().latitude || _lastLocation.longitude != _gps->location().longitude)) {
+        _lastLocation = _gps->location();
         
         _locationChanged = true;
     }
@@ -163,7 +161,7 @@ void LRoverNavigator::readLocation() {
 #pragma mark - Path Planning
 
 bool LRoverNavigator::isCurrentEqualToGoalLocation() {
-    float distanceToLocation = _gps->distanceTo(GOAL_LAT, GOAL_LON);
+    float distanceToLocation = _gps->distanceToGoalLocation();
     return distanceToLocation < GOAL_RADIUS_METERS;
 }
 
@@ -189,7 +187,7 @@ void LRoverNavigator::configureCruiseOutput(int *leftWheelSpeed, int *rightWheel
 }
 
 void LRoverNavigator::configureCruiseGoalHeading() {
-    double goalHeadingDeg = _gps->bearingDegTo(GOAL_LAT, GOAL_LON);
+    double goalHeadingDeg = _gps->bearingDegToGoalLocation();
     _compass->setGoalHeadingDeg(goalHeadingDeg);
 }
 

@@ -37,6 +37,7 @@ Builds/Classes/LRoverSonics.cpp.o: Classes/LRoverSonics.cpp \
  Classes/ThirdParty/LCD/I2CIO.h Classes/ThirdParty/LCD/LCD.h \
  Classes/LGPS.h Classes/ThirdParty/TinyGPS.h \
  /Applications/Arduino.app/Contents/Java/hardware/arduino/avr/libraries/SoftwareSerial/SoftwareSerial.h \
- Classes/LPIDTuner.h Classes/LLogger.h Classes/LDebugLog.h \
- Classes/LGPSLogger.h Classes/LPIDLogger.h Classes/LCompassLogger.h \
- Classes/LMotorControllerLogger.h Classes/LRoverSonicsLogger.h
+ Classes/LGeoLocation.h Classes/LPIDTuner.h Classes/LLogger.h \
+ Classes/LDebugLog.h Classes/LGPSLogger.h Classes/LPIDLogger.h \
+ Classes/LCompassLogger.h Classes/LMotorControllerLogger.h \
+ Classes/LRoverSonicsLogger.h
