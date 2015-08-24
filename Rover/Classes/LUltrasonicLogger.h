@@ -23,5 +23,4 @@ public:
     virtual void printToLCD(LLCD *lcd);
 };
 
-
 #endif /* defined(__Rover__LUltrasonicLogger__) */

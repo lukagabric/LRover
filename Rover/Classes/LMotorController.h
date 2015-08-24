@@ -2,10 +2,8 @@
 #define LMotorController_h
 
 #include "Arduino.h"
-#include "LLCD.h"
-#include "LDebugLog.h"
 
-class LMotorController : public LDebugLog {
+class LMotorController {
 private:
     unsigned int _ena, _in1, _in2, _enb, _in3, _in4;
     double _motorAConst, _motorBConst;
@@ -21,9 +19,6 @@ public:
     void turnLeft(int speed, bool kick);
     void turnRight(int speed, bool kick);
     void stopMoving();
-    
-    virtual void printToSerial();
-    virtual void printToLCD(LLCD *lcd);
 };
 
 #endif

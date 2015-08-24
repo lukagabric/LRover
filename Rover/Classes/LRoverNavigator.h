@@ -15,6 +15,7 @@
 #include "LGPSLogger.h"
 #include "LPIDLogger.h"
 #include "LCompassLogger.h"
+#include "LMotorControllerLogger.h"
 
 #define DEBUG_LOG 1
 #define LCD_DEBUG_LOG 1
@@ -83,6 +84,7 @@ private:
     LGPSLogger *_gpsLogger;
     LGPS *_gps;
     LMotorController *_motorController;
+    LMotorControllerLogger *_motorControllerLogger;
     LPIDTuner *_cruisePIDTuner;
     LPID *_cruisePID;
     LPIDLogger *_cruisePIDLogger;
