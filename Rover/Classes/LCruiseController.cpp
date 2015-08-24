@@ -7,7 +7,7 @@
 //
 
 #include "LCruiseController.h"
-#include "LRoverNavigator.h"
+#include <algorithm>
 
 #pragma mark - Constructor
 
@@ -67,12 +67,12 @@ LWheelSpeeds LCruiseController::cruiseWheelSpeedsForPIDOutput(double pidOutput) 
     if (pidOutput > 0) {
         //turn left
         leftWheelSpeed -= pidOutput;
-        leftWheelSpeed = std::max(MINIMUM_FORWARD_WHEEL_SPEED, leftWheelSpeed);
+        leftWheelSpeed = std::max(minimumForwardWheelSpeed, leftWheelSpeed);
     }
     else {
         //turn right
         rightWheelSpeed += pidOutput;
-        rightWheelSpeed = std::max(MINIMUM_FORWARD_WHEEL_SPEED, rightWheelSpeed);
+        rightWheelSpeed = std::max(minimumForwardWheelSpeed, rightWheelSpeed);
     }
     
     return {leftWheelSpeed, rightWheelSpeed};

@@ -24,6 +24,7 @@ private:
     double pidOutputForHeadingOffsetDeg(double headingOffsetDeg);
     LWheelSpeeds cruiseWheelSpeedsForPIDOutput(double pidOutput);
 public:
+    int minimumForwardWheelSpeed;
     LCruiseController(LPID *cruisePID);
     LWheelSpeeds cruiseOutput(LGeoLocation currentLocation, LGeoLocation goalLocation, double currentHeadingDeg);
 };

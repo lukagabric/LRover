@@ -34,6 +34,7 @@ void LRoverNavigator::setup() {
     _cruisePID->SetSampleTime(50);
     
     _cruiseController = new LCruiseController(_cruisePID);
+    _cruiseController->minimumForwardWheelSpeed = MINIMUM_FORWARD_WHEEL_SPEED;
     
 #if MANUAL_PID_TUNING
     _cruisePIDTuner = new LPIDTuner(_cruisePID, POT_Kp, POT_Ki, POT_Kd);

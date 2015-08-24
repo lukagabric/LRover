@@ -69,6 +69,7 @@
 		41AA254D1B8AEB3E002A5D60 /* LUltrasonicLogger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41AA254B1B8AEB3E002A5D60 /* LUltrasonicLogger.cpp */; };
 		41AA25501B8AEC3D002A5D60 /* LMotorControllerLogger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41AA254E1B8AEC3D002A5D60 /* LMotorControllerLogger.cpp */; };
 		41D22D461B8BAC890044C081 /* LCruiseController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41D22D441B8BAC890044C081 /* LCruiseController.cpp */; };
+		41D22D491B8BC3160044C081 /* LWallFollowController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41D22D471B8BC3160044C081 /* LWallFollowController.cpp */; };
 		41D260DA1B8AF97A00989473 /* LRoverSonicsLogger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41D260D81B8AF97A00989473 /* LRoverSonicsLogger.cpp */; };
 		41D294D51B71371500D37F64 /* LCompass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41D294D31B71371500D37F64 /* LCompass.cpp */; };
 		41E25F121B87B882000B9F79 /* LRoverSonics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41E25F101B87B882000B9F79 /* LRoverSonics.cpp */; };
@@ -735,6 +736,8 @@
 		41AA254F1B8AEC3D002A5D60 /* LMotorControllerLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMotorControllerLogger.h; sourceTree = "<group>"; };
 		41D22D441B8BAC890044C081 /* LCruiseController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LCruiseController.cpp; sourceTree = "<group>"; };
 		41D22D451B8BAC890044C081 /* LCruiseController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCruiseController.h; sourceTree = "<group>"; };
+		41D22D471B8BC3160044C081 /* LWallFollowController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LWallFollowController.cpp; sourceTree = "<group>"; };
+		41D22D481B8BC3160044C081 /* LWallFollowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LWallFollowController.h; sourceTree = "<group>"; };
 		41D260D81B8AF97A00989473 /* LRoverSonicsLogger.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LRoverSonicsLogger.cpp; sourceTree = "<group>"; };
 		41D260D91B8AF97A00989473 /* LRoverSonicsLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LRoverSonicsLogger.h; sourceTree = "<group>"; };
 		41D294D31B71371500D37F64 /* LCompass.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LCompass.cpp; sourceTree = "<group>"; };
@@ -1501,6 +1504,8 @@
 				417D50BE1B8B448B00C9EE59 /* LWheelSpeeds.h */,
 				41D22D441B8BAC890044C081 /* LCruiseController.cpp */,
 				41D22D451B8BAC890044C081 /* LCruiseController.h */,
+				41D22D471B8BC3160044C081 /* LWallFollowController.cpp */,
+				41D22D481B8BC3160044C081 /* LWallFollowController.h */,
 				410965211B60478300832B47 /* LRoverNavigator.cpp */,
 				410965221B60478300832B47 /* LRoverNavigator.h */,
 			);
@@ -3076,6 +3081,7 @@
 				AA2A150720200537AA0000C8 /* GSM3ShieldV1SMSProvider.cpp in Sources */,
 				AA2A150720200537AA0000C9 /* GSM3ShieldV1SMSProvider.h in Sources */,
 				AA2A150720200537AA0000CA /* GSM3ShieldV1VoiceProvider.cpp in Sources */,
+				41D22D491B8BC3160044C081 /* LWallFollowController.cpp in Sources */,
 				4176DD5A1B76126D007E1AD9 /* locale.cpp in Sources */,
 				AA2A150720200537AA0000CB /* GSM3ShieldV1VoiceProvider.h in Sources */,
 				AA2A150720200537AA0000CC /* GSM3SMSService.cpp in Sources */,
