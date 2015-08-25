@@ -19,6 +19,7 @@ LWallFollowController::LWallFollowController(LPID *wallFollowPID) {
 LWheelSpeeds LWallFollowController::wallFollowOutput(LObstacleDistances obstacleDistances) {
     double leftMinimumDistance = obstacleDistances.leftMinDistance();
     double rightMinimumDistance = obstacleDistances.rightMinDistance();
+    bool frontObstacle = obstacleDistances.isObstacleFront();
     bool leftFollow = leftMinimumDistance < rightMinimumDistance;
     double distance = leftFollow ? leftMinimumDistance : rightMinimumDistance;
     

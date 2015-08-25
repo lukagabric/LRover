@@ -16,7 +16,10 @@ private:
 public:
     LObstacleDistances();
     LObstacleDistances(double frontDistance, double frontLeftDistance, double frontRightDistance, double leftDistance, double rightDistance, double obstacleDistanceThreshold, double obstacleClearDistanceThreshold);
-    
+
+    double obstacleDistanceThreshold();
+    double obstacleClearDistanceThreshold();
+
     double frontDistance();
     double frontRightDistance();
     double frontLeftDistance();

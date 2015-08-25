@@ -46,6 +46,14 @@ bool LObstacleDistances::isObstacleCleared() {
 
 #pragma mark - Absolute Values
 
+double LObstacleDistances::obstacleDistanceThreshold() {
+    return _obstacleDistanceThreshold;
+}
+
+double LObstacleDistances::obstacleClearDistanceThreshold() {
+    return _obstacleClearDistanceThreshold;
+}
+
 double LObstacleDistances::frontDistance() {
     return _frontDistance;
 }
