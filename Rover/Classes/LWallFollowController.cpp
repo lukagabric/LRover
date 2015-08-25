@@ -12,30 +12,26 @@
 
 LWallFollowController::LWallFollowController(LPID *wallFollowPID) {
     _wallFollowPID = wallFollowPID;
+
+    double maxWheelSpeed = 255;
+    _wallFollowPID->SetOutputLimits(-2*maxWheelSpeed, 2*maxWheelSpeed);
 }
 
 #pragma mark - Output
 
 LWheelSpeeds LWallFollowController::wallFollowOutput(LObstacleDistances obstacleDistances) {
-    double leftMinimumDistance = obstacleDistances.leftMinDistance();
-    double rightMinimumDistance = obstacleDistances.rightMinDistance();
-    bool frontObstacle = obstacleDistances.isObstacleFront();
-    bool leftFollow = leftMinimumDistance < rightMinimumDistance;
-    double distance = leftFollow ? leftMinimumDistance : rightMinimumDistance;
-    
-    double maxWheelSpeed = 255;
-    
-    _wallFollowPID->SetControllerDirection(leftFollow ? REVERSE : DIRECT);
-    _wallFollowPID->SetOutputLimits(-2*maxWheelSpeed, 2*maxWheelSpeed);
-    _wallFollowPID->setInput(distance);
-    _wallFollowPID->Compute();
-    
-    return {0, 0};
+    double pidOutput = pidOutputForObstacleDistances(obstacleDistances);
+    return wallFollowWheelSpeedsForPIDOutput(pidOutput);
 }
 
 double LWallFollowController::pidOutputForObstacleDistances(LObstacleDistances obstacleDistances) {
-    _wallFollowPID->setInput(obstacleDistances.leftMinDistance());
+    bool leftFollow = obstacleDistances.leftMinDistance() < obstacleDistances.rightMinDistance();
+    double minimumDistance = obstacleDistances.minDistance();
+    
+    _wallFollowPID->SetControllerDirection(leftFollow ? REVERSE : DIRECT);
+    _wallFollowPID->setInput(minimumDistance);
     _wallFollowPID->Compute();
+
     return _wallFollowPID->output();
 }
 

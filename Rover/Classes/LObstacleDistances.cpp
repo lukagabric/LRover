@@ -74,6 +74,11 @@ double LObstacleDistances::leftDistance() {
     return _leftDistance;
 }
 
+double LObstacleDistances::minDistance() {
+    double sideMinDistance = std::min(leftMinDistance(), rightMinDistance());
+    return std::min(frontDistance(), sideMinDistance);
+}
+
 double LObstacleDistances::rightMinDistance() {
     return std::min(_frontRightDistance, _rightDistance);
 }

@@ -26,6 +26,7 @@ public:
     double rightDistance();
     double leftDistance();
 
+    double minDistance();
     double leftMinDistance();
     double rightMinDistance();
     
