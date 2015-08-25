@@ -42,7 +42,7 @@ void LRoverSonics::performNextMeasurement() {
     _measureState = ++_measureState % _sonics.size();
     LUltrasonic *sonic = _sonics.at(_measureState);
     sonic->measureDistance();
-    _obstacleDistances = LObstacleDistances(_frontSonic->distance(), _frontLeftSonic->distance(), _frontRightSonic->distance(), _leftSonic->distance(), _rightSonic->distance());
+    _obstacleDistances = LObstacleDistances(_frontSonic->distance(), _frontLeftSonic->distance(), _frontRightSonic->distance(), _leftSonic->distance(), _rightSonic->distance(), OBSTACLE_DISTANCE_THRESHOLD, OBSTACLE_CLEARED_DISTANCE_THRESHOLD);
 }
 
 #pragma mark - Getters

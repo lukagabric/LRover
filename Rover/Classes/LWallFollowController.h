@@ -16,7 +16,8 @@
 class LWallFollowController {
 private:
     LPID *_wallFollowPID;
-    
+    double pidOutputForObstacleDistances(LObstacleDistances obstacleDistances);
+    LWheelSpeeds wallFollowWheelSpeedsForPIDOutput(double pidOutput);
 public:
     LWallFollowController(LPID *wallFollowPID);
     LWheelSpeeds wallFollowOutput(LObstacleDistances obstacleDistances);

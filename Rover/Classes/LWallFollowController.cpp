@@ -29,4 +29,26 @@ LWheelSpeeds LWallFollowController::wallFollowOutput(LObstacleDistances obstacle
     return {0, 0};
 }
 
+double LWallFollowController::pidOutputForObstacleDistances(LObstacleDistances obstacleDistances) {
+    _wallFollowPID->setInput(obstacleDistances.leftMinDistance());
+    _wallFollowPID->Compute();
+    return _wallFollowPID->output();
+}
+
+LWheelSpeeds LWallFollowController::wallFollowWheelSpeedsForPIDOutput(double pidOutput) {
+    int leftWheelSpeed = 255;
+    int rightWheelSpeed = 255;
+    
+    if (pidOutput > 0) {
+        //turn left
+        leftWheelSpeed -= pidOutput;
+    }
+    else {
+        //turn right
+        rightWheelSpeed += pidOutput;
+    }
+    
+    return {leftWheelSpeed, rightWheelSpeed};
+}
+
 #pragma mark -

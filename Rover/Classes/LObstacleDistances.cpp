@@ -16,18 +16,18 @@ LObstacleDistances::LObstacleDistances() {
     _frontRightDistance = 999;
     _leftDistance = 999;
     _rightDistance = 999;
-    obstacleDistanceThreshold = 0;
-    obstacleClearDistanceThreshold = 0;
+    _obstacleDistanceThreshold = 0;
+    _obstacleClearDistanceThreshold = 0;
 }
 
-LObstacleDistances::LObstacleDistances(double frontDistance, double frontLeftDistance, double frontRightDistance, double leftDistance, double rightDistance) {
+LObstacleDistances::LObstacleDistances(double frontDistance, double frontLeftDistance, double frontRightDistance, double leftDistance, double rightDistance, double obstacleDistanceThreshold, double obstacleClearDistanceThreshold) {
     _frontDistance = frontDistance;
     _frontLeftDistance = frontLeftDistance;
     _frontRightDistance = frontRightDistance;
     _leftDistance = leftDistance;
     _rightDistance = rightDistance;
-    obstacleDistanceThreshold = 30;
-    obstacleClearDistanceThreshold = 40;
+    _obstacleDistanceThreshold = obstacleDistanceThreshold;
+    _obstacleClearDistanceThreshold = obstacleClearDistanceThreshold;
 }
 
 #pragma mark - Obstacle Proximity
@@ -37,11 +37,11 @@ bool LObstacleDistances::isObstacleDetected() {
 }
 
 bool LObstacleDistances::isObstacleCleared() {
-    return (_frontDistance > obstacleClearDistanceThreshold &&
-            _frontLeftDistance > obstacleClearDistanceThreshold &&
-            _frontRightDistance > obstacleClearDistanceThreshold &&
-            _leftDistance > obstacleClearDistanceThreshold &&
-            _rightDistance > obstacleClearDistanceThreshold);
+    return (_frontDistance > _obstacleClearDistanceThreshold &&
+            _frontLeftDistance > _obstacleClearDistanceThreshold &&
+            _frontRightDistance > _obstacleClearDistanceThreshold &&
+            _leftDistance > _obstacleClearDistanceThreshold &&
+            _rightDistance > _obstacleClearDistanceThreshold);
 }
 
 #pragma mark - Absolute Values
@@ -77,23 +77,23 @@ double LObstacleDistances::leftMinDistance() {
 #pragma mark - Each Distance
 
 bool LObstacleDistances::isObstacleFront() {
-    return _frontDistance < obstacleDistanceThreshold;
+    return _frontDistance < _obstacleDistanceThreshold;
 }
 
 bool LObstacleDistances::isObstacleFrontRight() {
-    return _frontRightDistance < obstacleDistanceThreshold;
+    return _frontRightDistance < _obstacleDistanceThreshold;
 }
 
 bool LObstacleDistances::isObstacleFrontLeft() {
-    return _frontLeftDistance < obstacleDistanceThreshold;
+    return _frontLeftDistance < _obstacleDistanceThreshold;
 }
 
 bool LObstacleDistances::isObstacleRight() {
-    return _rightDistance < obstacleDistanceThreshold;
+    return _rightDistance < _obstacleDistanceThreshold;
 }
 
 bool LObstacleDistances::isObstacleLeft() {
-    return _leftDistance < obstacleDistanceThreshold;
+    return _leftDistance < _obstacleDistanceThreshold;
 }
 
 #pragma mark - Specific Distances
