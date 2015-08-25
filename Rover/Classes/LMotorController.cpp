@@ -39,8 +39,8 @@ void LMotorController::move(int leftSpeed, int rightSpeed) {
     digitalWrite(_in4, _rightWheelSpeed > 0 ? LOW : HIGH);
     digitalWrite(_in1, _leftWheelSpeed > 0 ? HIGH : LOW);
     digitalWrite(_in2, _leftWheelSpeed > 0 ? LOW : HIGH);
-    analogWrite(_ena, _leftWheelSpeed * _motorAConst);
-    analogWrite(_enb, _rightWheelSpeed * _motorBConst);
+    analogWrite(_ena, abs(_leftWheelSpeed) * _motorAConst);
+    analogWrite(_enb, abs(_rightWheelSpeed) * _motorBConst);
 }
 
 void LMotorController::move(int speed) {
