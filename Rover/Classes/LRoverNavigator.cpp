@@ -72,6 +72,10 @@ void LRoverNavigator::setup() {
         _cruisePIDLogger = new LPIDLogger(_cruisePID);
         logItems.push_back(_cruisePIDLogger);
     }
+    if (_wallFollowPID) {
+        _wallFollowPIDLogger = new LPIDLogger(_wallFollowPID);
+        logItems.push_back(_wallFollowPIDLogger);
+    }
     if (_motorController) {
         _motorControllerLogger = new LMotorControllerLogger(_motorController);
         logItems.push_back(_motorControllerLogger);

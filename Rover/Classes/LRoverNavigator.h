@@ -94,8 +94,8 @@ private:
     LGPS *_gps;
     LMotorController *_motorController;
     LMotorControllerLogger *_motorControllerLogger;
-    LPIDTuner *_cruisePIDTuner;
     LPID *_cruisePID;
+    LPIDTuner *_cruisePIDTuner;
     LPIDLogger *_cruisePIDLogger;
     LCruiseController *_cruiseController;
     LCompass *_compass;
@@ -105,6 +105,7 @@ private:
     LWallFollowController *_wallFollowController;
     LPID *_wallFollowPID;
     LPIDTuner *_wallFollowPIDTuner;
+    LPIDLogger *_wallFollowPIDLogger;
     LLogger *_logger;
     
     LRoverState _state;
