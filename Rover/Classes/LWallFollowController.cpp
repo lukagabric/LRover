@@ -23,7 +23,10 @@ LWheelSpeeds LWallFollowController::wallFollowOutput(LObstacleDistances obstacle
     bool leftFollow = leftMinimumDistance < rightMinimumDistance;
     double distance = leftFollow ? leftMinimumDistance : rightMinimumDistance;
     
-    _wallFollowPID->SetControllerDirection(leftFollow ? DIRECT : REVERSE);
+    double maxWheelSpeed = 255;
+    
+    _wallFollowPID->SetControllerDirection(leftFollow ? REVERSE : DIRECT);
+    _wallFollowPID->SetOutputLimits(-2*maxWheelSpeed, 2*maxWheelSpeed);
     _wallFollowPID->setInput(distance);
     _wallFollowPID->Compute();
     
@@ -41,12 +44,12 @@ LWheelSpeeds LWallFollowController::wallFollowWheelSpeedsForPIDOutput(double pid
     int rightWheelSpeed = 255;
     
     if (pidOutput > 0) {
-        //turn left
-        leftWheelSpeed -= pidOutput;
+        //turn right
+        rightWheelSpeed -= pidOutput;
     }
     else {
-        //turn right
-        rightWheelSpeed += pidOutput;
+        //turn left
+        leftWheelSpeed += pidOutput;
     }
     
     return {leftWheelSpeed, rightWheelSpeed};
