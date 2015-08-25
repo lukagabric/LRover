@@ -11,6 +11,7 @@
 
 #include "vector"
 #include "LUltrasonic.h"
+#include "LObstacleDistances.h"
 
 class LRoverSonics {
 private:
@@ -24,23 +25,15 @@ private:
     
     std::vector<LUltrasonic *> _sonics;
     
+    LObstacleDistances _obstacleDistances;
+    
 public:
     LRoverSonics();
     ~LRoverSonics();
     
     void performNextMeasurement();
-    unsigned long frontDistance();
-    unsigned long frontRightDistance();
-    unsigned long frontLeftDistance();
-    unsigned long rightDistance();
-    unsigned long leftDistance();
     
-    bool isObstacleTooClose();
-    bool isObstacleFront();
-    bool isObstacleFrontRight();
-    bool isObstacleFrontLeft();
-    bool isObstacleRight();
-    bool isObstacleLeft();
+    LObstacleDistances obstacleDistances();
 };
 
 #endif /* defined(__Rover__LRoverSonics__) */

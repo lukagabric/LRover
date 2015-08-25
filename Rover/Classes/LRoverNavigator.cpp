@@ -141,15 +141,27 @@ void LRoverNavigator::loopAt20Hz() {
         arrivedAtGoal();
         return;
     }
+    
+    LObstacleDistances obstacleDistances = _sonics->obstacleDistances();
 
-    bool followWall = _sonics->isObstacleTooClose();
+    if (_state != LRoverStateWallFollow) {
+        if (obstacleDistances.isObstacleDetected()) {
+            _state = LRoverStateWallFollow;
+        }
+    }
+    else if (obstacleDistances.isObstacleCleared()) {
+        _state = LRoverStateCruise;
+    }
     
     LWheelSpeeds wheelSpeeds;
-    if (followWall) {
-        wheelSpeeds = wallFollowOutput();
-    }
-    else {
-        wheelSpeeds = _cruiseController->cruiseOutput(currentLocation, _goalLocation, _compass->headingDeg());
+    
+    switch (_state) {
+        case LRoverStateWallFollow:
+            wheelSpeeds = _wallFollowController->wallFollowOutput(obstacleDistances);
+            break;
+        case LRoverStateCruise:
+            wheelSpeeds = _cruiseController->cruiseOutput(currentLocation, _goalLocation, _compass->headingDeg());
+            break;
     }
     
     //path execution
@@ -178,12 +190,6 @@ void LRoverNavigator::arrivedAtGoal() {
     _motorController->turnLeft(255, false);
     delay(4000);
     _motorController->stopMoving();
-}
-
-#pragma mark - Wall Follow
-
-LWheelSpeeds LRoverNavigator::wallFollowOutput() {
-    return {0, 0};
 }
 
 #pragma mark -

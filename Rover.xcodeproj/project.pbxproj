@@ -12,6 +12,7 @@
 		411EBB101B75FDA9002093F3 /* LDebugLog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 411EBB0E1B75FDA9002093F3 /* LDebugLog.cpp */; };
 		4124D4F31B5D6DEF0065FBF5 /* Rover.ino in Sources */ = {isa = PBXBuildFile; fileRef = 4174D4F31B5D6DEF0065FBF5 /* Rover.ino */; };
 		41372BDE1B602BE2001967CC /* LUltrasonic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41372BDC1B602BE2001967CC /* LUltrasonic.cpp */; };
+		416D405B1B8C8E7700348DAB /* LObstacleDistances.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 416D40591B8C8E7700348DAB /* LObstacleDistances.cpp */; };
 		417127F91B7269E1001885C9 /* LGPS.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 417127F71B7269E1001885C9 /* LGPS.cpp */; };
 		417276F41B89E80100E8BBB3 /* NewPing.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 417276F21B89E80100E8BBB3 /* NewPing.cpp */; };
 		417277071B8A7E9500E8BBB3 /* LGPSLogger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 417277051B8A7E9500E8BBB3 /* LGPSLogger.cpp */; };
@@ -486,6 +487,8 @@
 		411EBB0F1B75FDA9002093F3 /* LDebugLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LDebugLog.h; sourceTree = "<group>"; };
 		41372BDC1B602BE2001967CC /* LUltrasonic.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LUltrasonic.cpp; sourceTree = "<group>"; };
 		41372BDD1B602BE2001967CC /* LUltrasonic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LUltrasonic.h; sourceTree = "<group>"; };
+		416D40591B8C8E7700348DAB /* LObstacleDistances.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LObstacleDistances.cpp; sourceTree = "<group>"; };
+		416D405A1B8C8E7700348DAB /* LObstacleDistances.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LObstacleDistances.h; sourceTree = "<group>"; };
 		417127F71B7269E1001885C9 /* LGPS.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LGPS.cpp; sourceTree = "<group>"; };
 		417127F81B7269E1001885C9 /* LGPS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGPS.h; sourceTree = "<group>"; };
 		417276F21B89E80100E8BBB3 /* NewPing.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NewPing.cpp; sourceTree = "<group>"; };
@@ -1499,6 +1502,8 @@
 				41372BDD1B602BE2001967CC /* LUltrasonic.h */,
 				41E25F101B87B882000B9F79 /* LRoverSonics.cpp */,
 				41E25F111B87B882000B9F79 /* LRoverSonics.h */,
+				416D40591B8C8E7700348DAB /* LObstacleDistances.cpp */,
+				416D405A1B8C8E7700348DAB /* LObstacleDistances.h */,
 				417D50BD1B8B445A00C9EE59 /* LGeoLocation.h */,
 				417D50BF1B8B4C6D00C9EE59 /* LGeoLocation.cpp */,
 				417D50BE1B8B448B00C9EE59 /* LWheelSpeeds.h */,
@@ -3053,6 +3058,7 @@
 				AA2A150720200537AA0000AE /* GSM3ShieldV1BandManagement.cpp in Sources */,
 				AA2A150720200537AA0000AF /* GSM3ShieldV1BandManagement.h in Sources */,
 				AA2A150720200537AA0000B0 /* GSM3ShieldV1BaseProvider.cpp in Sources */,
+				416D405B1B8C8E7700348DAB /* LObstacleDistances.cpp in Sources */,
 				AA2A150720200537AA0000B1 /* GSM3ShieldV1BaseProvider.h in Sources */,
 				AA2A150720200537AA0000B2 /* GSM3ShieldV1CellManagement.cpp in Sources */,
 				AA2A150720200537AA0000B3 /* GSM3ShieldV1CellManagement.h in Sources */,

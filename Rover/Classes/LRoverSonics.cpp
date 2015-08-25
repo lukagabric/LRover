@@ -10,6 +10,8 @@
 #include "LRoverNavigator.h"
 #include "Arduino.h"
 
+#pragma mark - Constructor/Destructor
+
 LRoverSonics::LRoverSonics() {
     _frontSonic = new LUltrasonic(SONIC_FRONT_ECHO, SONIC_FRONT_TRIG);
     _frontRightSonic = new LUltrasonic(SONIC_FRONT_RIGHT_ECHO, SONIC_FRONT_RIGHT_TRIG);
@@ -34,55 +36,19 @@ LRoverSonics::~LRoverSonics() {
     delete _leftSonic;
 }
 
+#pragma mark - Measurement
 
 void LRoverSonics::performNextMeasurement() {
     _measureState = ++_measureState % _sonics.size();
     LUltrasonic *sonic = _sonics.at(_measureState);
     sonic->measureDistance();
+    _obstacleDistances = LObstacleDistances(_frontSonic->distance(), _frontLeftSonic->distance(), _frontRightSonic->distance(), _leftSonic->distance(), _rightSonic->distance());
 }
 
-unsigned long LRoverSonics::frontDistance() {
-    return _frontSonic->distance();
-}
+#pragma mark - Getters
 
-unsigned long LRoverSonics::frontRightDistance() {
-    return _frontRightSonic->distance();
-}
-
-unsigned long LRoverSonics::frontLeftDistance() {
-    return _frontLeftSonic->distance();
-}
-
-unsigned long LRoverSonics::rightDistance() {
-    return _rightSonic->distance();
-}
-
-unsigned long LRoverSonics::leftDistance() {
-    return _leftSonic->distance();
-}
-
-bool LRoverSonics::isObstacleTooClose() {
-    return isObstacleFront() || isObstacleFrontRight() || isObstacleFrontLeft() || isObstacleRight() || isObstacleLeft();
-}
-
-bool LRoverSonics::isObstacleFront() {
-    return frontDistance() < WALL_FOLLOW_DISTANCE_SETPOINT;
-}
-
-bool LRoverSonics::isObstacleFrontRight() {
-    return frontRightDistance() < WALL_FOLLOW_DISTANCE_SETPOINT;
-}
-
-bool LRoverSonics::isObstacleFrontLeft() {
-    return frontLeftDistance() < WALL_FOLLOW_DISTANCE_SETPOINT;
-}
-
-bool LRoverSonics::isObstacleRight() {
-    return rightDistance() < WALL_FOLLOW_DISTANCE_SETPOINT;
-}
-
-bool LRoverSonics::isObstacleLeft() {
-    return leftDistance() < WALL_FOLLOW_DISTANCE_SETPOINT;
+LObstacleDistances LRoverSonics::obstacleDistances() {
+    return _obstacleDistances;
 }
 
 #pragma mark -

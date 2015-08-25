@@ -38,7 +38,7 @@ Builds/Classes/LRoverNavigator.cpp.o: Classes/LRoverNavigator.cpp \
  Classes/ThirdParty/StdCpp/algorithm Classes/ThirdParty/StdCpp/functional \
  Classes/ThirdParty/StdCpp/type_traits \
  Classes/ThirdParty/StdCpp/initializer_list Classes/LDebugLog.h \
- Classes/LRoverSonics.h Classes/LGPSLogger.h Classes/LPIDLogger.h \
- Classes/LCompassLogger.h Classes/LMotorControllerLogger.h \
- Classes/LRoverSonicsLogger.h Classes/LCruiseController.h \
- Classes/LWallFollowController.h
+ Classes/LRoverSonics.h Classes/LObstacleDistances.h Classes/LGPSLogger.h \
+ Classes/LPIDLogger.h Classes/LCompassLogger.h \
+ Classes/LMotorControllerLogger.h Classes/LRoverSonicsLogger.h \
+ Classes/LCruiseController.h Classes/LWallFollowController.h

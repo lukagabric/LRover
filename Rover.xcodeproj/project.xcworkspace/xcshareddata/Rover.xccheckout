@@ -7,14 +7,14 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>289583EA-46CF-4B2B-A7D7-A726B4693540</string>
 	<key>IDESourceControlProjectName</key>
-	<string>project</string>
+	<string>Rover</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>055D7366BBFF75567A7B20EEC3B89A6A30038100</key>
 		<string>https://github.com/lukagabric/LRover.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>Rover.xcodeproj/project.xcworkspace</string>
+	<string>Rover.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>055D7366BBFF75567A7B20EEC3B89A6A30038100</key>

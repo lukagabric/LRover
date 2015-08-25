@@ -83,7 +83,7 @@
 //#define LPF_RC 0.05
 //#define LPF_DT 1/20.0
 
-enum LRoverState {CRUISE = 0, WALLFOLLOW = 1};
+enum LRoverState {LRoverStateCruise = 0, LRoverStateWallFollow = 1};
 
 class LRoverNavigator {
 private:
