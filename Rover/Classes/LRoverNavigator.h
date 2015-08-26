@@ -45,7 +45,6 @@
 #define GOAL_LAT 45.551803
 #define GOAL_LON 18.695682
 
-
 #define GOAL_RADIUS_METERS 1
 
 //Ultrasonic
