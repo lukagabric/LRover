@@ -38,8 +38,13 @@
 //#define GOAL_LON 18.661836624145507
 
 //Prilaz kući, Ernestinovo
-#define GOAL_LAT 45.452903747558593
-#define GOAL_LON 18.662023544311523
+//#define GOAL_LAT 45.452903747558593
+//#define GOAL_LON 18.662023544311523
+
+//Sjenjak, igralište
+#define GOAL_LAT 45.551803
+#define GOAL_LON 18.695682
+
 
 #define GOAL_RADIUS_METERS 1
 
