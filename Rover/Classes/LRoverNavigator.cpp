@@ -119,6 +119,7 @@ void LRoverNavigator::loopAt5s() {
 void LRoverNavigator::loopAt1Hz() {
 #if MANUAL_PID_TUNING
     _cruisePIDTuner->configurePIDConstants();
+    _wallFollowPIDTuner->configurePIDConstants();
 #endif
 #if DEBUG_LOG
     _logger->debugLogToSerial();
