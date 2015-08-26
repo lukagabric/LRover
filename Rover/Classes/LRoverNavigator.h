@@ -24,7 +24,7 @@
 
 #define DEBUG_LOG 1
 #define LCD_DEBUG_LOG 1
-#define MANUAL_PID_TUNING 1
+#define MANUAL_PID_TUNING 0
 #define DRIVE 1
 
 //Centar terena Sloga, Ernestinovo: 45.452608, 18.662766
@@ -125,10 +125,8 @@ private:
     bool isCurrentEqualToGoalLocation();
     void arrivedAtGoal();
         
-    LWheelSpeeds wallFollowOutput();
-    
-    void move(int leftWheelSpeed, int rightWheelSpeed);
-    
+    bool shouldForceCruiseAndIgnoreObstacle(LObstacleDistances obstacleDistances);
+
     void debugLogToLCD();
     void debugLog();
     

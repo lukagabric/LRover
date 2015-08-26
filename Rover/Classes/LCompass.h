@@ -35,7 +35,7 @@ public:
     void setDeclinationDeg(double declinationDeg);
     double declinationDeg();
     
-    double offsetFromGoalHeadingDeg(); //Direction: CCW
+    double offsetFromGoalHeadingDeg(); //-180 <= offset <= 180; offset < 0 => CCW; offset > 0 => CW
     
     double degToRad(double deg);
     double radToDeg(double rad);

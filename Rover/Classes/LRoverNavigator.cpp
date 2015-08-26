@@ -136,20 +136,25 @@ void LRoverNavigator::loopAt20Hz() {
     //localization
     LGeoLocation currentLocation = _gps->location();
     
+    if (!currentLocation.isValid()) return;
+    
+    double goalHeadingDeg = currentLocation.headingDegTo(_goalLocation);
+    _compass->setGoalHeadingDeg(goalHeadingDeg);
+    
     //path planning
-    if (currentLocation.isValid() && isCurrentEqualToGoalLocation()) {
+    if (isCurrentEqualToGoalLocation()) {
         arrivedAtGoal();
         return;
     }
     
     LObstacleDistances obstacleDistances = _sonics->obstacleDistances();
-
+    
     if (_state != LRoverStateWallFollow) {
         if (obstacleDistances.isObstacleDetected()) {
             _state = LRoverStateWallFollow;
         }
     }
-    else if (obstacleDistances.isObstacleCleared()) {
+    else if (obstacleDistances.isObstacleCleared() || shouldForceCruiseAndIgnoreObstacle(obstacleDistances)) {
         _state = LRoverStateCruise;
     }
     
@@ -168,6 +173,17 @@ void LRoverNavigator::loopAt20Hz() {
 #if DRIVE
     _motorController->move(wheelSpeeds.leftWheelSpeed, wheelSpeeds.rightWheelSpeed);
 #endif
+}
+
+bool LRoverNavigator::shouldForceCruiseAndIgnoreObstacle(LObstacleDistances obstacleDistances) {
+    bool leftFollow = obstacleDistances.leftMinDistance() < obstacleDistances.rightMinDistance();
+    double headingOffset = _compass->offsetFromGoalHeadingDeg();
+    
+    if ((leftFollow == true && headingOffset > 0) || (leftFollow == false && headingOffset < 0)) {
+        return true;
+    }
+    
+    return false;
 }
 
 #pragma mark - Perception

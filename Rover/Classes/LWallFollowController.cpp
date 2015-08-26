@@ -8,6 +8,14 @@
 
 #include "LWallFollowController.h"
 
+#define FRONT_Kp 24
+#define FRONT_Ki 10
+#define FRONT_Kd 0.3
+
+#define SIDE_Kp 15
+#define SIDE_Ki 0.2
+#define SIDE_Kd 0.12
+
 #pragma mark - Constructor
 
 LWallFollowController::LWallFollowController(LPID *wallFollowPID) {
@@ -28,7 +36,14 @@ double LWallFollowController::pidOutputForObstacleDistances(LObstacleDistances o
     bool leftFollow = obstacleDistances.leftMinDistance() < obstacleDistances.rightMinDistance();
     double minimumDistance = obstacleDistances.minDistance();
     
-    _wallFollowPID->SetControllerDirection(leftFollow ? REVERSE : DIRECT);
+    if (obstacleDistances.isObstacleFront()) {
+        _wallFollowPID->SetTunings(FRONT_Kp, FRONT_Ki, FRONT_Kd);
+    }
+    else {
+        _wallFollowPID->SetTunings(SIDE_Kp, SIDE_Ki, SIDE_Kd);
+    }
+        
+    _wallFollowPID->SetControllerDirection(leftFollow ? DIRECT : REVERSE);
     _wallFollowPID->setInput(minimumDistance);
     _wallFollowPID->Compute();
 
