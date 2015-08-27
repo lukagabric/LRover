@@ -50,6 +50,8 @@ void LRoverNavigator::setup() {
     
 #if LCD_DEBUG_LOG
     _lcd = new LLCD();
+    _lcd->clear();
+    _lcd->print(0, 0, "INITIALIZING...");
 #endif
 
 #if DEBUG_LOG || LCD_DEBUG_LOG
@@ -123,6 +125,15 @@ void LRoverNavigator::initializationLoop() {
     if (millis() - _timeInit > 10000 && _gps->age() < 1000) {
         _goalLocation = _gps->location();
         _gps->setGoalLocation(_goalLocation);
+#if LCD_DEBUG_LOG
+        _lcd->clear();
+        _lcd->print(0, 0, "GOAL LOCATION");
+        _lcd->print(0, 1, "SET");
+        delay(2000);
+        _lcd->clear();
+        _lcd->print(0, 0, "PLACE ROBOT AT");
+        _lcd->print(0, 1, "START LOCATION");
+#endif
         delay(10000);
         _state = LRoverStateCruise;
     }
@@ -209,6 +220,15 @@ bool LRoverNavigator::isCurrentEqualToGoalLocation() {
 
 void LRoverNavigator::arrivedAtGoal() {
     _state = LRoverStateGoalReached;
+    
+#if DEBUG_LOG
+    Serial.println("GOAL REACHED");
+#endif
+#if LCD_DEBUG_LOG
+    _lcd->clear();
+    _lcd->print(0, 0, "GOAL");
+    _lcd->print(0, 1, "REACHED");
+#endif
     
     _motorController->turnLeft(255, false);
     delay(4000);
