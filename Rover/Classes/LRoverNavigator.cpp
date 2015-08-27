@@ -89,17 +89,14 @@ void LRoverNavigator::setup() {
 void LRoverNavigator::loop() {
     if (_atGoal) return;
     
+    _gps->readGPSData();
+
     unsigned long currentTime = millis();
     
     if (currentTime - _time20Hz >= 50) {
         _time20Hz = currentTime;
         loopAt20Hz();
     }
-    
-    currentTime = millis();
-    if (currentTime - _time20Hz > 20) return;
-    
-    _gps->readGPSData();
     if (currentTime - _time1Hz >= 1000) {
         _time1Hz = currentTime;
         loopAt1Hz();
@@ -175,17 +172,6 @@ void LRoverNavigator::loopAt20Hz() {
 #endif
 }
 
-bool LRoverNavigator::shouldForceCruiseAndIgnoreObstacle(LObstacleDistances obstacleDistances) {
-    bool leftFollow = obstacleDistances.leftMinDistance() < obstacleDistances.rightMinDistance();
-    double headingOffset = _compass->offsetFromGoalHeadingDeg();
-    
-    if ((leftFollow == true && headingOffset > 0) || (leftFollow == false && headingOffset < 0)) {
-        return true;
-    }
-    
-    return false;
-}
-
 #pragma mark - Perception
 
 void LRoverNavigator::updateSensorReadings() {
@@ -206,6 +192,17 @@ void LRoverNavigator::arrivedAtGoal() {
     _motorController->turnLeft(255, false);
     delay(4000);
     _motorController->stopMoving();
+}
+
+bool LRoverNavigator::shouldForceCruiseAndIgnoreObstacle(LObstacleDistances obstacleDistances) {
+    bool leftFollow = obstacleDistances.leftMinDistance() < obstacleDistances.rightMinDistance();
+    double headingOffset = _compass->offsetFromGoalHeadingDeg();
+    
+    if ((leftFollow == true && headingOffset > 0) || (leftFollow == false && headingOffset < 0)) {
+        return true;
+    }
+    
+    return false;
 }
 
 #pragma mark -
