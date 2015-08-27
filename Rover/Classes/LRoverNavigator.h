@@ -88,12 +88,14 @@
 //#define LPF_RC 0.05
 //#define LPF_DT 1/20.0
 
-enum LRoverState {LRoverStateCruise = 0, LRoverStateWallFollow = 1};
+enum LRoverState {LRoverStateInitialization = 0, LRoverStateCruise = 1, LRoverStateWallFollow = 2, LRoverStateGoalReached = 3};
 
 class LRoverNavigator {
 private:
-    bool _atGoal;
+    LRoverState _state;
     
+    LGeoLocation _goalLocation;
+
     LLCD *_lcd;
     LGPSLogger *_gpsLogger;
     LGPS *_gps;
@@ -113,11 +115,8 @@ private:
     LPIDLogger *_wallFollowPIDLogger;
     LLogger *_logger;
     
-    LRoverState _state;
-    
-    LGeoLocation _goalLocation;
-    
-    unsigned long _time1Hz, _time20Hz, _time5s;
+    unsigned long _timeInit, _time1Hz, _time20Hz, _time5s;
+    void initializationLoop();
     void loopAt5s();
     void loopAt1Hz();
     void loopAt20Hz();

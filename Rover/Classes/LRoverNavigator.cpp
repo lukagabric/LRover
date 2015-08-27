@@ -7,6 +7,9 @@
 #pragma mark - Setup
 
 void LRoverNavigator::setup() {
+    _state = LRoverStateInitialization;
+    _timeInit = 0; _time1Hz = 0; _time20Hz = 0; _time5s = 0;
+    
 #if DEBUG_LOG
     Serial.begin(9600);
     Serial.println("Starting...");
@@ -19,10 +22,7 @@ void LRoverNavigator::setup() {
     
     _sonics = new LRoverSonics();
     
-    _goalLocation = LGeoLocation(GOAL_LAT, GOAL_LON);
-    
     _gps = new LGPS();
-    _gps->setGoalLocation(_goalLocation);
     
 #if DRIVE
     _motorController = new LMotorController(ENA, IN1, IN2, ENB, IN3, IN4, 1, 1);
@@ -87,10 +87,15 @@ void LRoverNavigator::setup() {
 #pragma mark - Loop
 
 void LRoverNavigator::loop() {
-    if (_atGoal) return;
+    if (_state == LRoverStateGoalReached) return;
     
     _gps->readGPSData();
-
+    
+    if (_state == LRoverStateInitialization) {
+        initializationLoop();
+        return;
+    }
+    
     unsigned long currentTime = millis();
     
     if (currentTime - _time20Hz >= 50) {
@@ -104,6 +109,22 @@ void LRoverNavigator::loop() {
     if (currentTime - _time5s >= 5000) {
         _time5s = currentTime;
         loopAt5s();
+    }
+}
+
+void LRoverNavigator::initializationLoop() {
+    if (!_gps->location().isValid()) return;
+    
+    if (_timeInit == 0) {
+        _timeInit = millis();
+        return;
+    }
+    
+    if (millis() - _timeInit > 10000 && _gps->age() < 1000) {
+        _goalLocation = _gps->location();
+        _gps->setGoalLocation(_goalLocation);
+        delay(10000);
+        _state = LRoverStateCruise;
     }
 }
 
@@ -126,7 +147,7 @@ void LRoverNavigator::loopAt1Hz() {
 #endif
 }
 
-void LRoverNavigator::loopAt20Hz() {
+void LRoverNavigator::loopAt20Hz() {    
     //perception
     updateSensorReadings();
 
@@ -187,7 +208,7 @@ bool LRoverNavigator::isCurrentEqualToGoalLocation() {
 }
 
 void LRoverNavigator::arrivedAtGoal() {
-    _atGoal = true;
+    _state = LRoverStateGoalReached;
     
     _motorController->turnLeft(255, false);
     delay(4000);
