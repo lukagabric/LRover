@@ -12,7 +12,7 @@ void LRoverNavigator::setup() {
     
 #if DEBUG_LOG
     Serial.begin(9600);
-    Serial.println("Starting...");
+    Serial.println("Initialization...");
 #endif
 
     delay(100);
@@ -128,7 +128,6 @@ void LRoverNavigator::initializationLoop() {
 #if LCD_DEBUG_LOG
         _gpsLogger->printToLCD(_lcd);
 #endif
-        return;
     }
     
     if (millis() - _timeInit > 10000 && _gps->age() < 1000) {
