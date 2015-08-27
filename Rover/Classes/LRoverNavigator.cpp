@@ -86,7 +86,7 @@ void LRoverNavigator::setup() {
 #endif
 }
 
-#pragma mark - Loops
+#pragma mark - Loop
 
 void LRoverNavigator::loop() {
     if (_state == LRoverStateGoalReached) return;
@@ -114,6 +114,8 @@ void LRoverNavigator::loop() {
         loggingAndTuningLoopAt5s();
     }
 }
+
+#pragma mark - Initialization Loop
 
 void LRoverNavigator::initializationLoop() {
     if (!_gps->location().isValid()) return;
@@ -153,29 +155,12 @@ void LRoverNavigator::initializationLoop() {
     }
 }
 
-void LRoverNavigator::loggingAndTuningLoopAt5s() {
-#if LCD_DEBUG_LOG
-    _logger->skipNextDebugLogToLCD();
-#endif    
-}
-
-void LRoverNavigator::loggingAndTuningLoopAt1Hz() {
-#if MANUAL_PID_TUNING
-    _cruisePIDTuner->configurePIDConstants();
-    _wallFollowPIDTuner->configurePIDConstants();
-#endif
-#if DEBUG_LOG
-    _logger->debugLogToSerial();
-#endif
-#if LCD_DEBUG_LOG
-    _logger->debugLogToLCD();
-#endif
-}
+#pragma mark - Main Loop
 
 void LRoverNavigator::mainLoopAt20Hz() {
     //perception
     updateSensorReadings();
-
+    
     //localization
     LGeoLocation currentLocation = _gps->location();
     
@@ -218,14 +203,14 @@ void LRoverNavigator::mainLoopAt20Hz() {
 #endif
 }
 
-#pragma mark - Perception
+#pragma mark Perception
 
 void LRoverNavigator::updateSensorReadings() {
     _sonics->performNextMeasurement();
     _compass->updateHeading();
 }
 
-#pragma mark - Path Planning
+#pragma mark Path Planning
 
 bool LRoverNavigator::isCurrentEqualToGoalLocation() {
     float distanceToLocation = _gps->distanceToGoalLocation();
@@ -258,6 +243,27 @@ bool LRoverNavigator::shouldForceCruiseAndIgnoreObstacle(LObstacleDistances obst
     }
     
     return false;
+}
+
+#pragma mark - Logging And Tuning Loops
+
+void LRoverNavigator::loggingAndTuningLoopAt5s() {
+#if LCD_DEBUG_LOG
+    _logger->skipNextDebugLogToLCD();
+#endif    
+}
+
+void LRoverNavigator::loggingAndTuningLoopAt1Hz() {
+#if MANUAL_PID_TUNING
+    _cruisePIDTuner->configurePIDConstants();
+    _wallFollowPIDTuner->configurePIDConstants();
+#endif
+#if DEBUG_LOG
+    _logger->debugLogToSerial();
+#endif
+#if LCD_DEBUG_LOG
+    _logger->debugLogToLCD();
+#endif
 }
 
 #pragma mark -
