@@ -8,7 +8,7 @@
 
 void LRoverNavigator::setup() {
     _state = LRoverStateInitialization;
-    _timeInit = 0; _time1Hz = 0; _time20Hz = 0; _time5s = 0;
+    _timeInit = 0; _mainLoopTime20Hz = 0; _loggingAndTuningTime1Hz = 0; _loggingAndTuningTime5s = 0;
     
 #if DEBUG_LOG
     Serial.begin(9600);
@@ -86,7 +86,7 @@ void LRoverNavigator::setup() {
 #endif
 }
 
-#pragma mark - Loop
+#pragma mark - Loops
 
 void LRoverNavigator::loop() {
     if (_state == LRoverStateGoalReached) return;
@@ -100,17 +100,18 @@ void LRoverNavigator::loop() {
     
     unsigned long currentTime = millis();
     
-    if (currentTime - _time20Hz >= 50) {
-        _time20Hz = currentTime;
-        loopAt20Hz();
+    if (currentTime - _mainLoopTime20Hz >= 50) {
+        _mainLoopTime20Hz = currentTime;
+        mainLoopAt20Hz();
     }
-    if (currentTime - _time1Hz >= 1000) {
-        _time1Hz = currentTime;
-        loopAt1Hz();
+    
+    if (currentTime - _loggingAndTuningTime1Hz >= 1000) {
+        _loggingAndTuningTime1Hz = currentTime;
+        loggingAndTuningLoopAt1Hz();
     }
-    if (currentTime - _time5s >= 5000) {
-        _time5s = currentTime;
-        loopAt5s();
+    if (currentTime - _loggingAndTuningTime5s >= 5000) {
+        _loggingAndTuningTime5s = currentTime;
+        loggingAndTuningLoopAt5s();
     }
 }
 
@@ -119,16 +120,29 @@ void LRoverNavigator::initializationLoop() {
     
     if (_timeInit == 0) {
         _timeInit = millis();
+#if DEBUG_LOG
+        _gpsLogger->printToSerial();
+#endif
+#if LCD_DEBUG_LOG
+        _gpsLogger->printToLCD(_lcd);
+#endif
         return;
     }
     
     if (millis() - _timeInit > 10000 && _gps->age() < 1000) {
         _goalLocation = _gps->location();
         _gps->setGoalLocation(_goalLocation);
+#if DEBUG_LOG
+        Serial.println("GOAL LOCATION SET");
+        _gpsLogger->printToSerial();
+        Serial.println("PLACE ROBOT AT START LOCATION");
+#endif
 #if LCD_DEBUG_LOG
         _lcd->clear();
         _lcd->print(0, 0, "GOAL LOCATION");
         _lcd->print(0, 1, "SET");
+        delay(2000);
+        _gpsLogger->printToLCD(_lcd);
         delay(2000);
         _lcd->clear();
         _lcd->print(0, 0, "PLACE ROBOT AT");
@@ -139,13 +153,13 @@ void LRoverNavigator::initializationLoop() {
     }
 }
 
-void LRoverNavigator::loopAt5s() {
+void LRoverNavigator::loggingAndTuningLoopAt5s() {
 #if LCD_DEBUG_LOG
     _logger->skipNextDebugLogToLCD();
 #endif    
 }
 
-void LRoverNavigator::loopAt1Hz() {
+void LRoverNavigator::loggingAndTuningLoopAt1Hz() {
 #if MANUAL_PID_TUNING
     _cruisePIDTuner->configurePIDConstants();
     _wallFollowPIDTuner->configurePIDConstants();
@@ -158,7 +172,7 @@ void LRoverNavigator::loopAt1Hz() {
 #endif
 }
 
-void LRoverNavigator::loopAt20Hz() {    
+void LRoverNavigator::mainLoopAt20Hz() {
     //perception
     updateSensorReadings();
 

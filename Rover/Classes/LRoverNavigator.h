@@ -42,8 +42,8 @@
 //#define GOAL_LON 18.662023544311523
 
 //Sjenjak, igralište
-#define GOAL_LAT 45.551803
-#define GOAL_LON 18.695682
+//#define GOAL_LAT 45.551803
+//#define GOAL_LON 18.695682
 
 #define GOAL_RADIUS_METERS 1
 
@@ -115,11 +115,11 @@ private:
     LPIDLogger *_wallFollowPIDLogger;
     LLogger *_logger;
     
-    unsigned long _timeInit, _time1Hz, _time20Hz, _time5s;
+    unsigned long _timeInit, _mainLoopTime20Hz, _loggingAndTuningTime1Hz, _loggingAndTuningTime5s;
     void initializationLoop();
-    void loopAt5s();
-    void loopAt1Hz();
-    void loopAt20Hz();
+    void mainLoopAt20Hz();
+    void loggingAndTuningLoopAt5s();
+    void loggingAndTuningLoopAt1Hz();
     
     void updateSensorReadings();
 
