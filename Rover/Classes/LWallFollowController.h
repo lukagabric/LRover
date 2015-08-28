@@ -18,6 +18,7 @@ private:
     LPID *_wallFollowPID;
     double pidOutputForObstacleDistances(LObstacleDistances obstacleDistances);
     LWheelSpeeds wallFollowWheelSpeedsForPIDOutput(double pidOutput);
+    void updatePIDTunings(double Kp, double Ki, double Kd);
 public:
     LWallFollowController(LPID *wallFollowPID);
     LWheelSpeeds wallFollowOutput(LObstacleDistances obstacleDistances);

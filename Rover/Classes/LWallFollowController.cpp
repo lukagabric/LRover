@@ -8,21 +8,18 @@
 
 #include "LWallFollowController.h"
 
-#define FRONT_Kp 24
-#define FRONT_Ki 10
+#define FRONT_Kp 50
+#define FRONT_Ki 20
 #define FRONT_Kd 0.3
 
-#define SIDE_Kp 15
-#define SIDE_Ki 0.2
-#define SIDE_Kd 0.12
+#define SIDE_Kp 5
+#define SIDE_Ki 0.01
+#define SIDE_Kd 0.02
 
 #pragma mark - Constructor
 
 LWallFollowController::LWallFollowController(LPID *wallFollowPID) {
     _wallFollowPID = wallFollowPID;
-
-    double maxWheelSpeed = 255;
-    _wallFollowPID->SetOutputLimits(-2*maxWheelSpeed, 2*maxWheelSpeed);
 }
 
 #pragma mark - Output
@@ -37,17 +34,25 @@ double LWallFollowController::pidOutputForObstacleDistances(LObstacleDistances o
     double minimumDistance = obstacleDistances.minDistance();
     
     if (obstacleDistances.isObstacleFront()) {
-        _wallFollowPID->SetTunings(FRONT_Kp, FRONT_Ki, FRONT_Kd);
+        updatePIDTunings(FRONT_Kp, FRONT_Ki, FRONT_Kd);
     }
     else {
-        _wallFollowPID->SetTunings(SIDE_Kp, SIDE_Ki, SIDE_Kd);
+        updatePIDTunings(SIDE_Kp, SIDE_Ki, SIDE_Kd);
     }
-        
+    
     _wallFollowPID->SetControllerDirection(leftFollow ? DIRECT : REVERSE);
     _wallFollowPID->setInput(minimumDistance);
     _wallFollowPID->Compute();
-
+    
     return _wallFollowPID->output();
+}
+
+void LWallFollowController::updatePIDTunings(double Kp, double Ki, double Kd) {
+    if (_wallFollowPID->GetKp() == Kp && _wallFollowPID->GetKi() == Ki && _wallFollowPID->GetKd() == Kd) return;
+    _wallFollowPID->SetTunings(Kp, Ki, Kd);
+    _wallFollowPID->SetOutputLimits(0, 0.00001);
+    double maxWheelSpeed = 255;
+    _wallFollowPID->SetOutputLimits(-2*maxWheelSpeed, 2*maxWheelSpeed);
 }
 
 LWheelSpeeds LWallFollowController::wallFollowWheelSpeedsForPIDOutput(double pidOutput) {
