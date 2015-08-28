@@ -9,24 +9,18 @@
 #ifndef __Rover__LCruiseController__
 #define __Rover__LCruiseController__
 
-#include "LGeoLocation.h"
 #include "LWheelSpeeds.h"
 #include "LPID.h"
 
 class LCruiseController {
 private:
     LPID *_cruisePID;
-    LGeoLocation _lastLocation;
-    double _lastHeadingOffsetDeg;
-    bool hasLocationChanged(LGeoLocation currentLocation);
-    void updateHeadingOffset(LGeoLocation currentLocation, LGeoLocation goalLocation, double currentHeadingDeg);
-    double headingOffsetDeg(LGeoLocation currentLocation, LGeoLocation goalLocation, double currentHeadingDeg);
     double pidOutputForHeadingOffsetDeg(double headingOffsetDeg);
     LWheelSpeeds cruiseWheelSpeedsForPIDOutput(double pidOutput);
 public:
     int minimumForwardWheelSpeed;
     LCruiseController(LPID *cruisePID);
-    LWheelSpeeds cruiseOutput(LGeoLocation currentLocation, LGeoLocation goalLocation, double currentHeadingDeg);
+    LWheelSpeeds cruiseOutput(double headingOffsetDeg);
 };
 
 #endif /* defined(__Rover__LCruiseController__) */

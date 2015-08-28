@@ -17,41 +17,9 @@ LCruiseController::LCruiseController(LPID *cruisePID) {
 
 #pragma mark - Output
 
-LWheelSpeeds LCruiseController::cruiseOutput(LGeoLocation currentLocation, LGeoLocation goalLocation, double currentHeadingDeg) {
-    if (!currentLocation.isValid()) return {0, 0};
-    
-    double offsetDeg;
-    if (hasLocationChanged(currentLocation)) {
-        offsetDeg = headingOffsetDeg(currentLocation, goalLocation, currentHeadingDeg);
-    }
-    else {
-        offsetDeg = _lastHeadingOffsetDeg;
-    }
-    
-    double pidOutput = pidOutputForHeadingOffsetDeg(offsetDeg);
-    
+LWheelSpeeds LCruiseController::cruiseOutput(double headingOffsetDeg) {
+    double pidOutput = pidOutputForHeadingOffsetDeg(headingOffsetDeg);
     return cruiseWheelSpeedsForPIDOutput(pidOutput);
-}
-
-bool LCruiseController::hasLocationChanged(LGeoLocation currentLocation) {
-    bool hasLocationChanged = !currentLocation.isEqualTo(_lastLocation);
-    _lastLocation = currentLocation;
-    return hasLocationChanged;
-}
-
-double LCruiseController::headingOffsetDeg(LGeoLocation currentLocation, LGeoLocation goalLocation, double currentHeadingDeg) {
-    double goalHeadingDeg = currentLocation.headingDegTo(goalLocation);
-
-    double headingOffsetDeg = goalHeadingDeg - currentHeadingDeg;
-    
-    if (headingOffsetDeg < -180) {
-        headingOffsetDeg += 360;
-    }
-    else if (headingOffsetDeg > 180) {
-        headingOffsetDeg -= 360;
-    }
-    
-    return headingOffsetDeg;
 }
 
 double LCruiseController::pidOutputForHeadingOffsetDeg(double headingOffsetDeg) {

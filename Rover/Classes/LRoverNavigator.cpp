@@ -195,7 +195,7 @@ void LRoverNavigator::mainLoopAt20Hz() {
             wheelSpeeds = _wallFollowController->wallFollowOutput(obstacleDistances);
             break;
         case LRoverStateCruise:
-            wheelSpeeds = _cruiseController->cruiseOutput(currentLocation, _goalLocation, _compass->headingDeg());
+            wheelSpeeds = _cruiseController->cruiseOutput(_compass->offsetFromGoalHeadingDeg());
             break;
     }
     
