@@ -45,6 +45,8 @@ bool LGeoLocation::isEqualTo(LGeoLocation location) {
 }
 
 double LGeoLocation::headingDegTo(LGeoLocation location) {
+    if (!isValid() || !location.isValid()) return 999;
+    
     double fromLatR = degToRad(latitude());
 //    double fromLonR = degToRad(longitude());
     
@@ -63,6 +65,8 @@ double LGeoLocation::headingDegTo(LGeoLocation location) {
 }
 
 double LGeoLocation::distanceTo(LGeoLocation location) {
+    if (!isValid() || !location.isValid()) return -1;
+
     double fromLatR = degToRad(latitude());
 //    double fromLonR = degToRad(longitude());
     

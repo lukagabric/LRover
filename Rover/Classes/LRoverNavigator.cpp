@@ -46,6 +46,9 @@ void LRoverNavigator::setup() {
 #if MANUAL_PID_TUNING
 //    _cruisePIDTuner = new LPIDTuner(_cruisePID, POT_Kp, POT_Ki, POT_Kd);
     _wallFollowPIDTuner = new LPIDTuner(_wallFollowPID, POT_Kp, POT_Ki, POT_Kd);
+    _wallFollowPIDTuner->setKpMinMaxDiv(0, 1500, 100);
+    _wallFollowPIDTuner->setKiMinMaxDiv(0, 10, 1000);
+    _wallFollowPIDTuner->setKdMinMaxDiv(0, 10, 1000);
 #endif
     
 #if LCD_DEBUG_LOG

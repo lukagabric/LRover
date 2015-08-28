@@ -16,13 +16,16 @@ LPIDTuner::LPIDTuner(LPID *pid, uint8_t potKp, uint8_t potKi, uint8_t potKd) {
     setPots(potKp, potKi, potKd);
     
     _kpMin = 0;
-    _kpMax = 25;
+    _kpMax = 2500;
+    _kpDivide = 100;
     
     _kiMin = 0;
-    _kiMax = 1;
+    _kiMax = 100;
+    _kiDivide = 100;
     
     _kdMin = 0;
-    _kdMax = 5;
+    _kdMax = 500;
+    _kdDivide = 100;
 }
 
 #pragma mark - Configuration
@@ -32,9 +35,9 @@ void LPIDTuner::configurePIDConstants() {
     int potKi = analogRead(_potKi);
     int potKd = analogRead(_potKd);
     
-    double kp = map(potKp, 0, 1023, _kpMin * 100, _kpMax * 100) / 100.0;
-    double ki = map(potKi, 0, 1023, _kiMin * 100, _kiMax * 100) / 100.0;
-    double kd = map(potKd, 0, 1023, _kdMin * 100, _kdMax * 100) / 100.0;
+    double kp = map(potKp, 0, 1023, _kpMin, _kpMax) / _kpDivide;
+    double ki = map(potKi, 0, 1023, _kiMin, _kiMax) / _kiDivide;
+    double kd = map(potKd, 0, 1023, _kdMin, _kdMax) / _kdDivide;
     
     _pid->SetTunings(kp, ki, kd);
 }
@@ -47,20 +50,22 @@ void LPIDTuner::setPots(uint8_t potKp, uint8_t potKi, uint8_t potKd) {
     _potKd = potKd;
 }
 
-void LPIDTuner::setKpMinMax(unsigned long kpMin, unsigned long kpMax) {
+void LPIDTuner::setKpMinMaxDiv(unsigned long kpMin, unsigned long kpMax, double kpDivide) {
     _kpMin = kpMin;
     _kpMax = kpMax;
+    _kpDivide = kpDivide;
 }
 
-void LPIDTuner::setKiMinMax(unsigned long kiMin, unsigned long kiMax) {
+void LPIDTuner::setKiMinMaxDiv(unsigned long kiMin, unsigned long kiMax, double kiDivide) {
     _kiMin = kiMin;
     _kiMax = kiMax;
+    _kiDivide = kiDivide;
 }
 
-void LPIDTuner::setKdMinMax(unsigned long kdMin, unsigned long kdMax) {
+void LPIDTuner::setKdMinMaxDiv(unsigned long kdMin, unsigned long kdMax, double kdDivide) {
     _kdMin = kdMin;
     _kdMax = kdMax;
+    _kdDivide = kdDivide;
 }
-
 
 #pragma mark -
