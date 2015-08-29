@@ -33,7 +33,7 @@ double LWallFollowController::pidOutputForObstacleDistances(LObstacleDistances o
     bool leftFollow = obstacleDistances.leftMinDistance() < obstacleDistances.rightMinDistance();
     double minimumDistance = obstacleDistances.minDistance();
     
-    if (obstacleDistances.isObstacleFront()) {
+    if (obstacleDistances.isObstacleFront() || !obstacleDistances.isObstacleOnTheSide()) {
         updatePIDTunings(FRONT_Kp, FRONT_Ki, FRONT_Kd);
     }
     else {

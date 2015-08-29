@@ -39,7 +39,7 @@ void LRoverNavigator::setup() {
     _wallFollowPID = new LPID(Kp, Ki, Kd, DIRECT);
     _wallFollowPID->SetMode(AUTOMATIC);
     _wallFollowPID->SetSampleTime(50);
-    _wallFollowPID->setSetpoint(OBSTACLE_DISTANCE_THRESHOLD);
+    _wallFollowPID->setSetpoint(SIDE_OBSTACLE_DISTANCE_THRESHOLD);
     
     _wallFollowController = new LWallFollowController(_wallFollowPID);
     
@@ -237,14 +237,14 @@ void LRoverNavigator::arrivedAtGoal() {
 }
 
 bool LRoverNavigator::shouldForceCruiseAndIgnoreObstacle(LObstacleDistances obstacleDistances) {
+    if (obstacleDistances.isObstacleFront()) return false;
+    
     bool leftFollow = obstacleDistances.leftMinDistance() < obstacleDistances.rightMinDistance();
     double headingOffset = _compass->offsetFromGoalHeadingDeg();
     
-    if ((leftFollow == true && headingOffset > 0) || (leftFollow == false && headingOffset < 0)) {
-        return true;
-    }
+    if ((leftFollow == true && headingOffset < 20) || (leftFollow == false && headingOffset > -20)) return false;
     
-    return false;
+    return true;
 }
 
 #pragma mark - Logging And Tuning Loops
