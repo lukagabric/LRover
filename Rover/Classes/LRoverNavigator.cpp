@@ -180,7 +180,7 @@ void LRoverNavigator::mainLoopAt20Hz() {
     LObstacleDistances obstacleDistances = _sonics->obstacleDistances();
     
     if (_state != LRoverStateWallFollow) {
-        if (obstacleDistances.isObstacleDetected()) {
+        if (obstacleDistances.isObstacleDetected() && !shouldForceCruiseAndIgnoreObstacle(obstacleDistances)) {
             _state = LRoverStateWallFollow;
         }
     }
