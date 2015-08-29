@@ -7,7 +7,7 @@
 #pragma mark - Setup
 
 void LRoverNavigator::setup() {
-    _state = LRoverStateInitialization;
+    _state = LRoverStateCruise;
     _timeInit = 0; _mainLoopTime20Hz = 0; _loggingAndTuningTime1Hz = 0; _loggingAndTuningTime5s = 0;
     
 #if DEBUG_LOG
@@ -19,6 +19,7 @@ void LRoverNavigator::setup() {
     
     _compass = new LCompass(NULL);
     _compass->setDeclinationDeg(4.183333);
+    _compass->setGoalHeadingDeg(260);
     
     _sonics = new LRoverSonics();
     
@@ -56,6 +57,10 @@ void LRoverNavigator::setup() {
     _lcd->clear();
     _lcd->print(0, 0, "INITIALIZING...");
 #endif
+    
+    _lcd = new LLCD();
+    _lcd->clear();
+
 
 #if DEBUG_LOG || LCD_DEBUG_LOG
     std::vector<LDebugLog*> logItems;
@@ -94,7 +99,7 @@ void LRoverNavigator::setup() {
 void LRoverNavigator::loop() {
     if (_state == LRoverStateGoalReached) return;
     
-    _gps->readGPSData();
+//    _gps->readGPSData();
     
     if (_state == LRoverStateInitialization) {
         initializationLoop();
@@ -164,28 +169,34 @@ void LRoverNavigator::mainLoopAt20Hz() {
     updateSensorReadings();
     
     //localization
-    LGeoLocation currentLocation = _gps->location();
-    
-    if (!currentLocation.isValid()) return;
-    
-    double goalHeadingDeg = currentLocation.headingDegTo(_goalLocation);
-    _compass->setGoalHeadingDeg(goalHeadingDeg);
+//    LGeoLocation currentLocation = _gps->location();
+//
+//    if (!currentLocation.isValid()) return;
+//    
+//    double goalHeadingDeg = currentLocation.headingDegTo(_goalLocation);
+//    _compass->setGoalHeadingDeg(goalHeadingDeg);
     
     //path planning
-    if (isCurrentEqualToGoalLocation()) {
-        arrivedAtGoal();
-        return;
-    }
+//    if (isCurrentEqualToGoalLocation()) {
+//        arrivedAtGoal();
+//        return;
+//    }
     
     LObstacleDistances obstacleDistances = _sonics->obstacleDistances();
     
     if (_state != LRoverStateWallFollow) {
         if (obstacleDistances.isObstacleDetected() && !shouldForceCruiseAndIgnoreObstacle(obstacleDistances)) {
             _state = LRoverStateWallFollow;
+            _lcd->clear();
+            _lcd->print(0, 0, "STATE:");
+            _lcd->print(0, 1, "WALL FOLLOW");
         }
     }
     else if (obstacleDistances.isObstacleCleared() || shouldForceCruiseAndIgnoreObstacle(obstacleDistances)) {
         _state = LRoverStateCruise;
+        _lcd->clear();
+        _lcd->print(0, 0, "STATE:");
+        _lcd->print(0, 1, "CRUISE");
     }
     
     LWheelSpeeds wheelSpeeds;

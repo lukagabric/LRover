@@ -23,7 +23,7 @@
 #include "LWallFollowController.h"
 
 #define DEBUG_LOG 0
-#define LCD_DEBUG_LOG 1
+#define LCD_DEBUG_LOG 0
 #define MANUAL_PID_TUNING 0
 #define DRIVE 1
 
