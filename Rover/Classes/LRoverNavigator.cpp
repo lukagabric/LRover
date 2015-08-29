@@ -237,7 +237,7 @@ void LRoverNavigator::arrivedAtGoal() {
 }
 
 bool LRoverNavigator::shouldForceCruiseAndIgnoreObstacle(LObstacleDistances obstacleDistances) {
-    if (obstacleDistances.isObstacleFront()) return false;
+    if (obstacleDistances.isObstacleOnTheFrontSide()) return false;
     
     bool leftFollow = obstacleDistances.leftMinDistance() < obstacleDistances.rightMinDistance();
     double headingOffset = _compass->offsetFromGoalHeadingDeg();
