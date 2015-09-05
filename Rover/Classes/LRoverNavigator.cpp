@@ -39,7 +39,7 @@ void LRoverNavigator::setup() {
     _wallFollowPID = new LPID(Kp, Ki, Kd, DIRECT);
     _wallFollowPID->SetMode(AUTOMATIC);
     _wallFollowPID->SetSampleTime(50);
-    _wallFollowPID->setSetpoint(SIDE_OBSTACLE_DISTANCE_THRESHOLD);
+    _wallFollowPID->setSetpoint(OBSTACLE_DISTANCE_THRESHOLD);
     
     _wallFollowController = new LWallFollowController(_wallFollowPID);
     

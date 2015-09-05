@@ -16,19 +16,17 @@ LObstacleDistances::LObstacleDistances() {
     _frontRightDistance = 999;
     _leftDistance = 999;
     _rightDistance = 999;
-    _frontObstacleDistanceThreshold = 0;
-    _sideObstacleDistanceThreshold = 0;
+    _obstacleDistanceThreshold = 0;
     _obstacleClearDistanceThreshold = 0;
 }
 
-LObstacleDistances::LObstacleDistances(double frontDistance, double frontLeftDistance, double frontRightDistance, double leftDistance, double rightDistance, double frontObstacleDistanceThreshold, double sideObstacleDistanceThreshold, double obstacleClearDistanceThreshold) {
+LObstacleDistances::LObstacleDistances(double frontDistance, double frontLeftDistance, double frontRightDistance, double leftDistance, double rightDistance, double obstacleDistanceThreshold, double obstacleClearDistanceThreshold) {
     _frontDistance = frontDistance;
     _frontLeftDistance = frontLeftDistance;
     _frontRightDistance = frontRightDistance;
     _leftDistance = leftDistance;
     _rightDistance = rightDistance;
-    _frontObstacleDistanceThreshold = frontObstacleDistanceThreshold;
-    _sideObstacleDistanceThreshold = sideObstacleDistanceThreshold;
+    _obstacleDistanceThreshold = obstacleDistanceThreshold;
     _obstacleClearDistanceThreshold = obstacleClearDistanceThreshold;
 }
 
@@ -48,12 +46,8 @@ bool LObstacleDistances::isObstacleCleared() {
 
 #pragma mark - Absolute Values
 
-double LObstacleDistances::frontObstacleDistanceThreshold() {
-    return _frontObstacleDistanceThreshold;
-}
-
-double LObstacleDistances::sideObstacleDistanceThreshold() {
-    return _sideObstacleDistanceThreshold;
+double LObstacleDistances::obstacleDistanceThreshold() {
+    return _obstacleDistanceThreshold;
 }
 
 double LObstacleDistances::obstacleClearDistanceThreshold() {
@@ -104,23 +98,23 @@ double LObstacleDistances::rightSideDistance() {
 #pragma mark - Each Distance
 
 bool LObstacleDistances::isObstacleFront() {
-    return _frontDistance < _frontObstacleDistanceThreshold;
+    return _frontDistance < _obstacleDistanceThreshold;
 }
 
 bool LObstacleDistances::isObstacleFrontRight() {
-    return _frontRightDistance < _sideObstacleDistanceThreshold;
+    return _frontRightDistance < _obstacleDistanceThreshold;
 }
 
 bool LObstacleDistances::isObstacleFrontLeft() {
-    return _frontLeftDistance < _sideObstacleDistanceThreshold;
+    return _frontLeftDistance < _obstacleDistanceThreshold;
 }
 
 bool LObstacleDistances::isObstacleRight() {
-    return _rightDistance < _sideObstacleDistanceThreshold;
+    return _rightDistance < _obstacleDistanceThreshold;
 }
 
 bool LObstacleDistances::isObstacleLeft() {
-    return _leftDistance < _sideObstacleDistanceThreshold;
+    return _leftDistance < _obstacleDistanceThreshold;
 }
 
 #pragma mark - Specific Distances

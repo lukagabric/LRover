@@ -12,13 +12,12 @@
 class LObstacleDistances {
 private:
     double _frontDistance, _frontLeftDistance, _frontRightDistance, _leftDistance, _rightDistance;
-    double _frontObstacleDistanceThreshold, _sideObstacleDistanceThreshold, _obstacleClearDistanceThreshold;
+    double _obstacleDistanceThreshold, _obstacleClearDistanceThreshold;
 public:
     LObstacleDistances();
-    LObstacleDistances(double frontDistance, double frontLeftDistance, double frontRightDistance, double leftDistance, double rightDistance, double frontObstacleDistanceThreshold, double sideObstacleDistanceThreshold, double obstacleClearDistanceThreshold);
+    LObstacleDistances(double frontDistance, double frontLeftDistance, double frontRightDistance, double leftDistance, double rightDistance, double obstacleDistanceThreshold, double obstacleClearDistanceThreshold);
 
-    double frontObstacleDistanceThreshold();
-    double sideObstacleDistanceThreshold();
+    double obstacleDistanceThreshold();
     double obstacleClearDistanceThreshold();
 
     double frontDistance();
