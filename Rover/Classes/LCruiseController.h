@@ -18,8 +18,8 @@ private:
     double pidOutputForHeadingOffsetDeg(double headingOffsetDeg);
     LWheelSpeeds cruiseWheelSpeedsForPIDOutput(double pidOutput);
 public:
-    int minimumForwardWheelSpeed;
     LCruiseController(LPID *cruisePID);
+    int minimumForwardWheelSpeed;
     LWheelSpeeds cruiseOutput(double headingOffsetDeg);
 };
 
