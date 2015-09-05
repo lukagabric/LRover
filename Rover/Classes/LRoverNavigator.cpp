@@ -19,7 +19,7 @@ void LRoverNavigator::setup() {
     
     _compass = new LCompass(NULL);
     _compass->setDeclinationDeg(4.183333);
-    _compass->setGoalHeadingDeg(260);
+    _compass->setGoalHeadingDeg(252);
     
     _sonics = new LRoverSonics();
     
