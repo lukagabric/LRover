@@ -30,7 +30,10 @@ public:
     double minDistance();
     double leftMinDistance();
     double rightMinDistance();
-    
+
+    double leftSideDistance(); //always return front left distance if detected, else left
+    double rightSideDistance(); //always return front right distance if detected, else right
+
     bool isObstacleDetected();
     bool isObstacleCleared();
     

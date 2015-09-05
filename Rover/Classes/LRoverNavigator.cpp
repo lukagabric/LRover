@@ -187,6 +187,7 @@ void LRoverNavigator::mainLoopAt20Hz() {
     if (_state != LRoverStateWallFollow) {
         if (obstacleDistances.isObstacleDetected() && !shouldForceCruiseAndIgnoreObstacle(obstacleDistances)) {
             _state = LRoverStateWallFollow;
+            _wallFollowController->resetWallFollowParameters();
             _lcd->clear();
             _lcd->print(0, 0, "STATE:");
             _lcd->print(0, 1, "WALL FOLLOW");

@@ -27,24 +27,6 @@
 #define MANUAL_PID_TUNING 0
 #define DRIVE 1
 
-//Centar terena Sloga, Ernestinovo: 45.452608, 18.662766
-
-//Pet Centar
-//#define GOAL_LAT 45.550991058349609
-//#define GOAL_LON 18.692028045654296
-
-//Dvorište, Ernestinovo
-//#define GOAL_LAT 45.453231811523437
-//#define GOAL_LON 18.661836624145507
-
-//Prilaz kući, Ernestinovo
-//#define GOAL_LAT 45.452903747558593
-//#define GOAL_LON 18.662023544311523
-
-//Sjenjak, igralište
-//#define GOAL_LAT 45.551803
-//#define GOAL_LON 18.695682
-
 #define GOAL_RADIUS_METERS 1
 
 //Ultrasonic

@@ -13,14 +13,20 @@
 #include "LPID.h"
 #include "LObstacleDistances.h"
 
+enum LPIDTuningState {LPIDTuningStateNone = 0, LPIDTuningStateConservative = 1, LPIDTuningStateModerate = 2, LPIDTuningStateAggressive = 3};
+
 class LWallFollowController {
 private:
     LPID *_wallFollowPID;
+    LPIDTuningState _pidTuningState;
     double pidOutputForObstacleDistances(LObstacleDistances obstacleDistances);
     LWheelSpeeds wallFollowWheelSpeedsForPIDOutput(double pidOutput);
-    void updatePIDTunings(double Kp, double Ki, double Kd);
+    void updatePIDTunings(LPIDTuningState state);
+    void resetPIDTuning();
+    bool leftFollow(LObstacleDistances obstacleDistances);
 public:
     LWallFollowController(LPID *wallFollowPID);
+    void resetWallFollowParameters();
     LWheelSpeeds wallFollowOutput(LObstacleDistances obstacleDistances);
 };
 
