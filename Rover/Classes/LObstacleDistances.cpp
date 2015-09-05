@@ -93,6 +93,14 @@ double LObstacleDistances::leftMinDistance() {
     return std::min(_frontLeftDistance, _leftDistance);
 }
 
+double LObstacleDistances::leftSideDistance() {
+    return isObstacleFrontLeft() ? frontLeftDistance() : leftDistance();
+}
+
+double LObstacleDistances::rightSideDistance() {
+    return isObstacleFrontRight() ? frontRightDistance() : rightDistance();
+}
+
 #pragma mark - Each Distance
 
 bool LObstacleDistances::isObstacleFront() {
