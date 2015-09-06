@@ -12,9 +12,9 @@
 #define AGGRESSIVE_Ki 20
 #define AGGRESSIVE_Kd 0.3
 
-#define MODERATE_Kp 7
-#define MODERATE_Ki 0.012
-#define MODERATE_Kd 0.02
+#define MODERATE_Kp 15
+#define MODERATE_Ki 0.1
+#define MODERATE_Kd 0.1
 
 #define CONSERVATIVE_Kp 5
 #define CONSERVATIVE_Ki 0.01
