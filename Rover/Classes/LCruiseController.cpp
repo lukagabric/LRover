@@ -13,6 +13,7 @@
 
 LCruiseController::LCruiseController(LPID *cruisePID) {
     _cruisePID = cruisePID;
+    _cruisePID->SetOutputLimits(-255, 255);
 }
 
 #pragma mark - Output
