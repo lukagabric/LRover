@@ -67,7 +67,6 @@ void LWallFollowController::updatePIDTunings(LPIDTuningState state) {
 
     resetPIDTuning();
 
-    _pidTuningState = state;
     switch (state) {
         case LPIDTuningStateConservative:
             _wallFollowPID->SetTunings(CONSERVATIVE_Kp, CONSERVATIVE_Ki, CONSERVATIVE_Kd);
@@ -82,6 +81,8 @@ void LWallFollowController::updatePIDTunings(LPIDTuningState state) {
             _wallFollowPID->SetTunings(0, 0, 0);
             break;
     }
+    
+    _pidTuningState = state;
 }
 
 void LWallFollowController::resetWallFollowParameters() {
