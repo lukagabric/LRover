@@ -10,24 +10,32 @@
 
 #pragma mark - Constructor
 
-LGPS::LGPS() : _ss(10, 11) {
-    _ss.begin(9600);
+LGPS::LGPS() {
+    _ss = new SoftwareSerial(10, 11);
+    _ss->begin(9600);
 
+    _gps = new TinyGPS();
+    
     _altitude = TinyGPS::GPS_INVALID_F_ALTITUDE;
+}
+
+LGPS::~LGPS() {
+    delete _ss;
+    delete _gps;
 }
 
 #pragma mark - Read Data
 
 void LGPS::readGPSData() {
-    if (_ss.available()) {
+    if (_ss->available()) {
         do {
-            _gps.encode(_ss.read());
-        } while (_ss.available());
+            _gps->encode(_ss->read());
+        } while (_ss->available());
         
         float lat, lon;
-        _gps.f_get_position(&lat, &lon, &_age);
+        _gps->f_get_position(&lat, &lon, &_age);
         _location = LGeoLocation(lat, lon);
-        _altitude = _gps.f_altitude();
+        _altitude = _gps->f_altitude();
     }
 }
 

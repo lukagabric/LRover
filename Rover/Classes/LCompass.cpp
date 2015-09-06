@@ -25,19 +25,24 @@
 LCompass::LCompass(LLowPassFilter *filter) {
     _filter = filter;
     
-    _compass.initialize();
-    _compass.setSampleAveraging(HMC5883L_AVERAGING_8);
-    _compass.setGain(HMC5883L_GAIN_820);
-    _compass.setDataRate(HMC5883L_RATE_30);
+    _compass = new HMC5883L();
+    _compass->initialize();
+    _compass->setSampleAveraging(HMC5883L_AVERAGING_8);
+    _compass->setGain(HMC5883L_GAIN_820);
+    _compass->setDataRate(HMC5883L_RATE_30);
     
     _goalHeadingDeg = 0;
     _headingDeg = 0;
 }
 
+LCompass::~LCompass() {
+    delete _compass;
+}
+
 #pragma mark - Update Heading
 
 void LCompass::updateHeading() {
-    _compass.getHeading(&_mx, &_my, &_mz);
+    _compass->getHeading(&_mx, &_my, &_mz);
 
     double compass_x_scaled=_mx*compass_gain_fact*compass_x_gainError+compass_x_offset;
     double compass_y_scaled=_my*compass_gain_fact*compass_y_gainError+compass_y_offset;
