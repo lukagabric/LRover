@@ -12,12 +12,13 @@
 class LObstacleDistances {
 private:
     double _frontDistance, _frontLeftDistance, _frontRightDistance, _leftDistance, _rightDistance;
-    double _obstacleDistanceThreshold, _obstacleClearDistanceThreshold;
+    double _frontObstacleDistanceThreshold, _sideObstacleDistanceThreshold, _obstacleClearDistanceThreshold;
 public:
     LObstacleDistances();
-    LObstacleDistances(double frontDistance, double frontLeftDistance, double frontRightDistance, double leftDistance, double rightDistance, double obstacleDistanceThreshold, double obstacleClearDistanceThreshold);
+    LObstacleDistances(double frontDistance, double frontLeftDistance, double frontRightDistance, double leftDistance, double rightDistance, double frontObstacleDistanceThreshold, double sideObstacleDistanceThreshold, double obstacleClearDistanceThreshold);
 
-    double obstacleDistanceThreshold();
+    double frontObstacleDistanceThreshold();
+    double sideObstacleDistanceThreshold();
     double obstacleClearDistanceThreshold();
 
     double frontDistance();
@@ -41,11 +42,11 @@ public:
     bool isObstacleFrontLeft();
     bool isObstacleRight();
     bool isObstacleLeft();
-    
+    bool isObstacleLeftOrRight();
+
     bool isObstacleOnTheFrontSide();
     bool isObstacleOnTheLeftSide();
     bool isObstacleOnTheRightSide();
-    bool isObstacleOnTheSide();
 };
 
 #endif /* defined(__Rover__LObstacleDistances__) */

@@ -14,7 +14,7 @@
 
 #define MODERATE_Kp 7
 #define MODERATE_Ki 0.012
-#define MODERATE_Kd 0.021
+#define MODERATE_Kd 0.02
 
 #define CONSERVATIVE_Kp 5
 #define CONSERVATIVE_Ki 0.01
@@ -42,17 +42,25 @@ double LWallFollowController::pidOutputForObstacleDistances(LObstacleDistances o
     bool followLeft = leftFollow(obstacleDistances);
     double minimumDistance;
     
-    if (obstacleDistances.isObstacleFront()) {
+    if (obstacleDistances.isObstacleFront() ||
+        (_pidTuningState == LPIDTuningStateAggressive && !obstacleDistances.isObstacleLeftOrRight())) {
+        //if obstacle is front OR obstacle is not detected on the side (it's only detected on the front right/left sensor) AND
+        //current state is aggressive (so the obstacle has just disappeared from the front sensor) means the robot is turning
+        //and the pid tuning state should remain aggressive until robot alignes with the obstacle and detects it with the side sensor
+
+        _wallFollowPID->setSetpoint(obstacleDistances.frontObstacleDistanceThreshold());
+        minimumDistance = obstacleDistances.minDistance();
         updatePIDTunings(LPIDTuningStateAggressive);
-        minimumDistance = obstacleDistances.minDistance();
     }
-    else if (!obstacleDistances.isObstacleOnTheSide()) {
-        updatePIDTunings(LPIDTuningStateModerate);
+    else if (!obstacleDistances.isObstacleLeftOrRight()) {
+        _wallFollowPID->setSetpoint(obstacleDistances.sideObstacleDistanceThreshold());
         minimumDistance = obstacleDistances.minDistance();
+        updatePIDTunings(LPIDTuningStateModerate);
     }
     else {
-        updatePIDTunings(LPIDTuningStateConservative);
+        _wallFollowPID->setSetpoint(obstacleDistances.sideObstacleDistanceThreshold());
         minimumDistance = followLeft ? obstacleDistances.leftSideDistance() : obstacleDistances.rightSideDistance();
+        updatePIDTunings(LPIDTuningStateConservative);
     }
     
     _wallFollowPID->SetControllerDirection(followLeft ? DIRECT : REVERSE);
