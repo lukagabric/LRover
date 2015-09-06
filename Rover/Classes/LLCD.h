@@ -14,9 +14,10 @@
 
 class LLCD {
 private:
-    LiquidCrystal_I2C _lcd;
+    LiquidCrystal_I2C *_lcd;
 public:
     LLCD();
+    ~LLCD();
     void clear();
     void print(unsigned int column, unsigned int line, const char str[]);
     void print(unsigned int column, unsigned int line, double n, int digits);

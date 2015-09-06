@@ -16,15 +16,16 @@
 
 class LGPS {
 private:
-    TinyGPS _gps;
-    SoftwareSerial _ss;
+    TinyGPS *_gps;
+    SoftwareSerial *_ss;
     LGeoLocation _location;
     LGeoLocation _goalLocation;
     unsigned long _age;
     float _altitude;
 public:
     LGPS();
-
+    ~LGPS();
+    
     void readGPSData();
     
     LGeoLocation location();
