@@ -25,6 +25,9 @@
 LWallFollowController::LWallFollowController(LPID *wallFollowPID) {
     _wallFollowPID = wallFollowPID;
     _pidTuningState = LPIDTuningStateNone;
+    
+    double maxWheelSpeed = 255;
+    _wallFollowPID->setDefaultOutputLimits(-2*maxWheelSpeed, 2*maxWheelSpeed);
 }
 
 #pragma mark - Output
@@ -73,7 +76,7 @@ double LWallFollowController::pidOutputForObstacleDistances(LObstacleDistances o
 void LWallFollowController::updatePIDTunings(LPIDTuningState state) {
     if (state == _pidTuningState) return;
 
-    resetPIDTuning();
+    _wallFollowPID->resetOutput();
 
     switch (state) {
         case LPIDTuningStateConservative:
@@ -95,12 +98,6 @@ void LWallFollowController::updatePIDTunings(LPIDTuningState state) {
 
 void LWallFollowController::resetWallFollowParameters() {
     _pidTuningState = LPIDTuningStateNone;
-}
-
-void LWallFollowController::resetPIDTuning() {
-    _wallFollowPID->SetOutputLimits(0, 0.00001);
-    double maxWheelSpeed = 255;
-    _wallFollowPID->SetOutputLimits(-2*maxWheelSpeed, 2*maxWheelSpeed);
 }
 
 LWheelSpeeds LWallFollowController::wallFollowWheelSpeedsForPIDOutput(double pidOutput) {

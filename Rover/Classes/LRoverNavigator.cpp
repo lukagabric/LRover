@@ -193,6 +193,7 @@ void LRoverNavigator::mainLoopAt20Hz() {
     }
     else if (obstacleDistances.isObstacleCleared() || shouldForceCruiseAndIgnoreObstacle(obstacleDistances)) {
         _state = LRoverStateCruise;
+        _cruiseController->resetCruiseParameters();
         _lcd->clear();
         _lcd->print(0, 0, "STATE:");
         _lcd->print(0, 1, "CRUISE");

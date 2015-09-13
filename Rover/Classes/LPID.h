@@ -13,9 +13,14 @@
 
 class LPID : public PID {
 private:
-    double _myInput, _myOutput, _mySetpoint;
+    double _myInput, _myOutput, _mySetpoint, _defaultOutMin, _defaultOutMax;
 public:
     LPID(double kp, double ki, double kd, int direction);
+    
+    void setDefaultOutputLimits(double defaultOutMin, double defaultOutMax);
+    double defaultOutMin();
+    double defaultOutMax();
+    void resetOutput();
     
     void setSetpoint(double setpoint);
     double setpoint();
