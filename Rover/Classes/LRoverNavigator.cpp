@@ -185,6 +185,7 @@ void LRoverNavigator::mainLoopAt20Hz() {
     }
     else if (obstacleDistances.isObstacleCleared() || shouldForceCruiseAndIgnoreObstacle(obstacleDistances)) {
         _state = LRoverStateCruise;
+        _cruiseController->resetCruiseParameters();
     }
     
     LWheelSpeeds wheelSpeeds;

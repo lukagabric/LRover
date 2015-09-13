@@ -13,7 +13,9 @@
 
 LCruiseController::LCruiseController(LPID *cruisePID) {
     _cruisePID = cruisePID;
-    _cruisePID->SetOutputLimits(-255, 255);
+    
+    double maxWheelSpeed = 255;
+    _cruisePID->setDefaultOutputLimits(-maxWheelSpeed, maxWheelSpeed);
 }
 
 #pragma mark - Output
@@ -21,6 +23,10 @@ LCruiseController::LCruiseController(LPID *cruisePID) {
 LWheelSpeeds LCruiseController::cruiseOutput(double headingOffsetDeg) {
     double pidOutput = pidOutputForHeadingOffsetDeg(headingOffsetDeg);
     return cruiseWheelSpeedsForPIDOutput(pidOutput);
+}
+
+void LCruiseController::resetCruiseParameters() {
+    _cruisePID->resetOutput();
 }
 
 double LCruiseController::pidOutputForHeadingOffsetDeg(double headingOffsetDeg) {

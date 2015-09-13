@@ -22,7 +22,6 @@ private:
     double pidOutputForObstacleDistances(LObstacleDistances obstacleDistances);
     LWheelSpeeds wallFollowWheelSpeedsForPIDOutput(double pidOutput);
     void updatePIDTunings(LPIDTuningState state);
-    void resetPIDTuning();
     bool leftFollow(LObstacleDistances obstacleDistances);
 public:
     LWallFollowController(LPID *wallFollowPID);

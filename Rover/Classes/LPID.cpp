@@ -18,6 +18,25 @@ LPID::LPID(double kp, double ki, double kd, int direction) : PID(&_myInput, &_my
 
 #pragma mark - Getters/Setters
 
+void LPID::setDefaultOutputLimits(double defaultOutMin, double defaultOutMax) {
+    _defaultOutMin = defaultOutMin;
+    _defaultOutMax = defaultOutMax;
+    resetOutput();
+}
+
+double LPID::defaultOutMin() {
+    return _defaultOutMin;
+}
+
+double LPID::defaultOutMax() {
+    return _defaultOutMax;
+}
+
+void LPID::resetOutput() {
+    SetOutputLimits(0, 0.00000001);
+    SetOutputLimits(defaultOutMin(), defaultOutMax());
+}
+
 void LPID::setSetpoint(double setpoint) {
     _mySetpoint = setpoint;
 }
