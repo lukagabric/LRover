@@ -29,12 +29,12 @@ void LGPSLogger::printToSerial() {
 void LGPSLogger::printToLCD(LLCD *lcd) {
     if (_gps->location().isValid()) {
         if (_gps->goalLocation().isValid()) {
-            lcd->print(0, 0, "LAT=");
-            lcd->print(4, 0, _gps->location().latitude(), 3);
-            lcd->print(8, 0, "LON=");
-            lcd->print(11, 0, _gps->location().longitude(), 3);
+            lcd->print(0, 0, "X=");
+            lcd->print(2, 0, _gps->location().latitude(), 2);
+            lcd->print(8, 0, "Y=");
+            lcd->print(10, 0, _gps->location().longitude(), 2);
             lcd->print(0, 1, "D=");
-            lcd->print(3, 1, _gps->location().distanceTo(_gps->goalLocation()), 15);
+            lcd->print(2, 1, _gps->location().distanceTo(_gps->goalLocation()), 15);
         }
         else {
             lcd->print(0, 0, "LAT=");

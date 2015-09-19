@@ -7,15 +7,15 @@
 #pragma mark - Setup
 
 void LRoverNavigator::setup() {
-    _state = LRoverStateInitialization;
-    _timeInit = 0; _mainLoopTime20Hz = 0; _loggingAndTuningTime1Hz = 0; _loggingAndTuningTime5s = 0;
-    
+    delay(1000);
+
 #if DEBUG_LOG
     Serial.begin(9600);
     Serial.println("Initialization...");
 #endif
 
-    delay(100);
+    _state = LRoverStateInitialization;
+    _timeInit = 0; _mainLoopTime20Hz = 0; _loggingAndTuningTime1Hz = 0; _loggingAndTuningTime5s = 0;
     
     _compass = new LCompass(NULL);
     _compass->setDeclinationDeg(4.183333);
@@ -58,10 +58,10 @@ void LRoverNavigator::setup() {
 #if DEBUG_LOG || LCD_DEBUG_LOG
     std::vector<LDebugLog*> logItems;
     
-    if (_sonics) {
-        _sonicsLogger = new LRoverSonicsLogger(_sonics);
-        logItems.push_back(_sonicsLogger);
-    }
+//    if (_sonics) {
+//        _sonicsLogger = new LRoverSonicsLogger(_sonics);
+//        logItems.push_back(_sonicsLogger);
+//    }
     if (_gps) {
         _gpsLogger = new LGPSLogger(_gps);
         logItems.push_back(_gpsLogger);
@@ -70,18 +70,18 @@ void LRoverNavigator::setup() {
         _compassLogger = new LCompassLogger(_compass);
         logItems.push_back(_compassLogger);
     }
-    if (_cruisePID) {
-        _cruisePIDLogger = new LPIDLogger(_cruisePID);
-        logItems.push_back(_cruisePIDLogger);
-    }
-    if (_wallFollowPID) {
-        _wallFollowPIDLogger = new LPIDLogger(_wallFollowPID);
-        logItems.push_back(_wallFollowPIDLogger);
-    }
-    if (_motorController) {
-        _motorControllerLogger = new LMotorControllerLogger(_motorController);
-        logItems.push_back(_motorControllerLogger);
-    }
+//    if (_cruisePID) {
+//        _cruisePIDLogger = new LPIDLogger(_cruisePID);
+//        logItems.push_back(_cruisePIDLogger);
+//    }
+//    if (_wallFollowPID) {
+//        _wallFollowPIDLogger = new LPIDLogger(_wallFollowPID);
+//        logItems.push_back(_wallFollowPIDLogger);
+//    }
+//    if (_motorController) {
+//        _motorControllerLogger = new LMotorControllerLogger(_motorController);
+//        logItems.push_back(_motorControllerLogger);
+//    }
     
     _logger = new LLogger(_lcd, logItems);
 #endif
@@ -132,26 +132,45 @@ void LRoverNavigator::initializationLoop() {
     }
     
     if (millis() - _timeInit > 10000 && _gps->age() < 1000) {
-        _goalLocation = _gps->location();
-        _gps->setGoalLocation(_goalLocation);
+        if (_goalLocation.isValid()) {
 #if DEBUG_LOG
-        Serial.println("GOAL LOCATION SET");
-        _gpsLogger->printToSerial();
-        Serial.println("PLACE ROBOT AT START LOCATION");
+            Serial.println("SWITCHING TO CRUISE");
+            _gpsLogger->printToSerial();
 #endif
 #if LCD_DEBUG_LOG
-        _lcd->clear();
-        _lcd->print(0, 0, "GOAL LOCATION");
-        _lcd->print(0, 1, "SET");
-        delay(2000);
-        _gpsLogger->printToLCD(_lcd);
-        delay(2000);
-        _lcd->clear();
-        _lcd->print(0, 0, "PLACE ROBOT AT");
-        _lcd->print(0, 1, "START LOCATION");
+            _lcd->clear();
+            _lcd->print(0, 0, "SWITCHING TO");
+            _lcd->print(0, 1, "CRUISE");
+            delay(2000);
+            _gpsLogger->printToLCD(_lcd);
+            delay(2000);
+            _lcd->clear();
+            _lcd->print(0, 0, "SWITCHING TO");
+            _lcd->print(0, 1, "CRUISE");
 #endif
-        delay(10000);
-        _state = LRoverStateCruise;
+            _state = LRoverStateCruise;
+        }
+        else {
+            _goalLocation = _gps->location();
+            _gps->setGoalLocation(_goalLocation);
+            _timeInit = 0;
+#if DEBUG_LOG
+            Serial.println("GOAL LOCATION SET");
+            _gpsLogger->printToSerial();
+            Serial.println("PLACE ROBOT AT START LOCATION");
+#endif
+#if LCD_DEBUG_LOG
+            _lcd->clear();
+            _lcd->print(0, 0, "GOAL LOCATION");
+            _lcd->print(0, 1, "SET");
+            delay(2000);
+            _gpsLogger->printToLCD(_lcd);
+            delay(2000);
+            _lcd->clear();
+            _lcd->print(0, 0, "PLACE ROBOT AT");
+            _lcd->print(0, 1, "START LOCATION");
+#endif
+        }
     }
 }
 
