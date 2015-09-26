@@ -14,7 +14,8 @@ void LRoverNavigator::setup() {
     Serial.println("Initialization...");
 #endif
 
-    _state = LRoverStateInitialization;
+//    _state = LRoverStateInitialization;
+    _state = LRoverStateCruise;
     _timeInit = 0; _mainLoopTime20Hz = 0; _loggingAndTuningTime1Hz = 0; _loggingAndTuningTime5s = 0;
     
     _compass = new LCompass(NULL);
@@ -23,6 +24,9 @@ void LRoverNavigator::setup() {
     _sonics = new LRoverSonics();
     
     _gps = new LGPS();
+    
+    _goalLocation = LGeoLocation(45.545291900634765, 18.689756393432617);
+    _gps->setGoalLocation(_goalLocation);
     
 #if DRIVE
     _motorController = new LMotorController(ENA, IN1, IN2, ENB, IN3, IN4, 1, 1);
